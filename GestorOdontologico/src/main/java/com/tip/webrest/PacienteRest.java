@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -33,6 +34,18 @@ public class PacienteRest {
 			return Response.status(Status.NOT_FOUND).build();
 		}
 		return Response.ok(pacientes).build();
+	}
+	
+	@GET
+	@Path("/getPacientePorNombre/{name}")
+	@Produces("application/json")
+	public Response getPacientePorNombre(@PathParam("name") final String name) {
+		try {
+			List<Paciente> pacientes = this.getPacienteService().getEventsByName(name);
+			return Response.ok(pacientes).build();
+		}catch (Exception e) {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
 	}
 
 }
