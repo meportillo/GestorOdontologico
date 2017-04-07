@@ -16,7 +16,7 @@ public class Paciente implements Serializable {
 
 	@Id
 	@Column(name = "dni")
-	private Long dni;
+	private int dni;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -37,12 +37,12 @@ public class Paciente implements Serializable {
 
 	}
 
-	public Long getDni() {
+	public int getDni() {
 		return dni;
 	}
 
-	public void setDni(Long dni) {
-		this.dni = dni;
+	public void setDni(int i) {
+		this.dni = i;
 	}
 
 	public String getNombre() {
