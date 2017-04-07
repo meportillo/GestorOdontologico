@@ -39,71 +39,34 @@ public class PacienteRest {
 		}
 		return Response.ok(pacientes).build();
 	}
-	
-	
-//	  `dni` INT NOT NULL,
-//	  `nombre` VARCHAR(45) NULL ,
-//	  `apellido` VARCHAR(45) NULL,
-//	  `direccion` VARCHAR(45) NULL,
-//	  `fechaNac` DATE NULL,
-//	  `anios` INT NULL,
-	/*
-	@POST
-	@Path("/crearPaciente/{nombre}/{apellido}/{direccion}/{anios}/{dni}/{fechaNac}/{dni}")
-	@Produces("application/json")
-	public Response crearPaciente(@PathParam("nombre") final String nombre,
-					@PathParam("apellido") final String apellido,
-					@PathParam("direccion") final String direccion,
-					@PathParam("anios") final int anios,
-					@PathParam("fechaNac") final int fechaNac,
-					@PathParam("dni") final int dni
-					) {
-		try {
-			
-		Paciente paciente = new Paciente();
-		paciente.setAnios(anios);
-		paciente.setApellido(apellido);
-		paciente.setDireccion(direccion);
-		paciente.setDni(dni);
-		paciente.setNombre(nombre);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = format.parse("2012-12-13 14:54:30");
-		paciente.setFechaNac(date);
-		
-		this.getPacienteService().save(paciente);
-		return Response.ok(paciente).build();
-		}catch (Exception e) {
-			return null;
-		}
-	}
-	*/
+
 	@POST
 	@Path("/crearPaciente/{nombre}/{apellido}/{direccion}/{anios}/{fechaNac}/{dni}")
 	@Produces("application/json")
 	public Response crearPaciente(@PathParam("nombre") final String nombre,
-					@PathParam("apellido") final String apellido,
-					@PathParam("direccion") final String direccion,
-					@PathParam("anios") final int anios,
-					@PathParam("fechaNac") final int fechaNac,
-					@PathParam("dni") final int dni
-					) {
-		
-		Paciente paciente = new Paciente();
-		paciente.setAnios(anios);
-		paciente.setApellido(apellido);
-		paciente.setDireccion(direccion);
-		paciente.setAnios(anios);
-		paciente.setNombre(nombre);
-		
-		paciente.setFechaNac(new Timestamp(new Date().getTime()) );
-		
-		paciente.setDni(dni);
-		this.getPacienteService().save(paciente);
-		return Response.ok(paciente).build();
-		
+			@PathParam("apellido") final String apellido, @PathParam("direccion") final String direccion,
+			@PathParam("anios") final int anios, @PathParam("fechaNac") final int fechaNac,
+			@PathParam("dni") final int dni) {
+
+		try {
+			Paciente paciente = new Paciente();
+			paciente.setAnios(anios);
+			paciente.setApellido(apellido);
+			paciente.setDireccion(direccion);
+			paciente.setAnios(anios);
+			paciente.setNombre(nombre);
+
+			paciente.setFechaNac(new Timestamp(new Date().getTime()));
+
+			paciente.setDni(dni);
+			this.getPacienteService().save(paciente);
+			return Response.ok(paciente).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+
 	}
-	
-	
+
 	@GET
 	@Path("/getPacientePorNombre/{name}")
 	@Produces("application/json")
@@ -111,7 +74,7 @@ public class PacienteRest {
 		try {
 			List<Paciente> pacientes = this.getPacienteService().getEventsByName(name);
 			return Response.ok(pacientes).build();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 	}
