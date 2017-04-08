@@ -5,7 +5,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +20,7 @@ public class Paciente implements Serializable {
 
 	@Id
 	@Column(name = "dni")
-	private int dni;
+	private Integer dni;
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -33,16 +37,28 @@ public class Paciente implements Serializable {
 	@Column(name = "anios")
 	private Integer anios;
 
+	@OneToOne()
+	@JoinColumn(name = "idficha", referencedColumnName = "idficha")
+	private Ficha ficha;
+
+	public Ficha getFicha() {
+		return ficha;
+	}
+
+	public void setFicha(Ficha ficha) {
+		this.ficha = ficha;
+	}
+
 	public Paciente() {
 
 	}
 
-	public int getDni() {
+	public Integer getDni() {
 		return dni;
 	}
 
-	public void setDni(int i) {
-		this.dni = i;
+	public void setDni(Integer dni) {
+		this.dni = dni;
 	}
 
 	public String getNombre() {
