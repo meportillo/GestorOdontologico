@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="shortcut icon" href="favicon.ico" >
 <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2"
 	rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
@@ -15,22 +17,30 @@
 	<script src="https://cdn.rawgit.com/craftyjs/Crafty/testing/dist/crafty-min.js"></script>
 	<script type="text/javascript" src="js/iconselect.js"></script>
 	<script type="text/javascript" src="js/iscroll.js"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/getPacienteService.js"></script>
 	<script type="text/javascript" src="js/controller.js"></script>
+	
+	
+	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="toaster.js"></script>
+	<link href="toaster.css" rel="stylesheet" />
 
 <title>Historias Clinicas</title>
 </head>
 <body class="container" ng-app="gestorOdont">
 
 	<label><h3>Historias Clinicas</h3></label>
-
-	<div ng-controller="test">
+	
+		<toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+		<div ng-controller="getPacienteService">
 		<div>
 			<label>Ingresar Nombre: <input type="text"
 				class="form-control" ng-model="nombreBsqd" required>
 				<button class="btn btn-primary" ng-click="buscarPorNombre()"
 					ng-disable="{{nombreBsqd != null}}">Buscar</button>
 			</label>
+        	
+
 		</div>
 
 		<br>

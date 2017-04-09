@@ -41,11 +41,12 @@ public class PacienteRest {
 	}
 
 	@POST
-	@Path("/crearPaciente/{nombre}/{apellido}/{direccion}/{anios}/{fechaNac}/{dni}")
+	@Path("/crearPaciente/{nombre}/{apellido}/{direccion}/{anios}/{fechaNac}/{obraSocial}/{dni}")
 	@Produces("application/json")
 	public Response crearPaciente(@PathParam("nombre") final String nombre,
 			@PathParam("apellido") final String apellido, @PathParam("direccion") final String direccion,
 			@PathParam("anios") final Integer anios, @PathParam("fechaNac") final int fechaNac,
+			@PathParam("obraSocial") final int obraSocial,
 			@PathParam("dni") final int dni) {
 
 		try {

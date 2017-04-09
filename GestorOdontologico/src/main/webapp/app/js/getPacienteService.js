@@ -1,15 +1,16 @@
- var app = angular.module('gestorOdont', []);
-
-app.controller("test",function($scope, $http){
+var app = angular.module('gestorOdont', ['toaster']);
+ 
+app.controller("getPacienteService",function($scope, toaster ,$http){
 
 	$scope.nombreBsqd =null;
-	console.log("controller test");
+	console.log("getPaciente ");
 	$scope.icons ="diente.svg,close.png,azul.png,igual.png,circulo.png,recta.png,tres.png";
 	$scope.paciente = null;
 	$scope.buscarPorNombre=function(){
 		if($scope.nombreBsqd==null)
 		{
-			alert("ingresar un nombre");
+			//alert("ingresar un nombre");
+			toaster.pop('error', "Por favor, ingrese un nombre a buscar");
 			return
 		}else
 		{
@@ -23,6 +24,7 @@ app.controller("test",function($scope, $http){
 				$scope.paciente = response.data[0];
 				console.log(response);
 			}, function myError(response) {
+				toaster.pop('error', "Sistema no disponible en estos momentos");
 				console.log(response);
 			});	
 			console.log($scope.paciente);
