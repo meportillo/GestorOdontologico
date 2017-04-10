@@ -1,0 +1,50 @@
+<label><h3>Historias Clinicas</h3></label>
+	
+		<div>
+		<div>
+			<label>Ingresar Nombre: <input type="text"
+				class="form-control" ng-model="nombreBsqd" required>
+				<button class="btn btn-primary" ng-click="buscarPorNombre()"
+					ng-disable="{{nombreBsqd != null}}">Buscar</button>
+			</label>
+        	
+
+		</div>
+
+		<br>
+		<div class="panel panel-primary">
+			<!-- Default panel contents -->
+			<div class="panel-heading">Ficha Paciente Encontrado</div>
+			<div class="panel-body"></div>
+			<!-- List group -->
+			<ul class="list-group">
+				<li class="list-group-item"><b>Nombre:</b> {{paciente.nombre}}</li>
+				<li class="list-group-item"><b>Apellido:</b>
+					{{paciente.apellido}}</li>
+				<li class="list-group-item"><b>DNI:</b> {{paciente.dni}}</li>
+				<li class="list-group-item"><b>Direccion:</b> {{
+					paciente.direccion}}</li>
+				<li class="list-group-item"><b>Fecha Nacimiento:</b> {{
+					paciente.fechaNac | date : 'dd/MM/y'}}</li>
+				<li class="list-group-item"><b>Alta:</b> {{
+					paciente.ficha.fechaAlta | date :  "dd/MM/y" }}</li>
+				<li class="list-group-item"><b>Observaciones:</b> {{
+					paciente.ficha.observaciones }}</li>
+
+
+			</ul>
+		</div>
+
+		<div class=""
+			ng-repeat="cuadrante in paciente.ficha.odontograma.cuadrantes ">
+			<div  style="float:left" class="col-sm-5">
+				<div ng-repeat="diente in cuadrante.dientes">
+					<div diente data-estado="{{diente.idEstadoDiente}}"
+						data-posicion="{{diente.posicionCuadrante}}"
+						data-idcuadrante="{{cuadrante.idTipoCuadrante}}" data-iconos="{{icons}}">
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
