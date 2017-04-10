@@ -2,10 +2,10 @@
 	
 		<div>
 		<div>
-			<label>Ingresar Nombre: <input type="text"
+			<label>Ingresar Nombre, Apellido o Numero de Documento: <input type="text"
 				class="form-control" ng-model="nombreBsqd" required>
 				<button class="btn btn-primary" ng-click="buscarPorNombre()"
-					ng-disable="{{nombreBsqd != null}}">Buscar</button>
+					ng-disable="nombreBsqd == null">Buscar</button>
 			</label>
         	
 

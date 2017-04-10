@@ -46,8 +46,7 @@ public class PacienteRest {
 	public Response crearPaciente(@PathParam("nombre") final String nombre,
 			@PathParam("apellido") final String apellido, @PathParam("direccion") final String direccion,
 			@PathParam("anios") final Integer anios, @PathParam("fechaNac") final int fechaNac,
-			@PathParam("obraSocial") final int obraSocial,
-			@PathParam("dni") final int dni) {
+			@PathParam("obraSocial") final int obraSocial, @PathParam("dni") final int dni) {
 
 		try {
 			Paciente paciente = new Paciente();
@@ -69,13 +68,14 @@ public class PacienteRest {
 	}
 
 	@GET
-	@Path("/getPacientePorNombre/{name}")
+	@Path("/getPacientePorNombreApellidoDni/{valor}")
 	@Produces("application/json")
-	public Response getPacientePorNombre(@PathParam("name") final String name) {
+	public Response getPacientePorNombreApellidoDni(@PathParam("valor") final String valor) {
 		try {
-			List<Paciente> pacientes = this.getPacienteService().getEventsByName(name);
+			List<Paciente> pacientes = this.getPacienteService().getEventsByNameDniSurname(valor);
 			return Response.ok(pacientes).build();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 	}

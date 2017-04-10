@@ -14,9 +14,8 @@ public class PacienteService extends GenericService<Paciente> {
 	private static final long serialVersionUID = 1L;
 
 	@Transactional
-	public List<Paciente> getEventsByName(String name) {
-		return ((PacienteRepository) this.getRepository()).getEventsByName(name);
+	public List<Paciente> getEventsByNameDniSurname(String valor) {
+		return ((PacienteRepository) this.getRepository()).getEventsByNameDniSurname(valor);
 	}
 
 }
-

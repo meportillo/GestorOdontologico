@@ -15,13 +15,13 @@ public class PacienteRepository extends HibernateGenericDAO<Paciente> implements
 	protected Class<Paciente> getDomainClass() {
 		return Paciente.class;
 	}
-	
-	public List<Paciente> getEventsByName(String name) {
+
+	public List<Paciente> getEventsByNameDniSurname(String value) {
 
 		Session session = this.getSessionFactory().getCurrentSession();
-		String hql = "FROM Paciente P WHERE P.nombre LIKE :name ";
+		String hql = "FROM Paciente P WHERE P.nombre LIKE :value or P.apellido LIKE :value or P.dni LIKE :value  ";
 		Query query = session.createQuery(hql);
-		query.setParameter("name", "%" + name + "%");
+		query.setParameter("value", "%" + value + "%");
 
 		return query.list();
 	}

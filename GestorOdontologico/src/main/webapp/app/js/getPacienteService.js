@@ -7,14 +7,13 @@ app.controller("getPacienteService",function($scope, toaster ,$http){
 	$scope.buscarPorNombre=function(){
 		if($scope.nombreBsqd==null)
 		{
-			//alert("ingresar un nombre");
 			toaster.pop('error', "Por favor, ingrese un nombre a buscar");
 			return
 		}else
 		{
 			$http({
 				method : 'GET',
-				url : '/GestorOdontologico/service/paciente/getPacientePorNombre/' +$scope.nombreBsqd,
+				url : '/GestorOdontologico/service/paciente/getPacientePorNombreApellidoDni/' +$scope.nombreBsqd,
 				headers : {
 					'Content-Type' : 'application/json',
 				}
