@@ -42,11 +42,7 @@
       <label for="pacienteAnios" class="ng-scope">años</label><br />
       <input name="pacienteAnios" type="text" ng-model="paciente.anios" ng-model-options="{ updateOn: 'blur' }" required />
       <br />
-      
-      <label for="pacienteFechaNac" class="ng-scope">Fecha de nacimiento</label><br />
-      <input name="pacienteFechaNac" type="text" ng-model="paciente.fechaNac" ng-model-options="{ updateOn: 'blur' }" required />
-      <br />
-
+     
       <label for="pacienteObraSocial" class="ng-scope">Obra Social</label><br />
       <input name="pacienteObraSocial" type="text" ng-model="paciente.obraSocial" ng-model-options="{ updateOn: 'blur' }" required />
       <br />
@@ -57,7 +53,7 @@
       
       
          <md-content>
-            <h4>Standard Date Picker</h4>
+            <h4>Fecha Nacimiento</h4>
             <md-datepicker 
                ng-model="myDate" 
                md-placeholder="Enter date"></md-datepicker>
@@ -69,6 +65,10 @@
     	<input type="submit" ng-click="agregarPerfil()" value="Save" />
            
          </form>
+         
+         <pre>paciente = {{ paciente | json  }} </pre>
+         <pre>myDate = {{ myDate | json  }} </pre>
+         <pre>userRet = {{ userRet  }} </pre>
           
 	   </div>
    </body>

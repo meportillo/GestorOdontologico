@@ -45,8 +45,8 @@ public class PacienteRest {
 	@Produces("application/json")
 	public Response crearPaciente(@PathParam("nombre") final String nombre,
 			@PathParam("apellido") final String apellido, @PathParam("direccion") final String direccion,
-			@PathParam("anios") final Integer anios, @PathParam("fechaNac") final int fechaNac,
-			@PathParam("obraSocial") final int obraSocial, @PathParam("dni") final int dni) {
+			@PathParam("anios") final Integer anios, @PathParam("fechaNac") final Date fechaNac,
+			@PathParam("obraSocial") final String obraSocial, @PathParam("dni") final int dni) {
 
 		try {
 			Paciente paciente = new Paciente();

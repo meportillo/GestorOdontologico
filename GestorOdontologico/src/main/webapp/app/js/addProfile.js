@@ -21,9 +21,13 @@ $scope.user = {};
 $scope.userRet = {};
 $scope.agregarPerfil = function () {
 
+$scope.userRet = "http://localhost:8080/GestorOdontologico/service/paciente/crearPaciente/"+ $scope.paciente.nombre + "/"+ 
+$scope.paciente.apellido + "/" + $scope.paciente.direccion +"/"+ $scope.paciente.anios +"/"+ $scope.myDate + "/"+ $scope.paciente.obraSocial +"/" + $scope.paciente.DNI ;
+	
 $http({
  method : "POST",
- url : "http://localhost:8080/GestorOdontologico/service/paciente/crearPaciente/nombreTest2/apellidoTest2/direccionTest2/2/3/1/123456" ,
+ url : "http://localhost:8080/GestorOdontologico/service/paciente/crearPaciente/"+ $scope.paciente.nombre + "/"+ 
+ $scope.paciente.apellido + "/" + $scope.paciente.direccion +"/"+ $scope.paciente.anios +"/"+ $scope.myDate + "/"+ $scope.paciente.obraSocial +"/" + $scope.paciente.DNI ,
  headers: {'Content-Type': 'application/json'},
  data : $scope.userRet,
  //withCredentials: true,
@@ -85,7 +89,6 @@ $scope.agregarPerfil = function () {
 }
 });
 */
-
 
 
 
