@@ -1,4 +1,6 @@
-app.controller("getPacienteService",function($scope, toaster ,$http){
+app.controller("getPacienteService",function($scope, toaster ,$http, $filter){
+	
+	$scope.list = [];
 
 	$scope.nombreBsqd =null;
 	console.log("getPaciente ");
@@ -18,20 +20,33 @@ app.controller("getPacienteService",function($scope, toaster ,$http){
 					'Content-Type' : 'application/json',
 				}
 			}).then(function mySucces(response) {
-				$scope.paciente = response.data[0];
-				console.log(response);
+				$scope.rowCollection = response.data;
 			}, function myError(response) {
 				toaster.pop('error', "Sistema no disponible en estos momentos");
 				console.log(response);
 			});	
-			console.log($scope.paciente);
 			
 		}
 	}
+    $scope.showModal = false;
 
-	$scope.pacienteNotNull = function(){
-		return $scope.paciente != null;
+	$scope.itemsByPage=10;
+	$scope.verFicha=function(dni){
+		
+		$scope.paciente =  ($filter('filter')($scope.rowCollection, { 'dni': dni }))[0];
+		$scope.openModal();
 	}
-	
+
+	  $scope.openModal = function() {
+		    $scope.showModal = true;
+		  };
+
+		  $scope.ok = function() {
+		    $scope.showModalSeeDetail = true;
+		  };
+
+		  $scope.cancel = function() {
+		    $scope.showModal = false;
+		  };
 
 });
