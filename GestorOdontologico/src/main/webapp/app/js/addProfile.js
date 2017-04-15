@@ -18,6 +18,7 @@ $scope.onlyWeekendsPredicate = function(date) {
 
 $scope.user = ' ';
 $scope.userRet = {};
+
 $scope.agregarPerfil = function () {
 
 $scope.userRet = "http://localhost:8080/GestorOdontologico/service/paciente/crearPaciente/"+ $scope.paciente.nombre + "/"+ 

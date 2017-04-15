@@ -20,11 +20,12 @@
       <label for="pacienteDireccion" class="ng-scope">direccion</label><br />
       <input name="pacienteDireccion" type="text" ng-model="paciente.direccion" ng-model-options="{ updateOn: 'blur' }" required />
       <br />
-      
-      <label for="pacienteAnios" class="ng-scope">años</label><br />
-      <input name="pacienteAnios" type="text" ng-model="paciente.anios" ng-model-options="{ updateOn: 'blur' }" required />
       <br />
-     
+      
+      
+      Edad:<input type="number" ng-model="paciente.anios" name="edad" min="0" max="99" >
+      
+      <br />  
       <label for="pacienteObraSocial" class="ng-scope">Obra Social</label><br />
       <input name="pacienteObraSocial" type="text" ng-model="paciente.obraSocial" ng-model-options="{ updateOn: 'blur' }" required />
       <br />
