@@ -69,20 +69,22 @@
 						<div ng-repeat="diente in cuadrante.dientes">
 							<div diente data-estado="{{diente.idEstadoDiente}}"
 								data-posicion="{{diente.posicionCuadrante}}"
-								data-idcuadrante="{{cuadrante.idTipoCuadrante}}"
-								data-iconos="{{icons}}"></div>
+								data-iddiente="{{diente.iddiente}}"
+								data-idcuadrante="{{cuadrante.idTipoCuadrante}}"></div>
 
 						</div>
 					</div>
 				</div>
-
-
-
 			</div>
 			<div class="modal-footer" style="height: 5%">
 				<button class="btn btn-success" ng-click="cancel()">Cerrar</button>
 			</div>
 		</div>
+
 	</div>
+
+	<div id="my-icon-select"></div>
+	<input type="text" id="selected-text" name="selected-text"
+		style="width: 65px;">
 
 </div>
