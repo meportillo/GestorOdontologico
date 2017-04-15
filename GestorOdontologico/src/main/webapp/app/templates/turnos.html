@@ -1,14 +1,21 @@
-      <div class="datepickerdemo" ng-controller="dateController as ctrl" layout="column" ng-cloak>
+      <div class="datepickerdemo"  layout="column" ng-cloak>
       
-     <form name="pacienteForm" novalidate>
-    
-      <label for="pacienteNombre" class="ng-scope">Nombre</label><br />
-      <input name="pacienteNombre" type="text" ng-model="paciente.nombre" ng-model-options="{ updateOn: 'blur' }" required />  
-      <br />
-      
-      <label for="pacienteApellido" class="ng-scope">Apellido</label><br />
-      <input name="pacienteApellido" type="text" ng-model="paciente.apellido" ng-model-options="{ updateOn: 'blur' }" required />
-      <br />
+     <form name="pacienteForm" ng-controller="dateController as ctrl" novalidate>
+     
+      <p>Nombre:<br>
+	  <input type="text" name="nombre" ng-model="paciente.nombre" required>
+	  <span style="color:red" ng-show="!paciente.nombre">
+	  <span ng-show="pacienteForm.nombre.$error.required">Por favor complete el campo.</span>
+	  </span>
+	  </p>
+	  
+	  
+      <p>Apellido:<br>
+	  <input type="text" name="apellido" ng-model="paciente.apellido" required>
+	  <span style="color:red" ng-show="!paciente.apellido">
+	  <span ng-show="pacienteForm.apellido.$error.required">Por favor complete el campo.</span>
+	  </span>
+	  </p>
       
       <label for="pacienteDireccion" class="ng-scope">direccion</label><br />
       <input name="pacienteDireccion" type="text" ng-model="paciente.direccion" ng-model-options="{ updateOn: 'blur' }" required />
@@ -36,8 +43,11 @@
          </md-content>
          
          
-        <br /><br />
-    	<input type="submit" ng-click="agregarPerfil()" value="Save" />
+        <br />
+    	
+    	<input type="submit" ng-click="agregarPerfil()" value="Guardar Paciente"
+		ng-disabled="pacienteForm.apellido.$error.required ||  
+		pacienteForm.nombre.$error.required">
            
          </form>
          

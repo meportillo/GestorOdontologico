@@ -16,7 +16,7 @@ $scope.onlyWeekendsPredicate = function(date) {
    return day === 0 || day === 6;
 }
 
-$scope.user = {};
+$scope.user = ' ';
 $scope.userRet = {};
 $scope.agregarPerfil = function () {
 
