@@ -56,7 +56,7 @@ public class PacienteRest {
 			paciente.setAnios(anios);
 			paciente.setNombre(nombre);
 
-			paciente.setFechaNac(new Timestamp(new Date().getTime()));
+			paciente.setFechaNac(new Timestamp(fechaNac.getTime()));
 
 			paciente.setDni(dni);
 			this.getPacienteService().save(paciente);

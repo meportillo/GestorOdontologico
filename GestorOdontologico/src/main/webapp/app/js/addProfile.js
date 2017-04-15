@@ -2,6 +2,7 @@ angular
 .module('firstApplication', ['ngMaterial','ngMessages'])
 .controller('dateController', dateController);
 
+$scope.myDate = new Date();
 function dateController ($scope , $http) {
 $scope.myDate = new Date();
 $scope.minDate = new Date(
