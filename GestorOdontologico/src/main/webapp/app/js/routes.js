@@ -7,6 +7,11 @@ app.config(function($routeProvider) {
 		controller : 'getPacienteService',
 		controllerAs : 'getPaciente'
 
+	}).when('/agregarpaciente', {
+		templateUrl : 'app/templates/agregarpaciente.html',
+		controller : 'agregarPacienteCtrl',
+		controllerAs : 'agregarPaciente'
+
 	}).otherwise({
 		redirectTo : '/'
 	});
