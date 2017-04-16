@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,6 +41,18 @@ public class Paciente implements Serializable {
 	@OneToOne()
 	@JoinColumn(name = "idficha", referencedColumnName = "idficha")
 	private Ficha ficha;
+	
+	@ManyToOne()
+	@JoinColumn(name = "idOS", referencedColumnName = "idObraSocial")
+	private ObraSocial obraSocial;
+
+	public ObraSocial getObraSocial() {
+		return obraSocial;
+	}
+
+	public void setObraSocial(ObraSocial obraSocial) {
+		this.obraSocial = obraSocial;
+	}
 
 	public Ficha getFicha() {
 		return ficha;

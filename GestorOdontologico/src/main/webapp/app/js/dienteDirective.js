@@ -45,9 +45,9 @@ app.directive('diente', function() {
 			scope.idDiente = attributes.iddiente;
 			// scope.icons = attributes.iconos;
 			console.log("directive:-- " + scope.idDiente);
-			var mauro = new IconSelect(attributes.iddiente, element[0], []);
-			console.log(mauro);
-			mauro.refresh(icons, attributes.estado);
+			var diente = new IconSelect(attributes.iddiente, element[0], []);
+			console.log(diente);
+			diente.refresh(icons, attributes.estado);
 		}
 	}
 });

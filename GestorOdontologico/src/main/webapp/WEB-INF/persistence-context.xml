@@ -88,10 +88,23 @@
 	<!-- ________________________________________ -->
 	<!-- ___________ Beans de negocio____________ -->
 	<!-- ________________________________________ -->
+	
+	
+		<!-- beans de Paciente -->
 
 	<bean id="pacienteRepo" class="com.tip.persistence.PacienteRepository">
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
+	
+		<!-- beans de Paciente -->
+		
+		<!-- beans de ObraSocial -->
+	
+	<bean id="obraSocialRepo" class="com.tip.persistence.ObraSocialRepository">
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+	
+		<!-- beans de ObraSocial -->
 
 
 </beans>

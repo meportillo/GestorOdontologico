@@ -64,3 +64,4 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster) {
 					}
 
 				});
+
