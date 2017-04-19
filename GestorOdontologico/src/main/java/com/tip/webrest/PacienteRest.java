@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.tip.model.ObraSocial;
 import com.tip.model.Paciente;
 import com.tip.service.PacienteService;
 
@@ -55,13 +56,19 @@ public class PacienteRest {
 			paciente.setDireccion(direccion);
 			paciente.setAnios(anios);
 			paciente.setNombre(nombre);
-
+			
+			ObraSocial obraS = new ObraSocial();
+			obraS.setNombre(obraSocial);
+			
+			paciente.setObraSocial(obraS);
+			
 			paciente.setFechaNac(new Timestamp(fechaNac.getTime()));
 
 			paciente.setDni(dni);
 			this.getPacienteService().save(paciente);
 			return Response.ok(paciente).build();
 		} catch (Exception e) {
+			System.out.println(e);
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 

@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "Paciente")
 public class Paciente implements Serializable {
@@ -42,7 +45,8 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "idficha", referencedColumnName = "idficha")
 	private Ficha ficha;
 	
-	@ManyToOne()
+	@OneToOne(fetch = FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	@JoinColumn(name = "idOS", referencedColumnName = "idObraSocial")
 	private ObraSocial obraSocial;
 
