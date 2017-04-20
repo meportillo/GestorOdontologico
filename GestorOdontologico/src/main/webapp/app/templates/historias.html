@@ -63,15 +63,14 @@
 					</ul>
 				</div>
 
-				<div class=""
-					ng-repeat="cuadrante in paciente.ficha.odontograma.cuadrantes">
-					<div style="float: left" class="col-sm-5">
+				<div ng-repeat="cuadrante in paciente.ficha.odontograma.cuadrantes">
+					<div class="col-lg-6">
 						<div ng-repeat="diente in cuadrante.dientes">
 							<div diente data-estado="{{diente.idEstadoDiente}}"
 								data-posicion="{{diente.posicionCuadrante}}"
 								data-iddiente="{{diente.iddiente}}"
-								data-idcuadrante="{{cuadrante.idTipoCuadrante}}"></div>
-
+								data-idcuadrante="{{cuadrante.idTipoCuadrante}}">
+								{{diente.posicionCuadrante}}</div>
 						</div>
 					</div>
 				</div>
@@ -82,9 +81,4 @@
 		</div>
 
 	</div>
-
-	<div id="my-icon-select"></div>
-	<input type="text" id="selected-text" name="selected-text"
-		style="width: 65px;">
-
 </div>

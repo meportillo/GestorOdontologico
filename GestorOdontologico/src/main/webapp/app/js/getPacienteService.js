@@ -61,34 +61,4 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter){
 
 		  
 		  
-
-	        window.onload = function(){
-	        	
-	            // ///////////////////// ESTE ES EL VALOR DEL
-				// INPUT////////////////////
-//	            selectedText = document.getElementById('selected-text');
-//	            document.getElementById('my-icon-select').addEventListener('changed', function(e){
-//	               selectedText.value = iconSelect.getSelectedValue();
-//	            });
-	            // ///////////////////// ESTE ES EL VALOR DEL
-				// INPUT////////////////////
-	            
-	            
-	            iconSelect = new IconSelect("my-icon-select", document.getElementById("my-icon-select"));
-	            var icons = [];
-	            icons.push({'iconFilePath':'app/images/diente.svg', 'iconValue':'1'});
-	            icons.push({'iconFilePath':'app/images/close.png', 'iconValue':'2'});
-	            icons.push({'iconFilePath':'app/images/azul.png', 'iconValue':'3'});
-	            icons.push({'iconFilePath':'app/images/igual.png', 'iconValue':'4'});
-	            icons.push({'iconFilePath':'app/images/circulo.png', 'iconValue':'5'});
-	            icons.push({'iconFilePath':'app/images/recta.png', 'iconValue':'6'});
-	            icons.push({'iconFilePath':'app/images/tres.png', 'iconValue':'7'});
-	            iconSelect.refresh(icons , 2, []);
-	
-	            
-	        };	  
-
 });
-
-var iconSelect;
-var selectedText;

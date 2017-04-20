@@ -24,7 +24,7 @@ IconSelect.DEFAULT.VECTORAL_ICON_NUMBER = 3;
 
 IconSelect.COMPONENT_ICON_FILE_PATH = "images/control/icon-select/arrow.png";
 
-function IconSelect($$elementID, element,$$parameters) {
+function IconSelect($$elementID, element, $$parameters) {
 
 	console.log("id ---" + $$elementID);
 
@@ -212,6 +212,8 @@ function IconSelect($$elementID, element,$$parameters) {
 		_View.clearUI();
 
 		_View.iconSelectElement.setAttribute('class', 'icon-select');
+		_View.iconSelectElement.setAttribute('class', 'col-sm-1');
+
 
 		var selectedBoxElement = document.createElement('div');
 		selectedBoxElement.setAttribute('class', 'selected-box');
@@ -286,10 +288,10 @@ function IconSelect($$elementID, element,$$parameters) {
 	};
 
 	_View.createIcon = function($iconFilePath, $iconValue, $index, $parameters) {
-//		console.log($iconFilePath);
-//		console.log($iconValue);
-//		console.log($index);
-//		console.log($parameters);
+		// console.log($iconFilePath);
+		// console.log($iconValue);
+		// console.log($index);
+		// console.log($parameters);
 
 		/*
 		 * HTML MODEL
@@ -304,6 +306,7 @@ function IconSelect($$elementID, element,$$parameters) {
 		iconElement.style.height = $parameters.iconsHeight;
 		iconElement.style.marginLeft = $parameters.boxIconSpace;
 		iconElement.style.marginTop = $parameters.boxIconSpace;
+		iconElement.style.cssFloat = 'left';
 
 		var iconImgElement = document.createElement('img');
 		iconImgElement.setAttribute('src', $iconFilePath);
@@ -311,6 +314,7 @@ function IconSelect($$elementID, element,$$parameters) {
 		iconImgElement.setAttribute('icon-index', $index);
 		iconImgElement.setAttribute('width', $parameters.iconsWidth);
 		iconImgElement.setAttribute('height', $parameters.iconsHeight);
+		iconImgElement.style.cssFloat = 'left';
 
 		iconElement.appendChild(iconImgElement);
 		_View.boxElement.appendChild(iconElement);
