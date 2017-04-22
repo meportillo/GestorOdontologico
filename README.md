@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/meportillo/GestorOdontologico.svg?branch=master)](https://travis-ci.org/meportillo/GestorOdontologico
+![Build Status](https://travis-ci.org/meportillo/GestorOdontologico.svg?branch=master)](https://travis-ci.org/meportillo/GestorOdontologico
 
 Turnos Odontológicos e Historias Clínicas
 
