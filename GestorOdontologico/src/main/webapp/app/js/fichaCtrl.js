@@ -21,6 +21,7 @@ app.controller('fichaCtrl', function($scope, $routeParams, PacienteService) {
 
 	$scope.cancel = function() {
 		$scope.showModal = false;
+		$scope.paciente = {};
 	};
 	$scope.verFicha($routeParams.DNI);
 

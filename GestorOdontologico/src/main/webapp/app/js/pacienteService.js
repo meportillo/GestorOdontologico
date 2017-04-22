@@ -24,8 +24,9 @@ app.service('PacienteService', function() {
 
 	this.getPacienteDni= function(dniParam){
 		var temppacientes = this.pacientes.filter(function (el) {
-			return el.dni = dniParam
+			return el.dni == dniParam
 		});
+		console.log(temppacientes[0]);
 		return temppacientes[0];
 	}	
 });
