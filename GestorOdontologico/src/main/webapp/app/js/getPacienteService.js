@@ -1,16 +1,15 @@
-app.controller("getPacienteService",function($scope, toaster ,$http, $filter){
+app.controller("getPacienteService",function($scope, toaster ,$http, $filter, PacienteService){
 	
 	$scope.list = [];
 
 	$scope.nombreBsqd =null;
-	console.log("getPaciente ");
 	$scope.icons ="diente.svg,close.png,azul.png,igual.png,circulo.png,recta.png,tres.png";
 	$scope.paciente = null;
 	$scope.buscarPorNombre=function(){
 		if($scope.nombreBsqd==null)
 		{
 			toaster.pop('error', "Por favor, ingrese un nombre a buscar");
-			return
+			return;
 		}else
 		{
 			$http({
@@ -21,6 +20,9 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter){
 				}
 			}).then(function mySucces(response) {
 				$scope.rowCollection = response.data;
+				PacienteService.setPacientes(response.data);
+				console.log(PacienteService.getPacientes());				
+
 			}, function myError(response) {
 				toaster.pop('error', "Sistema no disponible en estos momentos");
 				console.log(response);
@@ -32,6 +34,8 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter){
 
 	$scope.itemsByPage=10;
 	$scope.verFicha=function(dni){
+		
+		console.log(PacienteService.getPacienteDni(dni));
 		
 		$scope.paciente =  ($filter('filter')($scope.rowCollection, { 'dni': dni }))[0];
 		$scope.openModal();

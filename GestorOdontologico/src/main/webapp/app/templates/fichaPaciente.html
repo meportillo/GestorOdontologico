@@ -1,41 +1,3 @@
-<label><h3>Historias Clinicas</h3></label>
-
-<div>
-	<div>
-		<label>Ingresar Nombre, Apellido o Numero de Documento: <input
-			type="text" class="form-control" ng-model="nombreBsqd" required>
-			<button class="btn btn-primary" ng-click="buscarPorNombre()"
-				ng-disable="nombreBsqd == null">Buscar</button>
-		</label>
-	</div>
-
-	<!-- TABLA DE PACIENTES -->
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th>DNI</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="row in rowCollection">
-				<td>{{row.nombre}}</td>
-				<td>{{row.apellido}}</td>
-				<td>{{row.dni}}</td>
-				<!--td><button ng-click="verFicha(row.dni)">ver Ficha</button></td-->
-				<td> <a ng-href="#/historias/ficha/{{row.dni}}">ver Ficha</a> </td>
-
-			</tr>
-		</tbody>
-		<tfoot>
-		</tfoot>
-	</table>
-	<!-- 	TABLA DE PACIENTES -->
-	<br>
-
-
-
 	<div>
 		<div modal="showModal" close="cancel()" align="left"
 			style="width: 90%; display: block; left: 25%;">
@@ -83,4 +45,3 @@
 		</div>
 
 	</div>
-</div>

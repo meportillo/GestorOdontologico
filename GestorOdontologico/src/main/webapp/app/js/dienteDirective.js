@@ -41,12 +41,10 @@ app.directive('diente', function() {
 			scope.estado = attributes.estado;
 			scope.posicion = attributes.posicion;
 			scope.idcuadrante = attributes.idcuadrante;
-			// scope.icons = attributes.iconos.split(",");
 			scope.idDiente = attributes.iddiente;
-			// scope.icons = attributes.iconos;
-			console.log("directive:-- " + scope.idDiente);
+//			console.log("directive:-- " + scope.idDiente);
 			var diente = new IconSelect(attributes.iddiente, element[0], []);
-			console.log(diente);
+//			console.log(diente);
 			diente.refresh(icons, attributes.estado);
 		}
 	}

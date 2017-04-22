@@ -1,4 +1,4 @@
-app.controller('agregarPacienteCtrl',function($scope, $http, toaster) {
+app.controller('agregarPacienteCtrl',['PacienteService',function($scope, $http, toaster, PacienteService) {
 
 					$scope.myDate = new Date();
 					$scope.minDate = new Date($scope.myDate.getFullYear(),
@@ -17,6 +17,7 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster) {
 
 					$scope.agregarPerfil = function() {
 
+						
 						$scope.userRet = "http://localhost:8080/GestorOdontologico/service/paciente/crearPaciente/"
 								+ $scope.paciente.nombre
 								+ "/"
@@ -63,5 +64,5 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster) {
 						});
 					}
 
-				});
+				}]);
 

@@ -7,7 +7,13 @@ app.config(function($routeProvider) {
 		controller : 'getPacienteService',
 		controllerAs : 'getPaciente'
 
-	}).when('/agregarpaciente', {
+	}).when('/historias/ficha/:dni', {
+		templateUrl : 'app/templates/fichaPaciente.html',
+		controller : 'fichaCtrl',
+		controllerAs : 'ficha'
+
+	})
+	.when('/agregarpaciente', {
 		templateUrl : 'app/templates/agregarpaciente.html',
 		controller : 'agregarPacienteCtrl',
 		controllerAs : 'agregarPaciente'

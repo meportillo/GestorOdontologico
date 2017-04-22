@@ -26,7 +26,7 @@ IconSelect.COMPONENT_ICON_FILE_PATH = "images/control/icon-select/arrow.png";
 
 function IconSelect($$elementID, element, $$parameters) {
 
-	console.log("id ---" + $$elementID);
+//	console.log("id ---" + $$elementID);
 
 	var _icons = [];
 	var _selectedIndex = -1;
@@ -40,7 +40,7 @@ function IconSelect($$elementID, element, $$parameters) {
 		// parametreler boş gelirse
 		if (!$$parameters)
 			$$parameters = {};
-		console.log("sdfsd " + _View.iconSelectElement);
+//		console.log("sdfsd " + _View.iconSelectElement);
 		// En üst elementi seç
 		if (_View.iconSelectElement) {
 
@@ -172,9 +172,9 @@ function IconSelect($$elementID, element, $$parameters) {
 	};
 
 	_View.setIconSelectElement = function($$elementID) {
-		console.log("view id" + $$elementID);
+//		console.log("view id" + $$elementID);
 		_View.iconSelectElement = document.getElementById($$elementID);
-		console.log("view " + _View.iconSelectElement);
+//		console.log("view " + _View.iconSelectElement);
 		return _View.iconSelectElement;
 	};
 
