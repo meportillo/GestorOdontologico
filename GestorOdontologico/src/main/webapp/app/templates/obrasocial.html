@@ -1,6 +1,6 @@
  <div >
       
-     <form name="obraSocialForm" novalidate>
+     <form name="obraSocialForm"  ui-keypress="{13:'agregarObraSocial()'}" novalidate>
      
       <p>Nombre:<br>
 	  <input type="text" name="nombre" ng-model="obraSocial.nombre" required>
@@ -17,9 +17,11 @@
 	  </span>
 	  </p>
       
-    	<input type="submit" ng-click="agregarObraSocial()" value="Guardar Obra Social"
+    	<input type="submit" ng-click="agregarObraSocial()" value="Guardar Obra Social" 
+    	ng-keypress="($event.charCode==13)? agregarObraSocial() : return"
 		ng-disabled="obraSocialForm.codigo.$error.required ||  
 		obraSocialForm.nombre.$error.required">
+		
            
          </form>
          
