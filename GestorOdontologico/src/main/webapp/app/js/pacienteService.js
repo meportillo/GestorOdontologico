@@ -1,6 +1,6 @@
 app.service('PacienteService', function() {
 
-	console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	console.log("PacienteService");
 	this.pacientes = [];
 
 	this.init = function(pacienteParam) {
