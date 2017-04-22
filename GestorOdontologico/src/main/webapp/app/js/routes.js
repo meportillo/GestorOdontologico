@@ -2,6 +2,9 @@ app.config(function($routeProvider) {
 	console.log("dentro routes config");
 	$routeProvider.when('/turnos', {
 		templateUrl : 'app/templates/turnos.html',
+		controller : 'turnosCtrl',
+		controllerAs : 'turnos'
+			
 	}).when('/historias', {
 		templateUrl : 'app/templates/historias.html',
 		controller : 'getPacienteService',
@@ -12,11 +15,15 @@ app.config(function($routeProvider) {
 		controller : 'fichaCtrl',
 		controllerAs : 'ficha'
 
-	})
-	.when('/agregarpaciente', {
+	}).when('/agregarpaciente', {
 		templateUrl : 'app/templates/agregarpaciente.html',
 		controller : 'agregarPacienteCtrl',
 		controllerAs : 'agregarPaciente'
+
+	}).when('/obrasocial', {
+		templateUrl : 'app/templates/obrasocial.html',
+		controller : 'obraSocialCtrl',
+		controllerAs : 'obraSocial'
 
 	}).otherwise({
 		redirectTo : '/'

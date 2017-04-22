@@ -1,0 +1,27 @@
+ <div >
+      
+     <form name="obraSocialForm" novalidate>
+     
+      <p>Nombre:<br>
+	  <input type="text" name="nombre" ng-model="obraSocial.nombre" required>
+	  <span style="color:red" ng-show="!obraSocial.nombre">
+	  <span ng-show="obraSocialForm.nombre.$error.required">Por favor complete el campo.</span>
+	  </span>
+	  </p>
+	  
+	  
+      <p>Codigo:<br>
+	  <input type="text" name="codigo" ng-model="obraSocial.codigo" required>
+	  <span style="color:red" ng-show="!obraSocial.codigo">
+	  <span ng-show="obraSocialForm.codigo.$error.required">Por favor complete el campo.</span>
+	  </span>
+	  </p>
+      
+    	<input type="submit" ng-click="agregarObraSocial()" value="Guardar Obra Social"
+		ng-disabled="obraSocialForm.codigo.$error.required ||  
+		obraSocialForm.nombre.$error.required">
+           
+         </form>
+         
+        
+	   </div>

@@ -46,7 +46,7 @@ public class ObraSocialRest {
 	
 	
 	@POST
-	@Path("/crearPaciente/{nombre}/{codigo}")
+	@Path("/crearObraSocial/{nombre}/{codigo}")
 	@Produces("application/json")	
 	public Response crearObraSocial(@PathParam("nombre") final String nombre, @PathParam("codigo") final String codigo){
 		try {
