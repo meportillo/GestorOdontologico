@@ -9,19 +9,157 @@
 					<div class="panel-heading">Ficha Paciente Encontrado</div>
 					<div class="panel-body"></div>
 					<ul class="list-group">
-						<li class="list-group-item"><b>Nombre:</b>
-							{{paciente.nombre}}</li>
+						<li class="list-group-item">
+				
+								<form editable-form name="nombretextBtnForm" action="#"> 
+								    <span editable-text="paciente.nombre"><b>Nombre</b>
+								        {{ paciente.nombre || 'empty' }}
+								    </span>
+								    <button type="button" class="btn btn-default" ng-click="nombretextBtnForm.$show()" ng-hide="nombretextBtnForm.$visible">
+								        edit
+								    </button>
+								    <span ng-show="nombretextBtnForm.$visible">
+								        <button type="submit" class="btn btn-primary" ng-disabled="nombretextBtnForm.$waiting">
+								          Save
+								        </button>
+								        <button type="button" class="btn btn-default" ng-disabled="nombretextBtnForm.$waiting" ng-click="nombretextBtnForm.$cancel()">
+								          Cancel
+								        </button>
+								    </span>
+								</form>
+															
+						</li>
 						<li class="list-group-item"><b>Apellido:</b>
-							{{paciente.apellido}}</li>
-						<li class="list-group-item"><b>DNI:</b> {{paciente.dni}}</li>
-						<li class="list-group-item"><b>Direccion:</b> {{
-							paciente.direccion}}</li>
-						<li class="list-group-item"><b>Fecha Nacimiento:</b> {{
-							paciente.fechaNac | date : 'dd/MM/y'}}</li>
-						<li class="list-group-item"><b>Alta:</b> {{
-							paciente.ficha.fechaAlta | date : "dd/MM/y" }}</li>
-						<li class="list-group-item"><b>Observaciones:</b> {{
-							paciente.ficha.observaciones }}</li>
+								<form editable-form name="apellidotextBtnForm" action="#"> 
+								    <span editable-text="paciente.apellido">
+								        {{ paciente.apellido || 'empty' }}
+								    </span>
+								    <button type="button" class="btn btn-default" ng-click="apellidotextBtnForm.$show()" ng-hide="apellidotextBtnForm.$visible">
+								        edit
+								    </button>
+								    <span ng-show="apellidotextBtnForm.$visible">
+								        <button type="submit" class="btn btn-primary" ng-disabled="apellidotextBtnForm.$waiting">
+								          Save
+								        </button>
+								        <button type="button" class="btn btn-default" ng-disabled="apellidotextBtnForm.$waiting" ng-click="apellidotextBtnForm.$cancel()">
+								          Cancel
+								        </button>
+								    </span>
+								</form>
+									
+						
+						</li>
+						<li class="list-group-item"><b>DNI:</b> 
+						
+						
+							<form editable-form name="dnitextBtnForm" action="#"> 
+								    <span editable-text="paciente.dni">
+								        {{ paciente.dni || 'empty' }}
+								    </span>
+								    <button type="button" class="btn btn-default" ng-click="dnitextBtnForm.$show()" ng-hide="dnitextBtnForm.$visible">
+								        edit
+								    </button>
+								    <span ng-show="dnitextBtnForm.$visible">
+								        <button type="submit" class="btn btn-primary" ng-disabled="dnitextBtnForm.$waiting">
+								          Save
+								        </button>
+								        <button type="button" class="btn btn-default" ng-disabled="dnitextBtnForm.$waiting" ng-click="dnitextBtnForm.$cancel()">
+								          Cancel
+								        </button>
+								    </span>
+								</form>
+						
+						
+						</li>
+						<li class="list-group-item"><b>Direccion:</b>
+						
+								<form editable-form name="dirtextBtnForm" action="#"> 
+								    <span editable-text="paciente.direccion">
+								        {{ paciente.direccion || 'empty' }}
+								    </span>
+								    <button type="button" class="btn btn-default" ng-click="dirtextBtnForm.$show()" ng-hide="dirtextBtnForm.$visible">
+								        edit
+								    </button>
+								    <span ng-show="dirtextBtnForm.$visible">
+								        <button type="submit" class="btn btn-primary" ng-disabled="dirtextBtnForm.$waiting">
+								          Save
+								        </button>
+								        <button type="button" class="btn btn-default" ng-disabled="dirtextBtnForm.$waiting" ng-click="dirtextBtnForm.$cancel()">
+								          Cancel
+								        </button>
+								    </span>
+								</form>
+						
+						
+						</li>
+						<li class="list-group-item"><b>Fecha Nacimiento:</b>
+								<form editable-form name="nactextBtnForm" action="#"> 
+								    <span   editable-bsdate="paciente.fechaNac" e-is-open="opened.$data" e-ng-click="open($event,'$data')" e-datepicker-popup="dd-MMMM-yyyy">
+
+								            {{ (user.dob | date:"dd/MM/yyyy") || 'empty' }}
+								        
+								    </span>
+								    <button type="button" class="btn btn-default" ng-click="nactextBtnForm.$show()" ng-hide="nactextBtnForm.$visible">
+								        edit
+								    </button>
+								    <span ng-show="nactextBtnForm.$visible">
+								        <button type="submit" class="btn btn-primary" ng-disabled="nactextBtnForm.$waiting">
+								          Save
+								        </button>
+								        <button type="button" class="btn btn-default" ng-disabled="nactextBtnForm.$waiting" ng-click="nactextBtnForm.$cancel()">
+								          Cancel
+								        </button>
+								    </span>
+								</form>
+						
+													
+						</li>
+						<li class="list-group-item"><b>Alta:</b> 
+						
+							<form editable-form name="altatextBtnForm" action="#"> 
+								    <span   editable-bsdate="paciente.ficha.fechaAlta" e-is-open="opened.$data" e-ng-click="open($event,'$data')" e-datepicker-popup="dd-MMMM-yyyy">
+
+											{{paciente.ficha.fechaAlta | date : "dd/MM/y" }}
+						  
+								    </span>
+								    <button type="button" class="btn btn-default" ng-click="altatextBtnForm.$show()" ng-hide="altatextBtnForm.$visible">
+								        edit
+								    </button>
+								    <span ng-show="altatextBtnForm.$visible">
+								        <button type="submit" class="btn btn-primary" ng-disabled="altatextBtnForm.$waiting">
+								          Save
+								        </button>
+								        <button type="button" class="btn btn-default" ng-disabled="altatextBtnForm.$waiting" ng-click="altatextBtnForm.$cancel()">
+								          Cancel
+								        </button>
+								    </span>
+								</form>
+						
+						
+						</li>
+						
+						<li class="list-group-item"><b>Observaciones:</b> 
+						
+							<form editable-form name="obstextBtnForm" action="#"> 
+								    <span  editable-textarea="paciente.ficha.observaciones" e-rows="7" e-cols="40">
+								        {{ paciente.ficha.observaciones || 'empty' }}
+								    </span>
+								    <button type="button" class="btn btn-default" ng-click="obstextBtnForm.$show()" ng-hide="obstextBtnForm.$visible">
+								        edit
+								    </button>
+								    <span ng-show="obstextBtnForm.$visible">
+								        <button type="submit" class="btn btn-primary" ng-disabled="obstextBtnForm.$waiting">
+								          Save
+								        </button>
+								        <button type="button" class="btn btn-default" ng-disabled="obstextBtnForm.$waiting" ng-click="obstextBtnForm.$cancel()">
+								          Cancel
+								        </button>
+								    </span>
+								</form>
+						
+						
+						
+						</li>
 
 
 					</ul>

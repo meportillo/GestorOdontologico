@@ -1,2 +1,2 @@
 var app = angular
-		.module('gestorOdont', [ 'toaster', 'ngRoute', 'smart-table','ui.bootstrap.modal', 'ngMaterial','ngMessages' ]);
+		.module('gestorOdont', [ 'toaster', 'ngRoute', 'smart-table','ui.bootstrap.modal', 'ngMaterial','ngMessages', 'xeditable' ]);
