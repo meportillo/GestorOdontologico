@@ -19,6 +19,8 @@ angular.module('gestorOdont')
 .controller('agregarPacienteCtrl', function($scope, $http, toaster) {
 	$scope.user = ' ';
 	$scope.userRet = {};
+	$scope.paciente = {};
+	$scope.paciente.anios = 0;
 
 	$scope.agregarPerfil = function() {
 
@@ -37,6 +39,10 @@ angular.module('gestorOdont')
 				+ $scope.paciente.obraSocial
 				+ "/"
 				+ $scope.paciente.DNI;
+		
+		if($scope.myDate == null){
+			toaster.pop('error', 'Por favor ingresa una fecha de nacimiento' );
+		}else{
 
 		$http(
 				{
@@ -67,5 +73,6 @@ angular.module('gestorOdont')
 			toaster.pop('error', response.status + ', ' + response.message );
 			$scope.myTxt = "error";
 		});
+	}
 	}
 });
