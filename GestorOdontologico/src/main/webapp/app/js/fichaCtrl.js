@@ -3,20 +3,12 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 	$scope.showModal = false;
 	$scope.paciente={};
 	$scope.dni = $routeParams.dni;
-	console.log($scope.dni);
 	$scope.verFicha = function(dni) {
-	console.log(PacienteService.getPacienteDni($scope.dni));
-	console.log(PacienteService.getPacientes());				
 	$scope.paciente = PacienteService.getPacienteDni($scope.dni);
 	$scope.openModal();
 	}
 
 	$scope.updatePaciente=function(){
-//	console.log("asdfsdf");
-//	console.log($scope.paciente);
-//	var ret =	PacienteService.updatePaciente($scope.paciente);
-//	console.log("ret " + ret);
-//	$scope.paciente = ret;
 		$http({
 			method : 'PUT',
 			url : '/GestorOdontologico/service/paciente/updatePaciente/' + $scope.paciente.dni,
@@ -52,7 +44,5 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 		$scope.paciente = {};
 	};
 	$scope.verFicha($routeParams.DNI);
-
 	
-	
-})
+});

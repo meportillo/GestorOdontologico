@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.tip.model.Datos;
 import com.tip.model.ObraSocial;
 import com.tip.model.Paciente;
 import com.tip.service.DienteService;
@@ -85,6 +86,37 @@ public class PacienteRest {
 		}
 
 	}
+	
+	@POST
+	@Path("/crearPaciente")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public Response crearPaciente(Datos datos) {
+
+		try {
+			Paciente paciente = new Paciente();
+			paciente.setAnios(datos.getAnios());
+			paciente.setApellido(datos.getApellido());
+			paciente.setDireccion(datos.getDireccion());
+			paciente.setNombre(datos.getNombre());
+
+			ObraSocial obraS = new ObraSocial();
+			obraS.setNombre(datos.getObraSocial());
+
+			paciente.setObraSocial(obraS);
+
+			paciente.setFechaNac(new Timestamp(datos.getFechaNac().getTime()));
+
+			paciente.setDni(datos.getDni());
+			this.getPacienteService().save(paciente);
+			return Response.ok(paciente).build();
+		} catch (Exception e) {
+			System.out.println(e);
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+
+	}
+
 
 	@GET
 	@Path("/getPacientePorNombreApellidoDni/{valor}")
@@ -109,7 +141,6 @@ public class PacienteRest {
 		try {
 
 			this.getPacienteService().updatePaciente(dni,paciente);
-			this.getDienteService().updateDientes(paciente.getFicha().getOdontograma().getCuadrantes());
 			ret = this.getPacienteService().getById(dni);
 
 		} catch (Exception e) {

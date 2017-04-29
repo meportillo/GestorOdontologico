@@ -29,16 +29,14 @@ public class PacienteRepository extends HibernateGenericDAO<Paciente> implements
 	public Paciente updatePaciente(Integer dni, Paciente paciente) {
 
 		Session session = this.getSessionFactory().getCurrentSession();
+		session.update(paciente);
 		String hql = "FROM Paciente P WHERE P.dni = :dni  ";
 		Query query = session.createQuery(hql);
-		query.setParameter("dni",  dni);
-		Paciente ret = (Paciente) query.list().get(0);
+		query.setParameter("dni", dni);
 
-		session.save(ret);
-		ret.setFicha(paciente.getFicha());
-		session.merge(ret);
 		
-		return ret;
+		
+		return (Paciente) query.list().get(0);
 
 	}
 

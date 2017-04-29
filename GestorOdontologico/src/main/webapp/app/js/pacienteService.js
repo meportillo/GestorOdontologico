@@ -13,6 +13,10 @@ app.service('PacienteService', function($http,toaster) {
 	this.getPaciente = function() {
 		return this.paciente;
 	}
+	
+	this.agregarPaciente= function(pacienteParam){
+		this.pacientes.push(pacienteParam);
+	}
 
 	this.setPacientes = function(pacientesParam) {
 		this.pacientes = pacientesParam;

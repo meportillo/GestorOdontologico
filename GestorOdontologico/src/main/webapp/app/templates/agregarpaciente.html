@@ -1,6 +1,6 @@
       <div class="datepickerdemo"  layout="column" ng-cloak>
       
-     <form name="pacienteForm" novalidate>
+     <form name="pacienteForm" ng-submit="agregarPerfil()" novalidate>
      
       <p>Nombre:<br>
 	  <input type="text" name="nombre" ng-model="paciente.nombre" required>
@@ -39,7 +39,7 @@
       <br />
       
       <label for="pacienteDNI">DNI</label><br />
-      <input name="pacienteDNI" type="text" ng-model="paciente.DNI" ng-model-options="{ updateOn: 'blur' }" valid-number />
+      <input name="pacienteDNI" type="text" ng-model="paciente.dni" ng-model-options="{ updateOn: 'blur' }" valid-number />
       <br />      
       
       
@@ -54,7 +54,7 @@
          
         <br />
     	
-    	<input class="btn btn-primary" type="submit" ng-click="agregarPerfil()" value="Guardar Paciente"
+    	<input class="btn btn-primary" type="submit" id="submit"  value="Guardar Paciente"
 		ng-disabled="pacienteForm.apellido.$error.required ||  
 		pacienteForm.nombre.$error.required">
            
