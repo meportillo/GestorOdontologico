@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,7 +19,8 @@ public class Diente implements Serializable{
 	private static final long serialVersionUID = 3503041860746671258L;
 
 	@Id
-	@Column(name = "iddiente")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "iddiente", nullable= false)
 	private Integer iddiente;
 
 	@Column(name = "posicionCuadrante")
@@ -29,6 +32,15 @@ public class Diente implements Serializable{
 	@Column(name = "idEstadoDiente")
 	private Integer idEstadoDiente;
 
+	public Diente(){
+		
+	}
+	
+	public Diente(Integer pos){
+		this.idEstadoDiente = 0;
+		this.posicionCuadrante = pos; 
+	}
+	
 	public Integer getIddiente() {
 		return iddiente;
 	}

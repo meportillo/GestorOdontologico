@@ -102,13 +102,16 @@ public class PacienteRest {
 
 			ObraSocial obraS = new ObraSocial();
 			obraS.setNombre(datos.getObraSocial());
-
 			paciente.setObraSocial(obraS);
-
 			paciente.setFechaNac(new Timestamp(datos.getFechaNac().getTime()));
-
 			paciente.setDni(datos.getDni());
+
 			this.getPacienteService().save(paciente);
+			paciente.getFicha().setIdPaciente(new Long(datos.getDni()));
+			paciente.getFicha().getOdontograma().setIdFicha(paciente.getFicha().getIdFicha());
+			paciente.getFicha().getOdontograma().actualizarcuadrantes();
+			this.getPacienteService().update(paciente);
+			
 			return Response.ok(paciente).build();
 		} catch (Exception e) {
 			System.out.println(e);

@@ -11,10 +11,6 @@ app.directive('diente',['$http', function($http) {
 		templateUrl : "app/curso-template.html",
 		link : function(scope, element, attributes) {
 			
-			console.log("--------------data----------------");
-			console.log(scope.estadoD);
-			console.log("--------------data----------------");
-
 
 			var icons = [];
 			icons.push({

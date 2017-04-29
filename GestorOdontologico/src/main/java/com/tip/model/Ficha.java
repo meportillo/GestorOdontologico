@@ -1,36 +1,57 @@
 package com.tip.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "ficha")
-public class Ficha {
+public class Ficha implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "idficha")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idficha", nullable= false)
 	private Long idFicha;
 
-	@Column(name = "observaciones")
+	@Column(name = "observaciones",nullable=true)
 	private String observaciones;
 
-	@Column(name = "fechaAlta")
+	@Column(name = "fechaAlta",nullable=true)
 	private Date fechaAlta;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idodontograma", referencedColumnName = "idodontograma")
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	@JoinColumn(name = "idodontograma", referencedColumnName = "idodontograma",nullable=true)
 	private Odontograma odontograma;
 
-	@Column(name = "idPaciente")
+	@Column(name = "idPaciente", nullable=true)
 	private Long idPaciente;
 
+	public Ficha(){
+		this.observaciones ="";
+		this.fechaAlta = new Date();
+		this.fechaAlta.setHours(0);
+		this.odontograma = new Odontograma();
+		
+	}
+	
 	public Odontograma getOdontograma() {
 		return odontograma;
 	}

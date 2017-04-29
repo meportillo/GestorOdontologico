@@ -1,4 +1,4 @@
-app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteService) {
+app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteService,$location) {
 
 	$scope.myDate = new Date();
 	$scope.minDate = new Date($scope.myDate.getFullYear(), $scope.myDate.getMonth() - 2, $scope.myDate.getDate());
@@ -26,6 +26,8 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 				data : $scope.paciente,
 			}).then(function mySucces(response) {
 				toaster.pop('sucess', 'Agregado en forma correcta');
+				PacienteService.agregarPaciente(response.data);
+				$location.path('/historias/ficha/'+response.data.dni);
 				console.log(response);
 		}, function myError(response) {
 			console.log(response);
