@@ -20,6 +20,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
 		<jaxrs:serviceBeans>
 			<ref bean="pacienteRest" />
 			<ref bean="obraSocialRest" />
+			<ref bean="dienteRest"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
@@ -35,12 +36,24 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
 	</jaxrs:server>
 	<!-- beans de Paciente -->
 
+
+
+	<bean id="dienteServiceId" class="com.tip.service.DienteService">
+		<property name="repository" ref="dienteRepo" />
+	</bean>
+
+
 	<bean id="pacienteServiceId" class="com.tip.service.PacienteService">
 		<property name="repository" ref="pacienteRepo" />
 	</bean>
 
 	<bean id="pacienteRest" class="com.tip.webrest.PacienteRest">
 		<property name="pacienteService" ref="pacienteServiceId" />
+		<property name="dienteService" ref="dienteServiceId" />
+	</bean>
+
+	<bean id="dienteRest" class="com.tip.webrest.DienteRest">
+		<property name="dienteService" ref="dienteServiceId" />
 	</bean>
 	
 	<!-- beans de Paciente -->

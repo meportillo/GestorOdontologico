@@ -16,14 +16,20 @@
 	  <span ng-show="pacienteForm.apellido.$error.required">Por favor complete el campo.</span>
 	  </span>
 	  </p>
-	  
-	  <p>Direccion:<br>
-	  <input type="text" name="direccion" ng-model="paciente.direccion" required>
-	  <span style="color:red" ng-show="!paciente.direccion">
-	  <span ng-show="pacienteForm.direccion.$error.required">Por favor complete el campo.</span>
-	  </span>
-	  </p>
-	  
+
+ 
+     <p>Direccion:<br>
+     <input type="text" name="direccion" ng-model="paciente.direccion" required>
+     <span style="color:red" ng-show="!paciente.direccion">
+    <span ng-show="pacienteForm.direccion.$error.required">Por favor complete el campo.</span>
+    </span>
+     </p>
+      
+      <label for="pacienteDireccion" class="ng-scope">direccion</label><br />
+      <input name="pacienteDireccion" type="text" ng-model="paciente.direccion" ng-model-options="{ updateOn: 'blur' }" required />
+      <br />
+      <br />
+      
       
       Edad:<input type="number" ng-model="paciente.anios" name="edad" min="0" max="99" >
       
@@ -32,13 +38,10 @@
       <input name="pacienteObraSocial" type="text" ng-model="paciente.obraSocial" ng-model-options="{ updateOn: 'blur' }" required />
       <br />
       
-      <p>DNI:<br>
-	  <input type="text" name="pacienteDNI" ng-model="paciente.DNI" required valid-number>
-	  <span style="color:red" ng-show="!paciente.DNI">
-	  <span ng-show="pacienteForm.pacienteDNI.$error.required">Por favor complete el campo.</span>
-	  </span>
-	  </p> 
-	       
+      <label for="pacienteDNI">DNI</label><br />
+      <input name="pacienteDNI" type="text" ng-model="paciente.DNI" ng-model-options="{ updateOn: 'blur' }" valid-number />
+      <br />      
+      
       
          <md-content>
             <h4>Fecha Nacimiento</h4>
@@ -53,15 +56,12 @@
     	
     	<input class="btn btn-primary" type="submit" ng-click="agregarPerfil()" value="Guardar Paciente"
 		ng-disabled="pacienteForm.apellido.$error.required ||  
-		pacienteForm.nombre.$error.required ||
-		pacienteForm.pacienteDNI.$error.required ||
-		pacienteForm.direccion.$error.required">
+		pacienteForm.nombre.$error.required">
            
          </form>
-
-<!--          
+         <!-- 
          <pre>paciente = {{ paciente | json  }} </pre>
          <pre>myDate = {{ myDate | json  }} </pre>
          <pre>userRet = {{ userRet  }} </pre>
-      -->     
+          -->
 	   </div>

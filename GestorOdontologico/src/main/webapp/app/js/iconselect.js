@@ -220,7 +220,8 @@ function IconSelect($$elementID, element, $$parameters) {
 
 		var selectedIconElement = document.createElement('div');
 		selectedIconElement.setAttribute('class', 'selected-icon');
-
+		//selectedIconElement.setAttribute('ng-model', 'diente.idEstadoDiente');
+		
 		_View.selectedIconImgElement = document.createElement('img');
 		_View.selectedIconImgElement.setAttribute('src', '');
 		selectedIconElement.appendChild(_View.selectedIconImgElement);

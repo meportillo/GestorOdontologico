@@ -168,17 +168,15 @@
 				<div ng-repeat="cuadrante in paciente.ficha.odontograma.cuadrantes">
 					<div class="col-lg-6">
 						<div ng-repeat="diente in cuadrante.dientes">
-							<div diente data-estado="{{diente.idEstadoDiente}}"
-								data-posicion="{{diente.posicionCuadrante}}"
-								data-iddiente="{{diente.iddiente}}"
-								data-idcuadrante="{{cuadrante.idTipoCuadrante}}">
+							<div diente  estado="diente.idEstadoDiente" iddiente="diente.iddiente">
 								{{diente.posicionCuadrante}}</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer" style="height: 5%">
-				<button class="btn btn-success" ng-click="cancel()">Cerrar</button>
+				<button class="btn btn-success" ng-click="updatePaciente()">Guardar</button>
+				<button class="btn btn-danger" ng-click="cancel()">Cancelar</button>
 			</div>
 		</div>
 

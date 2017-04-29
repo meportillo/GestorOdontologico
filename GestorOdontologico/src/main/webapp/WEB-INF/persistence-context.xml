@@ -90,14 +90,7 @@
 	<!-- ________________________________________ -->
 	
 	
-		<!-- beans de Paciente -->
 
-	<bean id="pacienteRepo" class="com.tip.persistence.PacienteRepository">
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean>
-	
-		<!-- beans de Paciente -->
-		
 		<!-- beans de ObraSocial -->
 	
 	<bean id="obraSocialRepo" class="com.tip.persistence.ObraSocialRepository">
@@ -106,5 +99,21 @@
 	
 		<!-- beans de ObraSocial -->
 
+		<!-- beans de ObraSocial -->
+	
+	<bean id="dienteRepo" class="com.tip.persistence.DienteRepository">
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+	
+		<!-- beans de ObraSocial -->
+
+		<!-- beans de Paciente -->
+
+	<bean id="pacienteRepo" class="com.tip.persistence.PacienteRepository">
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+	
+		<!-- beans de Paciente -->
+		
 
 </beans>

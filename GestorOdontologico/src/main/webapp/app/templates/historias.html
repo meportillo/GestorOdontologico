@@ -1,7 +1,7 @@
 <label><h3>Historias Clinicas</h3></label>
 
 <div>
-	<form name="testBoton"  ui-keypress="{13:'buscarPorNombre()'}" novalidate>
+		<form name="testBoton"  ui-keypress="{13:'buscarPorNombre()'}" novalidate>
 	<div>
 		<label>Ingresar Nombre, Apellido o Numero de Documento: <input
 			type="text" class="form-control" ng-model="nombreBsqd" required>
@@ -24,7 +24,6 @@
 				<td>{{row.nombre}}</td>
 				<td>{{row.apellido}}</td>
 				<td>{{row.dni}}</td>
-				<!--td><button ng-click="verFicha(row.dni)">ver Ficha</button></td-->
 				<td> <a ng-href="#/historias/ficha/{{row.dni}}">ver Ficha</a> </td>
 
 			</tr>
@@ -34,5 +33,4 @@
 	</table>
 	<!-- 	TABLA DE PACIENTES -->
 	<br>
-	</form>
 </div>

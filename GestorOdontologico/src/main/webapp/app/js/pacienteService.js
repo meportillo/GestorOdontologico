@@ -1,4 +1,4 @@
-app.service('PacienteService', function() {
+app.service('PacienteService', function($http,toaster) {
 
 	console.log("PacienteService");
 	this.pacientes = [];
@@ -28,5 +28,32 @@ app.service('PacienteService', function() {
 		});
 		console.log(temppacientes[0]);
 		return temppacientes[0];
-	}	
+	}
+	this.updatePaciente=function(pacienteParam){
+		console.log("into service");
+		this.paciente = pacienteParam;
+		console.log(pacienteParam);
+		
+		$http({
+			method : 'PUT',
+			url : '/GestorOdontologico/service/paciente/updatePaciente/' + pacienteParam.dni,
+			headers : {
+				 'Content-Type' : 'application/json',
+                 'accept' : 'application/json'
+			},
+			data: pacienteParam
+			
+		}).then(function mySucces(response) {
+			this.paciente = response.data;			
+			console.log(response.data)
+			toaster.pop('success', "Acutalizacion OK");
+
+		}, function myError(response) {
+			toaster.pop('error', "Sistema no disponible en estos momentos");
+			console.log(response);
+			return null;
+		});	
+
+		return this.paciente;
+	}
 });

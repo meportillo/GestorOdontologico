@@ -3,7 +3,6 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter, Pa
 	$scope.list = [];
 
 	$scope.nombreBsqd =null;
-	$scope.icons ="diente.svg,close.png,azul.png,igual.png,circulo.png,recta.png,tres.png";
 	$scope.paciente = null;
 	$scope.buscarPorNombre=function(){
 		if($scope.nombreBsqd==null)
@@ -20,7 +19,7 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter, Pa
 				}
 			}).then(function mySucces(response) {
 				$scope.rowCollection = response.data;
-				toaster.pop('sucess', 'Se encontraron: ' +response.data.length+  ' pacientes');
+				toaster.pop('sucess', 'Se encontraron: ' +response.data.length+  ' pacientes')
 				PacienteService.setPacientes(response.data);
 				console.log(PacienteService.getPacientes());				
 
@@ -53,17 +52,6 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter, Pa
 		  $scope.cancel = function() {
 		    $scope.showModal = false;
 		  };
-		  
-          $scope.iconosDientes = [];
-          $scope.iconosDientes.push({'iconFilePath':'app/images/diente.svg', 'iconValue':'1'});
-          $scope.iconosDientes.push({'iconFilePath':'app/images/close.png', 'iconValue':'2'});
-          $scope.iconosDientes.push({'iconFilePath':'app/images/azul.png', 'iconValue':'3'});
-          $scope.iconosDientes.push({'iconFilePath':'app/images/igual.png', 'iconValue':'4'});
-          $scope.iconosDientes.push({'iconFilePath':'app/images/circulo.png', 'iconValue':'5'});
-          $scope.iconosDientes.push({'iconFilePath':'app/images/recta.png', 'iconValue':'6'});
-          $scope.iconosDientes.push({'iconFilePath':'app/images/tres.png', 'iconValue':'7'});
-          
-
-		  
+		  		  
 		  
 });

@@ -1,12 +1,13 @@
 package com.tip.webrest;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,12 +16,23 @@ import javax.ws.rs.core.Response.Status;
 
 import com.tip.model.ObraSocial;
 import com.tip.model.Paciente;
+import com.tip.service.DienteService;
 import com.tip.service.PacienteService;
 
 @Path("/paciente")
 public class PacienteRest {
 
 	private PacienteService pacienteService;
+	
+	private DienteService dienteService;
+
+	public DienteService getDienteService() {
+		return dienteService;
+	}
+
+	public void setDienteService(DienteService dienteService) {
+		this.dienteService = dienteService;
+	}
 
 	public PacienteService getPacienteService() {
 		return pacienteService;
@@ -56,12 +68,12 @@ public class PacienteRest {
 			paciente.setDireccion(direccion);
 			paciente.setAnios(anios);
 			paciente.setNombre(nombre);
-			
+
 			ObraSocial obraS = new ObraSocial();
 			obraS.setNombre(obraSocial);
-			
+
 			paciente.setObraSocial(obraS);
-			
+
 			paciente.setFechaNac(new Timestamp(fechaNac.getTime()));
 
 			paciente.setDni(dni);
@@ -85,6 +97,26 @@ public class PacienteRest {
 			e.printStackTrace();
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
+	}
+
+	@PUT
+	@Path("/updatePaciente/{dni}")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public Response updatePaciente(@PathParam("dni") final Integer dni,final Paciente paciente) {
+
+		Paciente ret = null;
+		try {
+
+			this.getPacienteService().updatePaciente(dni,paciente);
+			this.getDienteService().updateDientes(paciente.getFicha().getOdontograma().getCuadrantes());
+			ret = this.getPacienteService().getById(dni);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+		return Response.ok(ret).build();
 	}
 
 }
