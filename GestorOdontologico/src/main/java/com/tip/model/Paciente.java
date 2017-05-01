@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -44,7 +45,7 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "idficha", referencedColumnName = "idficha")
 	private Ficha ficha;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	@JoinColumn(name = "idOS", referencedColumnName = "idObraSocial")
 	private ObraSocial obraSocial;
