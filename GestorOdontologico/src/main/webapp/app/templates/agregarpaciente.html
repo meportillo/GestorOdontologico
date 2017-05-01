@@ -24,19 +24,22 @@
       </p>
       
       <p>Edad:<br>
-      <input type="number" name="anios" ng-model="paciente.anios" required>
+      <input type="number" name="anios" ng-model="paciente.anios" min="0" max="99" required>
       <span style="color:red" ng-show="!paciente.anios">
       <span ng-show="pacienteForm.anios.$error.required">Por favor complete el campo.</span>
       </span>
       </p>
-      
+  
+
       <p>DNI:<br>
-      <input type="number" name="dni" ng-model="paciente.dni" required>
+      <input type="number" name="dni" ng-model="paciente.dni"  min="1000000" max="10000000" required>
       <span style="color:red" ng-show="!paciente.dni">
       <span ng-show="pacienteForm.dni.$error.required">Por favor complete el campo.</span>
+      <span ng-show="pacienteForm.dni.$error.min">El numero de ser mayor a 1000000</span>
+      <span ng-show="pacienteForm.dni.$error.max">El numero de ser menor a 10000000</span>
+      
       </span>
       </p>
-      
             
  <!--      Edad:<input type="number" ng-model="paciente.anios" name="edad" min="0" max="99" >
  
@@ -70,7 +73,10 @@
 		pacienteForm.nombre.$error.required ||
 		pacienteForm.direccion.$error.required ||  
 		pacienteForm.edad.$error.required ||
-		pacienteForm.dni.$error.required"
+		pacienteForm.dni.$error.required   ||
+		pacienteForm.dni.$error.min  ||
+		pacienteForm.dni.$error.max
+		"
 		
 		>
            
