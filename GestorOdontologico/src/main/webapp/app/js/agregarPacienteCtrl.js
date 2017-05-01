@@ -34,6 +34,8 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 
 		$scope.paciente.fechaNac= $scope.myDate;
  		if($scope.myDate == null){
+ 			$scope.myDate = new Date($scope.myDate);
+ 			console.log($scope.myDate);
  			toaster.pop('error', 'Por favor ingresa una fecha de nacimiento' );
  		}else{
 

@@ -9,7 +9,6 @@
 	  </span>
 	  </p>
 	  
-	  
       <p>Apellido:<br>
 	  <input type="text" name="apellido" ng-model="paciente.apellido" required>
 	  <span style="color:red" ng-show="!paciente.apellido">
@@ -17,25 +16,42 @@
 	  </span>
 	  </p>
 
- 
-     <p>Direccion:<br>
-     <input type="text" name="direccion" ng-model="paciente.direccion" required>
-     <span style="color:red" ng-show="!paciente.direccion">
-    <span ng-show="pacienteForm.direccion.$error.required">Por favor complete el campo.</span>
-    </span>
-     </p>
+      <p>Direccion:<br>
+      <input type="text" name="direccion" ng-model="paciente.direccion" required>
+      <span style="color:red" ng-show="!paciente.direccion">
+      <span ng-show="pacienteForm.direccion.$error.required">Por favor complete el campo.</span>
+      </span>
+      </p>
+      
+      <p>Edad:<br>
+      <input type="number" name="anios" ng-model="paciente.anios" required>
+      <span style="color:red" ng-show="!paciente.anios">
+      <span ng-show="pacienteForm.anios.$error.required">Por favor complete el campo.</span>
+      </span>
+      </p>
+      
+      <p>DNI:<br>
+      <input type="number" name="dni" ng-model="paciente.dni" required>
+      <span style="color:red" ng-show="!paciente.dni">
+      <span ng-show="pacienteForm.dni.$error.required">Por favor complete el campo.</span>
+      </span>
+      </p>
       
             
-      Edad:<input type="number" ng-model="paciente.anios" name="edad" min="0" max="99" >
+ <!--      Edad:<input type="number" ng-model="paciente.anios" name="edad" min="0" max="99" >
+ 
+      <label for="pacienteDNI">DNI</label><br />
+      <input name="pacienteDNI" type="text" ng-model="paciente.dni" ng-model-options="{ updateOn: 'blur' }" valid-number />
+      <br /> 
+ 
+  -->
       
         <label for="pacienteObraSocial" class="ng-scope">Obra Social <select ng-model="paciente.idObraSocial" >
 		   <option ng-repeat="option in obrasSociales" value="{{option.idObraSocial}}">{{option.nombre}}</option>
 	  </select> </label><br />
       <br />
       
-      <label for="pacienteDNI">DNI</label><br />
-      <input name="pacienteDNI" type="text" ng-model="paciente.dni" ng-model-options="{ updateOn: 'blur' }" valid-number />
-      <br />      
+      
       
       
          <md-content>
@@ -51,7 +67,12 @@
     	
     	<input ui-keypress="{13:'submit'} class="btn btn-primary" type="submit" id="submit"  value="Guardar Paciente"
 		ng-disabled="pacienteForm.apellido.$error.required ||  
-		pacienteForm.nombre.$error.required">
+		pacienteForm.nombre.$error.required ||
+		pacienteForm.direccion.$error.required ||  
+		pacienteForm.edad.$error.required ||
+		pacienteForm.dni.$error.required"
+		
+		>
            
          </form>
          <!-- 
