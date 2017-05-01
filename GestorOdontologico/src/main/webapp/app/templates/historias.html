@@ -1,14 +1,16 @@
 <label><h3>Historias Clinicas</h3></label>
 
 <div>
-		<form name="testBoton"  ui-keypress="{13:'buscarPorNombre()'}" novalidate>
-	<div>
-		<label>Ingresar Nombre, Apellido o Numero de Documento: <input
-			type="text" class="form-control" ng-model="nombreBsqd" required>
-			<button class="btn btn-primary" ng-click="buscarPorNombre()"
-				ng-disable="nombreBsqd == null">Buscar</button>
-		</label>
+		
+	
+	<form name="bsqPaciente"  ui-keypress="{13:'buscarPorNombre()'}" novalidate>
+	<div class="form-group">
+	<label>Ingresar Nombre, Apellido o Numero de Documento:</label> 
+		 <input type="text" class="form-control" style="height:30px;font-size:14pt;"    height="5px" ng-model="nombreBsqd" required>
+			<button class="btn btn-primary" ng-click="buscarPorNombre()" ng-disable="nombreBsqd == null" ui-keypress="{13:'buscarPorNombre()'}">Buscar</button>
 	</div>
+		</form>
+	
 
 	<!-- TABLA DE PACIENTES -->
 	<table class="table table-striped">
