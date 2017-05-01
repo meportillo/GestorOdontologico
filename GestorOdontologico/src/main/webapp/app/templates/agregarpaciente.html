@@ -28,9 +28,9 @@
             
       Edad:<input type="number" ng-model="paciente.anios" name="edad" min="0" max="99" >
       
-      <br />  
-      <label for="pacienteObraSocial" class="ng-scope">Obra Social</label><br />
-      <input name="pacienteObraSocial" type="text" ng-model="paciente.obraSocial" ng-model-options="{ updateOn: 'blur' }" required />
+        <label for="pacienteObraSocial" class="ng-scope">Obra Social <select ng-model="paciente.idObraSocial" >
+		   <option ng-repeat="option in obrasSociales" value="{{option.idObraSocial}}">{{option.nombre}}</option>
+	  </select> </label><br />
       <br />
       
       <label for="pacienteDNI">DNI</label><br />

@@ -18,6 +18,7 @@ import com.tip.model.Datos;
 import com.tip.model.ObraSocial;
 import com.tip.model.Paciente;
 import com.tip.service.DienteService;
+import com.tip.service.ObraSocialService;
 import com.tip.service.PacienteService;
 
 @Path("/paciente")
@@ -27,6 +28,8 @@ public class PacienteRest {
 	
 	private DienteService dienteService;
 
+	private ObraSocialService osService;
+	
 	public DienteService getDienteService() {
 		return dienteService;
 	}
@@ -42,6 +45,16 @@ public class PacienteRest {
 	public void setPacienteService(PacienteService pacienteService) {
 		this.pacienteService = pacienteService;
 	}
+	
+	public ObraSocialService getOsService() {
+		return osService;
+	}
+
+	public void setOsService(ObraSocialService osService) {
+		this.osService = osService;
+	}
+
+
 
 	@GET
 	@Path("/todos")
@@ -100,9 +113,7 @@ public class PacienteRest {
 			paciente.setDireccion(datos.getDireccion());
 			paciente.setNombre(datos.getNombre());
 
-			ObraSocial obraS = new ObraSocial();
-			obraS.setNombre(datos.getObraSocial());
-			paciente.setObraSocial(obraS);
+			paciente.setObraSocial(this.getOsService().getById(datos.getIdObraSocial()));
 			paciente.setFechaNac(new Timestamp(datos.getFechaNac().getTime()));
 			paciente.setDni(datos.getDni());
 
@@ -152,5 +163,7 @@ public class PacienteRest {
 		}
 		return Response.ok(ret).build();
 	}
+	
+
 
 }

@@ -50,6 +50,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
 	<bean id="pacienteRest" class="com.tip.webrest.PacienteRest">
 		<property name="pacienteService" ref="pacienteServiceId" />
 		<property name="dienteService" ref="dienteServiceId" />
+		<property name="osService" ref="obraSocialServiceId" />
 	</bean>
 
 	<bean id="dienteRest" class="com.tip.webrest.DienteRest">

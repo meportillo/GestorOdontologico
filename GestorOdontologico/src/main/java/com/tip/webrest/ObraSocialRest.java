@@ -60,6 +60,22 @@ public class ObraSocialRest {
 		}
 	}
 
+	@GET
+	@Path("/obrasSociales")
+	@Produces("application/json")
+	public Response obtenerObrasSociales() {
+
+		try {
+			return Response.ok(this.getObraSocialService().retriveAll()).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Response.Status.NOT_FOUND).build();
+
+		}
+
+	}
+
+	
 	public ObraSocialService getObraSocialService() {
 		return obraSocialService;
 	}
@@ -67,5 +83,6 @@ public class ObraSocialRest {
 	public void setObraSocialService(ObraSocialService obraSocialService) {
 		this.obraSocialService = obraSocialService;
 	}
+	
 
 }

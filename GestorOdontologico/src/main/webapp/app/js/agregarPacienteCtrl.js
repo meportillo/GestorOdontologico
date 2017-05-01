@@ -12,6 +12,24 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 	$scope.paciente = {};
  	$scope.paciente.anios = 0;
 
+ 	$scope.obrasSociales = [];
+ 	
+	$http({ 
+		method : 'GET',
+		url : '/GestorOdontologico/service/obraSocial/obrasSociales',
+		headers : { 'Content-Type' : 'application/json'},
+		data : $scope.paciente,
+		}).then(function mySucces(response) {
+			$scope.obrasSociales = response.data;
+			console.log(response);
+		}, function myError(response) {
+		toaster.pop('error', response.status + ', ' + response.message );
+		$scope.myTxt = "error";
+		});
+		
+
+ 	
+ 	
 	$scope.agregarPerfil = function() {
 
 		$scope.paciente.fechaNac= $scope.myDate;
@@ -21,7 +39,7 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 
 		$http({ 
 				method : 'POST',
-				url : 'http://localhost:8080/GestorOdontologico/service/paciente/crearPaciente',
+				url : '/GestorOdontologico/service/paciente/crearPaciente',
 				headers : { 'Content-Type' : 'application/json'},
 				data : $scope.paciente,
 			}).then(function mySucces(response) {

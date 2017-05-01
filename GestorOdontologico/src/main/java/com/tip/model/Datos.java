@@ -17,6 +17,7 @@ public class Datos implements Serializable {
 	private String direccion;
 	private Integer anios;
 	private String obraSocial;
+	private Integer idObraSocial;
 
 	public Datos() {
 
@@ -76,6 +77,14 @@ public class Datos implements Serializable {
 
 	public void setObraSocial(String obraSocial) {
 		this.obraSocial = obraSocial;
+	}
+
+	public Integer getIdObraSocial() {
+		return idObraSocial;
+	}
+
+	public void setIdObraSocial(Integer idObraSocial) {
+		this.idObraSocial = idObraSocial;
 	}
 
 }
