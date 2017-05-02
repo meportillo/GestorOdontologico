@@ -53,5 +53,12 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter, Pa
 		    $scope.showModal = false;
 		  };
 		  		  
-		  
+	    $scope.opened = {};
+		
+	    $scope.open = function($event, elementOpened) {
+				$event.preventDefault();
+				$event.stopPropagation();
+
+				$scope.opened[elementOpened] = !$scope.opened[elementOpened];
+		};	  
 });
