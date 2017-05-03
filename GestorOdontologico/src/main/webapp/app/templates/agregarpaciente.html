@@ -1,47 +1,38 @@
       <div class="datepickerdemo"  layout="column" ng-cloak>
       
+      
+      <div class="panel panel-primary">
+  <div class="panel-heading">Agregar Paciente: completar Campos</div>
+  <div class="panel-body">      
      <form name="pacienteForm"  ng-submit="agregarPerfil()" novalidate>
-     
+    
+    <div class="col-lg-10">
+     <div class="col-md-4">
+     <label>
       <p>Nombre:<br>
 	  <input type="text" name="nombre" ng-model="paciente.nombre" required>
 	  <span style="color:red" ng-show="!paciente.nombre">
 	  <span ng-show="pacienteForm.nombre.$error.required">Por favor complete el campo.</span>
 	  </span>
 	  </p>
-	  
+	  </label>
+	</div>
+
+     <div class="col-md-4">
+	 <label>  
       <p>Apellido:<br>
 	  <input type="text" name="apellido" ng-model="paciente.apellido" required>
 	  <span style="color:red" ng-show="!paciente.apellido">
 	  <span ng-show="pacienteForm.apellido.$error.required">Por favor complete el campo.</span>
 	  </span>
 	  </p>
-
-      <p>Direccion:<br>
-      <input type="text" name="direccion" ng-model="paciente.direccion" required>
-      <span style="color:red" ng-show="!paciente.direccion">
-      <span ng-show="pacienteForm.direccion.$error.required">Por favor complete el campo.</span>
-      </span>
-      </p>
-      
-      
-        <md-content>
-            <h4>Fecha Nacimiento</h4>
-            <md-datepicker ng-change="diferencia()" 
-               ng-model="myDate" 
-               md-placeholder="Fecha Nacimiento Paciente"></md-datepicker>
-           
-         </md-content>
-         
-      
-      
-      <p>Edad:<br>
-     <span>
-      <label>{{paciente.anios}}</label>
-      </span>
-      </p>
-  
-
-      <p>DNI:<br>
+	</label>
+	</div>
+    </div>
+    
+    <div class="col-lg-10">
+    <div class="col-md-4">
+      DNI:<br>
       <input type="number" name="dni" ng-model="paciente.dni"  min="1000000" max="10000000" required>
       <span style="color:red" ng-show="!paciente.dni">
       <span ng-show="pacienteForm.dni.$error.required">Por favor complete el campo.</span>
@@ -49,24 +40,44 @@
       <span ng-show="pacienteForm.dni.$error.max">El numero de ser menor a 10000000</span>
       
       </span>
-      </p>
-            
- <!--      Edad:<input type="number" ng-model="paciente.anios" name="edad" min="0" max="99" >
- 
-      <label for="pacienteDNI">DNI</label><br />
-      <input name="pacienteDNI" type="text" ng-model="paciente.dni" ng-model-options="{ updateOn: 'blur' }" valid-number />
-      <br /> 
- 
-  -->
-      
-        <label for="pacienteObraSocial" class="ng-scope">Obra Social <select ng-model="paciente.idObraSocial" >
+    </div>
+    <div class="col-md-4">
+    
+          <label for="pacienteObraSocial" class="ng-scope">Obra Social <select ng-model="paciente.idObraSocial" >
 		   <option ng-repeat="option in obrasSociales" value="{{option.idObraSocial}}">{{option.nombre}}</option>
-	  </select> </label><br />
-      <br />
+	  </select> 
+	  </label>
+    
+    </div>
+    </div>
+    
+    <div class="col-lg-10">
+    <div class="col-md-4">
+      Direccion:<br>
+      <input type="text" name="direccion" ng-model="paciente.direccion" required>
+      <span style="color:red" ng-show="!paciente.direccion">
+      <span ng-show="pacienteForm.direccion.$error.required">Por favor complete el campo.</span>
+      </span>
       
-               
-        <br />
-    	
+      </div>
+          <div class="col-md-6">
+          	<label> 
+           		   <p>Edad:<br>
+				     <span>
+				      <label>{{paciente.anios}}</label>
+				      </span>
+				      </p>
+			</label>
+          
+          
+        <md-content">
+            <p>Fecha Nacimiento</p>
+            <md-datepicker ng-change="diferencia()" 
+               ng-model="myDate" 
+               md-placeholder="Fecha Nacimiento Paciente"></md-datepicker>           
+         </md-content>
+         </div>
+         </div>    	
     	<input ui-keypress="{13:'submit'} class="btn btn-primary" type="submit" id="submit"  value="Guardar Paciente"
 		ng-disabled="pacienteForm.apellido.$error.required ||  
 		pacienteForm.nombre.$error.required ||
@@ -74,13 +85,9 @@
 		pacienteForm.edad.$error.required ||
 		pacienteForm.dni.$error.required   ||
 		pacienteForm.dni.$error.min  ||
-		pacienteForm.dni.$error.max
-		"
-		
-		>
+		pacienteForm.dni.$error.max">
            
-         </form>
-         
+         </form>         
          
          <!-- 
          <pre>paciente = {{ paciente | json  }} </pre>
