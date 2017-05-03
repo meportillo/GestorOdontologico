@@ -23,10 +23,20 @@
       </span>
       </p>
       
+      
+        <md-content>
+            <h4>Fecha Nacimiento</h4>
+            <md-datepicker ng-change="diferencia()" 
+               ng-model="myDate" 
+               md-placeholder="Fecha Nacimiento Paciente"></md-datepicker>
+           
+         </md-content>
+         
+      
+      
       <p>Edad:<br>
-      <input type="number" name="anios" ng-model="paciente.anios" min="0" max="99" required>
-      <span style="color:red" ng-show="!paciente.anios">
-      <span ng-show="pacienteForm.anios.$error.required">Por favor complete el campo.</span>
+     <span>
+      <label>{{paciente.anios}}</label>
       </span>
       </p>
   
@@ -54,18 +64,7 @@
 	  </select> </label><br />
       <br />
       
-      
-      
-      
-         <md-content>
-            <h4>Fecha Nacimiento</h4>
-            <md-datepicker 
-               ng-model="myDate" 
-               md-placeholder="Fecha Nacimiento Paciente"></md-datepicker>
-           
-         </md-content>
-         
-         
+               
         <br />
     	
     	<input ui-keypress="{13:'submit'} class="btn btn-primary" type="submit" id="submit"  value="Guardar Paciente"
@@ -81,6 +80,9 @@
 		>
            
          </form>
+         
+         	<button ng-click="diferencia()">ver dif</button>      
+         
          <!-- 
          <pre>paciente = {{ paciente | json  }} </pre>
          <pre>myDate = {{ myDate | json  }} </pre>

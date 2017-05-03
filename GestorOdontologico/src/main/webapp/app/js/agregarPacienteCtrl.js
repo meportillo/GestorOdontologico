@@ -1,16 +1,30 @@
 app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteService,$location) {
 
+	$scope.paciente = {};
+ 	$scope.paciente.anios = 0;
+
 	$scope.myDate = new Date();
 	$scope.minDate = new Date($scope.myDate.getFullYear(), $scope.myDate.getMonth() - 2, $scope.myDate.getDate());
 	$scope.maxDate = new Date($scope.myDate.getFullYear(),$scope.myDate.getMonth() + 2, $scope.myDate.getDate());
+	$scope.hoy = new Date();
+
+	
+	var MILISENGUNDOS_POR_DIA = 1000 * 60 * 60 * 24;
+
+	$scope.diferencia = function ()
+	{
+		var fechaInicio = new Date('2016-07-12').getTime();
+		var fechaFin    = new Date('2017-07-12').getTime();
+
+		var diff = $scope.hoy - $scope.myDate;
+		$scope.paciente.anios= Math.trunc((diff/(1000*60*60*24))/365);
+	}
 
 	$scope.onlyWeekendsPredicate = function(date) {
 		var day = date.getDay();
 		return day === 0 || day === 6;
 	}
 	
-	$scope.paciente = {};
- 	$scope.paciente.anios = 0;
 
  	$scope.obrasSociales = [];
  	
