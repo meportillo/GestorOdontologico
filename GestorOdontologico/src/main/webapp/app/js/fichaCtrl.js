@@ -31,6 +31,25 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 		
 	}
 	
+	$scope.opened = {};
+	
+	$scope.openedAlta = {};
+
+	$scope.open = function($event, elementOpened) {
+		$event.preventDefault();
+		$event.stopPropagation();
+
+		$scope.opened[elementOpened] = !$scope.opened[elementOpened];
+	};
+	
+	$scope.openAlta = function($event, elementOpened) {
+		$event.preventDefault();
+		$event.stopPropagation();
+
+		$scope.openedAlta[elementOpened] = !$scope.openedAlta[elementOpened];
+	};
+
+	
 	$scope.openModal = function() {
 		$scope.showModal = true;
 	};

@@ -42,12 +42,12 @@
 										</tr>
 										<tr>
 										<td>
-										 <span   editable-bsdate="paciente.fechaNac"   e-is-open="opened.$data" e-ng-click="open($event,'$data')" e-datepicker-popup="dd/MM/yyyy">
+										 <span   editable-bsdate="paciente.fechaNac"   e-is-open="opened.$data" e-ng-click="open($event,'$data')"  e-datepicker-popup="dd/MM/yyyy">
 								            {{ (paciente.fechaNac | date:"dd/MM/yyyy") || 'empty' }}
 								          </span>
 										</td>
 										<td>
-										 <span   editable-bsdate="paciente.ficha.fechaAlta"  e-is-open="opened.$data" e-ng-click="open($event,'$data')" e-datepicker-popup="dd/MM/yyyy">
+										 <span   editable-bsdate="paciente.ficha.fechaAlta"  e-is-open="openedAlta.$data" e-ng-click="openAlta($event,'$data')"  e-datepicker-popup="dd/MM/yyyy">
 											{{(paciente.ficha.fechaAlta | date : "dd/MM/y" ) || 'empty' }}
 									    </span>
 										</td>
