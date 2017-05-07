@@ -44,7 +44,7 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 
  	
  	
-	$scope.agregarPerfil = function() {
+	$scope.agregarPaciente = function() {
 
 		$scope.paciente.fechaNac= $scope.myDate;
 		
