@@ -2,6 +2,8 @@
       
      <form name="obraSocialForm"  ui-keypress="{13:'agregarObraSocial()'}" novalidate>
      
+     <!-- 
+     
       <p>Nombre:<br>
 	  <input type="text" name="nombre" ng-model="obraSocial.nombre" required>
 	  <span style="color:red" ng-show="!obraSocial.nombre">
@@ -22,6 +24,37 @@
 		ng-disabled="obraSocialForm.codigo.$error.required ||  
 		obraSocialForm.nombre.$error.required">
 		
+		</p></p>
+ -->
+ 
+
+
+    
+ 	
+		
+	<!-- TABLA DE Obra Social --> 
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Codigo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="os in obrasSociales">
+				<td>{{os.nombre}}</td>
+				<td>{{os.codigo}}</td>
+				<td> <a ng-href="#/historias/ficha/{{row.dni}}">Editar</a> </td>
+				<td> 
+				<input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow(os.idObraSocial)"/> </td>
+				
+
+			</tr>
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</table>
+
            
          </form>
          
