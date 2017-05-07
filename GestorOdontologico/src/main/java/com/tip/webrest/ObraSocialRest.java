@@ -1,6 +1,7 @@
 package com.tip.webrest;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,6 +16,22 @@ import com.tip.service.ObraSocialService;
 public class ObraSocialRest {
 
 	private ObraSocialService obraSocialService;
+	
+	
+	
+	@DELETE
+	@Path("/deleteObraSocial/{id}")
+	@Produces("application/json")
+	public Response deleteObraSocial(@PathParam("id") final Integer id) {
+
+		try {
+			ObraSocial os = this.getObraSocialService().getById(id);
+			this.getObraSocialService().delete(os);
+		} catch (Exception e) {
+			return Response.ok(Response.Status.NOT_FOUND).build();
+		}
+		return Response.ok(Response.Status.OK).build();
+	}
 	
 	
 	@GET
