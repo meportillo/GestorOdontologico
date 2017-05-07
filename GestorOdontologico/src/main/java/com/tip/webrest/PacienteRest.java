@@ -145,6 +145,25 @@ public class PacienteRest {
 		}
 	}
 
+	
+
+	@GET
+	@Path("/getPacientePorDni/{dni}")
+	@Produces("application/json")
+	public Response getPacientePorDni(@PathParam("dni") final String dni) {
+		try {
+			List<Paciente> pacientes = this.getPacienteService().getEventsByNameDniSurname(dni);
+			if(pacientes.size() == 1)
+				return Response.ok(pacientes.get(0)).build();
+			else
+				return Response.status(Response.Status.NOT_FOUND).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+	}
+
+	
 	@PUT
 	@Path("/updatePaciente/{dni}")
 	@Consumes("application/json")

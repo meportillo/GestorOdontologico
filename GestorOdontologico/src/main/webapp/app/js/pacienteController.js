@@ -30,35 +30,6 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter, Pa
 			
 		}
 	}
-    $scope.showModal = false;
 
 	$scope.itemsByPage=10;
-	$scope.verFicha=function(dni){
-		
-		console.log(PacienteService.getPacienteDni(dni));
-		
-		$scope.paciente =  ($filter('filter')($scope.rowCollection, { 'dni': dni }))[0];
-		$scope.openModal();
-	}
-
-	  $scope.openModal = function() {
-		    $scope.showModal = true;
-		  };
-
-		  $scope.ok = function() {
-		    $scope.showModalSeeDetail = true;
-		  };
-
-		  $scope.cancel = function() {
-		    $scope.showModal = false;
-		  };
-		  		  
-	    $scope.opened = {};
-		
-	    $scope.open = function($event, elementOpened) {
-				$event.preventDefault();
-				$event.stopPropagation();
-
-				$scope.opened[elementOpened] = !$scope.opened[elementOpened];
-		};	  
-});
+	});

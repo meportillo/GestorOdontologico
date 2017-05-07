@@ -1,8 +1,10 @@
-app.service('PacienteService', function($http,toaster) {
+app.service('PacienteService', function($http,toaster, $location) {
 
 	console.log("PacienteService");
 	this.pacientes = [];
 
+	this.pacienteRet = {};
+	
 	this.init = function(pacienteParam) {
 		this.paciente = pacienteParam;
 		return this.paciente;
@@ -14,9 +16,9 @@ app.service('PacienteService', function($http,toaster) {
 		return this.paciente;
 	}
 	
-	this.agregarPaciente= function(pacienteParam){
-		this.pacientes.push(pacienteParam);
-	}
+//	this.agregarPaciente= function(pacienteParam){
+//		this.pacientes.push(pacienteParam);
+//	}
 
 	this.setPacientes = function(pacientesParam) {
 		this.pacientes = pacientesParam;
@@ -26,7 +28,7 @@ app.service('PacienteService', function($http,toaster) {
 		return this.pacientes;
 	}
 
-	this.getPacienteDni= function(dniParam){
+	this.getPacienteDniIII= function(dniParam){
 		var temppacientes = this.pacientes.filter(function (el) {
 			return el.dni == dniParam
 		});
@@ -59,5 +61,42 @@ app.service('PacienteService', function($http,toaster) {
 		});	
 
 		return this.paciente;
+	}
+	
+	this.agregarPaciente= function(pacienteParam){
+	
+		$http({ 
+			method : 'POST',
+			url : '/GestorOdontologico/service/paciente/crearPaciente',
+			headers : { 'Content-Type' : 'application/json'},
+			data : pacienteParam,
+		}).then(function mySucces(response) {
+			toaster.pop('sucess', 'Agregado en forma correcta');
+			console.log(response);
+			$location.path('/historias/ficha/'+response.data.dni);
+	}, function myError(response) {
+		console.log(response);
+		toaster.pop('error', response.status + ', ' + response.message );
+	
+		});
+
+		
+	}
+	this.obtenerPacienteDni = function(dni){
+		$http({
+			method : 'GET',
+			url : '/GestorOdontologico/service/paciente/getPacientePorDni/' +dni,
+			headers : {
+				'Content-Type' : 'application/json',
+			}
+		}).then(function mySucces(response) {
+			this.pacienteRet = response.data;
+			return this.pacienteRet;
+		}, function myError(response) {
+			toaster.pop('error', "Sistema no disponible en estos momentos");
+			console.log(response);
+			
+		});	
+		return this.pacienteRet;
 	}
 });

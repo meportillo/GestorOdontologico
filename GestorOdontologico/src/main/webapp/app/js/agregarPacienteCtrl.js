@@ -44,7 +44,7 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 
  	
  	
-	$scope.agregarPaciente = function() {
+	$scope.guardarPaciente = function() {
 
 		$scope.paciente.fechaNac= $scope.myDate;
 		
@@ -58,22 +58,8 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
  			toaster.pop('error', 'Por favor ingresa una fecha de nacimiento valida' );
  			
  		}else{
-
-		$http({ 
-				method : 'POST',
-				url : '/GestorOdontologico/service/paciente/crearPaciente',
-				headers : { 'Content-Type' : 'application/json'},
-				data : $scope.paciente,
-			}).then(function mySucces(response) {
-				toaster.pop('sucess', 'Agregado en forma correcta');
-				PacienteService.agregarPaciente(response.data);
-				$location.path('/historias/ficha/'+response.data.dni);
-				console.log(response);
-		}, function myError(response) {
-			console.log(response);
-			toaster.pop('error', response.status + ', ' + response.message );
-			$scope.myTxt = "error";
-			});
- 		}
+ 			PacienteService.agregarPaciente($scope.paciente);
+ 			
+  		}
 	}
 })

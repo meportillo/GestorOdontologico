@@ -3,8 +3,16 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 	$scope.showModal = false;
 	$scope.paciente={};
 	$scope.dni = $routeParams.dni;
+	
 	$scope.verFicha = function(dni) {
-	$scope.paciente = PacienteService.getPacienteDni($scope.dni);
+	console.log($scope.dni);	
+	
+	$scope.obtenerPacienteDni($scope.dni);	
+	console.log("+++++++++++++++");
+	console.log($scope.paciente);
+	console.log("+++++++++++++++");
+
+	
 	$scope.openModal();
 	}
 
@@ -30,6 +38,22 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 
 		
 	}
+	$scope.obtenerPacienteDni = function(dni){
+		$http({
+			method : 'GET',
+			url : '/GestorOdontologico/service/paciente/getPacientePorDni/' +dni,
+			headers : {
+				'Content-Type' : 'application/json',
+			}
+		}).then(function mySucces(response) {
+			$scope.paciente = response.data;
+		}, function myError(response) {
+			toaster.pop('error', "Sistema no disponible en estos momentos");
+			console.log(response);
+		});	
+	}
+
+	
 	
 	$scope.opened = {};
 	
