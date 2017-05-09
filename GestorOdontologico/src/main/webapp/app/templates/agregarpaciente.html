@@ -6,7 +6,7 @@
   <div class="panel-body">      
      <form name="pacienteForm"  ng-submit="guardarPaciente()" novalidate>
     
-    <div class="col-lg-10">
+    <div class="col-lg-8">
      <div class="col-md-4">
      <label>
       <p>Nombre:<br>
@@ -30,7 +30,7 @@
 	</div>
     </div>
     
-    <div class="col-lg-10">
+    <div class="col-lg-8">
     <div class="col-md-4">
       DNI:<br>
       <input type="number" name="dni" ng-model="paciente.dni"  min="1000000" max="10000000" required>
@@ -52,7 +52,7 @@
     </div>
     
     <div class="col-lg-10">
-    <div class="col-md-4">
+    <div class="col-md-3">
       Direccion:<br>
       <input type="text" name="direccion" ng-model="paciente.direccion" required>
       <span style="color:red" ng-show="!paciente.direccion">

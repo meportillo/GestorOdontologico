@@ -19,7 +19,12 @@ app.controller("getPacienteService",function($scope, toaster ,$http, $filter, Pa
 				}
 			}).then(function mySucces(response) {
 				$scope.rowCollection = response.data;
-				toaster.pop('sucess', 'Se encontraron: ' +response.data.length+  ' pacientes')
+				if(response.data.length == 1)
+				{
+					toaster.pop('sucess', 'Se encontro: ' +response.data.length+  ' paciente')										
+				}else{
+					toaster.pop('sucess', 'Se encontraron: ' +response.data.length+  ' pacientes')					
+				}
 				PacienteService.setPacientes(response.data);
 				console.log(PacienteService.getPacientes());				
 
