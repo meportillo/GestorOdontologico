@@ -1,9 +1,41 @@
  <div >
-      
-     <form name="obraSocialForm"  ui-keypress="{13:'agregarObraSocial()'}" novalidate>
-     
-     <!-- 
-     
+ <label><h3>Obras Sociales Dispobles</h3></label>
+    <table class="table table-striped">
+        <thead>
+            <th>Nombre</th>
+            <th>Codigo</th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="obraSocial in model.obrasSociales" ng-include="getTemplate(obraSocial)">
+            </tr>
+        </tbody>
+    </table>
+    
+    <script type="text/ng-template" id="display">
+        <td>{{obraSocial.nombre}}</td>
+        <td>{{obraSocial.codigo}}</td>
+        <td>
+            <button ng-click="editobraSocial(obraSocial)">Edit</button>
+        </td>
+    </script>
+    <script type="text/ng-template" id="edit">
+        <td><input type="text" ng-model="model.selected.nombre" /></td>
+        <td><input type="text" ng-model="model.selected.codigo" /></td>
+        <td>
+            <button ng-click="updatearOS($index)">Actualizar</button>
+			<button ng-click="eliminarOS($index)">Eliminar</button>
+            <button ng-click="reset()">Cancel</button>
+        </td>
+    </script>
+    </p>
+    
+    
+    <label><h3>Agregar una nueva obra social</h3></label>
+    
+    <form name="obraSocialForm" novalidate>
+    	
       <p>Nombre:<br>
 	  <input type="text" name="nombre" ng-model="obraSocial.nombre" required>
 	  <span style="color:red" ng-show="!obraSocial.nombre">
@@ -23,40 +55,7 @@
     	ng-keypress="($event.charCode==13)? agregarObraSocial() : return"
 		ng-disabled="obraSocialForm.codigo.$error.required ||  
 		obraSocialForm.nombre.$error.required">
-		
+     </form> 
 		</p></p>
- -->
- 
-
-
     
- 	
-		
-	<!-- TABLA DE Obra Social --> 
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>Codigo</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="os in obrasSociales">
-				<td>{{os.nombre}}</td>
-				<td>{{os.codigo}}</td>
-				<td> <a ng-href="#/historias/ficha/{{row.dni}}">Editar</a> </td>
-				<td> 
-				<input type="button" value="Remove" class="btn btn-primary" ng-click="eliminarOS(os.idObraSocial)"/> </td>
-				
-
-			</tr>
-		</tbody>
-		<tfoot>
-		</tfoot>
-	</table>
-
-           
-         </form>
-         
-        
-	   </div>
+</div>
