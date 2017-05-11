@@ -125,8 +125,7 @@ public class PacienteRest {
 			
 			return Response.ok(paciente).build();
 		} catch (Exception e) {
-			System.out.println(e);
-			return Response.status(Response.Status.NOT_FOUND).build();
+			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 
 	}

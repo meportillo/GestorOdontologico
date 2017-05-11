@@ -76,7 +76,7 @@ app.service('PacienteService', function($http,toaster, $location) {
 			$location.path('/historias/ficha/'+response.data.dni);
 	}, function myError(response) {
 		console.log(response);
-		toaster.pop('error', response.status + ', ' + response.message );
+		toaster.pop('error', response.status + ', Error en uno de los campos ingresados ' + response.message );
 	
 		});
 
