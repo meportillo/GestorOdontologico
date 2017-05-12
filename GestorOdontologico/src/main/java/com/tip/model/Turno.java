@@ -1,6 +1,7 @@
 package com.tip.model;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -21,58 +22,88 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "turno")
 public class Turno implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTurno")
-	private Long idTurno;
+	private Integer idTurno;
+	
+	@Column(name = "horaInicio")
+	private Time horaInicio;
 	
 	@Column(name = "fechaTurno")
 	private Date fechaTurno;
 	
-	@Column(name = "horaInicio")
-	private LocalTime horaInicio;
-	
 	@Column(name = "horaFin")
-	private LocalTime horaFin;
-
-	@Column(name = "dniPaciente")
-	private Integer dniPaciente;
-
+	private Time horaFin;
 	
-	@Column(name = "descripcion")
-	private String descripcion;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	@JoinColumn(name = "dniPaciente", referencedColumnName = "dni")
+	private Paciente dniPaciente;
+	
+	public Turno(){
+		
+	}
 
-	public Long getIdTurno() {
+
+	public Integer getIdTurno() {
 		return idTurno;
 	}
-	public void setIdTurno(Long idTurno) {
+
+
+	public void setIdTurno(Integer idTurno) {
 		this.idTurno = idTurno;
 	}
+
+
+	public Time getHoraInicio() {
+		return horaInicio;
+	}
+
+
+	public void setHoraInicio(Time horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+
 	public Date getFechaTurno() {
 		return fechaTurno;
 	}
+
+
 	public void setFechaTurno(Date fechaTurno) {
 		this.fechaTurno = fechaTurno;
 	}
-	public LocalTime getHoraInicio() {
-		return horaInicio;
-	}
-	public void setHoraInicio(LocalTime horaInicio) {
-		this.horaInicio = horaInicio;
-	}
-	public LocalTime getHoraFin() {
+
+
+	public Time getHoraFin() {
 		return horaFin;
 	}
-	public void setHoraFin(LocalTime horaFin) {
+
+
+	public void setHoraFin(Time horaFin) {
 		this.horaFin = horaFin;
 	}
-	public String getDescripcion() {
-		return descripcion;
+
+
+	public Paciente getDniPaciente() {
+		return dniPaciente;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+
+
+	public void setDniPaciente(Paciente dniPaciente) {
+		this.dniPaciente = dniPaciente;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

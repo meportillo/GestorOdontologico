@@ -43,7 +43,7 @@ app.controller('obraSocialCtrl',function($scope, $http, toaster,$route){
             
     		$http({ 
     			method : 'POST',
-    			url : 'http://localhost:8080/GestorOdontologico/service/obraSocial/updateprofilejson',
+    			url : 'http://localhost:8080/GestorOdontologico/service/obraSocial/updateOS',
     			headers : { 'Content-Type' : 'application/json'},
     			data : $scope.model.obrasSociales[idx],
     		}).then(function mySucces(response) {

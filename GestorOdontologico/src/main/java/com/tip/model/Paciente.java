@@ -47,14 +47,14 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "idficha", referencedColumnName = "idficha")
 	private Ficha ficha;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	@JoinColumn(name = "idOS", referencedColumnName = "idObraSocial")
 	private ObraSocial obraSocial;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-	private List<Turno> turnos;
+//	@OneToMany(fetch = FetchType.LAZY)
+//	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+//	private List<Turno> turnos;
 
 	
 	public Paciente() {

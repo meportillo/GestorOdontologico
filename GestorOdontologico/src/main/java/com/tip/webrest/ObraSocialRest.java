@@ -48,10 +48,10 @@ public class ObraSocialRest {
 	}
 	
 	@POST
-	@Path("/updateprofilejson/")
+	@Path("/updateOS/")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response updateProfilejson(final ObraSocial os) {
+	public Response updateOS(final ObraSocial os) {
 		try{
 			this.getObraSocialService().update(os);
 			return Response.ok(os).build();
