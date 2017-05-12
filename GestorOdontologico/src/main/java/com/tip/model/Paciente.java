@@ -2,6 +2,7 @@ package com.tip.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -45,11 +47,16 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "idficha", referencedColumnName = "idficha")
 	private Ficha ficha;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	@JoinColumn(name = "idOS", referencedColumnName = "idObraSocial")
 	private ObraSocial obraSocial;
 
+	@OneToMany(fetch = FetchType.LAZY)
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	private List<Turno> turnos;
+
+	
 	public Paciente() {
 		this.ficha = new Ficha();
 		

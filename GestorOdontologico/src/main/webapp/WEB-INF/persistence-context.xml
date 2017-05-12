@@ -115,5 +115,13 @@
 	
 		<!-- beans de Paciente -->
 		
+		<!-- beans de Turno -->
+
+	<bean id="turnoRepo" class="com.tip.persistence.TurnoRepository">
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+	
+		<!-- beans de Turno -->
+
 
 </beans>

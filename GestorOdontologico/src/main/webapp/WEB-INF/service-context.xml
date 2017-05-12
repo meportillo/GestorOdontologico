@@ -21,6 +21,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
 			<ref bean="pacienteRest" />
 			<ref bean="obraSocialRest" />
 			<ref bean="dienteRest"/>
+			<ref bean="turnoRest"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
@@ -71,5 +72,18 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
 	
 	<!-- beans de ObraSocial -->
 	
+
+	<!-- beans de Turnos -->
+	
+	<bean id="turnoServiceId" class="com.tip.service.TurnoService">
+		<property name="repository" ref="turnoRepo" />
+	</bean>
+
+	<bean id="turnoRest" class="com.tip.webrest.TurnoRest">
+		<property name="turnoService" ref="turnoServiceId" />
+	</bean>
+	
+	<!-- beans de Turnos -->
+
 
 </beans>
