@@ -36,11 +36,13 @@
 								     		</td>
 										</tr>
 										<tr>
-											<td>  <b> Fecha Nacimiento  </b></td>
+											<td><b>Años </b></td>
+											<td><b> Fecha Nacimiento</b></td>
 											<td><b>Fecha Alta </b></td>
 											<td><b>Observaciones</b></td>
 										</tr>
 										<tr>
+										<td> {{paciente.anios}}</td>
 										<td>
 										 <span   editable-bsdate="paciente.fechaNac"   e-is-open="opened.$data" e-ng-click="open($event,'$data')"  e-datepicker-popup="dd/MM/yyyy">
 								            {{ (paciente.fechaNac | date:"dd/MM/yyyy") || 'empty' }}
@@ -58,15 +60,15 @@
 										</tr>
 									</tbody>
 									<tfoot>
-									<button type="button" class="btn btn-default" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
-								        edit
+									<button type="button" class="btn btn-primary" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+								        Editar
 								    </button>
 								    <span ng-show="textBtnForm.$visible">
 								        <button type="submit" class="btn btn-primary" ng-disabled="textBtnForm.$waiting">
-								         ok
+								         Ok
 								        </button>
-								        <button type="button" class="btn btn-default" ng-disabled="textBtnForm.$waiting" ng-click="textBtnForm.$cancel()">
-								          Cancel
+								        <button type="button" class="btn btn-danger" ng-disabled="textBtnForm.$waiting" ng-click="textBtnForm.$cancel()">
+								          Cancelar
 								        </button>
 								    </span>
 									

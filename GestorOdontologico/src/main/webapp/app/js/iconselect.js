@@ -26,7 +26,7 @@ IconSelect.COMPONENT_ICON_FILE_PATH = "images/control/icon-select/arrow.png";
 
 function IconSelect($$elementID, element, $$parameters) {
 
-//	console.log("id ---" + $$elementID);
+	// console.log("id ---" + $$elementID);
 
 	var _icons = [];
 	var _selectedIndex = -1;
@@ -40,7 +40,7 @@ function IconSelect($$elementID, element, $$parameters) {
 		// parametreler boş gelirse
 		if (!$$parameters)
 			$$parameters = {};
-//		console.log("sdfsd " + _View.iconSelectElement);
+		// console.log("sdfsd " + _View.iconSelectElement);
 		// En üst elementi seç
 		if (_View.iconSelectElement) {
 
@@ -120,7 +120,7 @@ function IconSelect($$elementID, element, $$parameters) {
 			_View.selectedIconImgElement.setAttribute('src', icon.iconFilePath);
 			if (_selectedIndex != -1)
 				_icons[_selectedIndex].element.setAttribute('class',
-						'icon selected');
+						'icon selected dropdown-toggle');
 		}
 
 		_View.iconSelectElement.dispatchEvent(new Event('changed'));
@@ -172,9 +172,9 @@ function IconSelect($$elementID, element, $$parameters) {
 	};
 
 	_View.setIconSelectElement = function($$elementID) {
-//		console.log("view id" + $$elementID);
+		// console.log("view id" + $$elementID);
 		_View.iconSelectElement = document.getElementById($$elementID);
-//		console.log("view " + _View.iconSelectElement);
+		// console.log("view " + _View.iconSelectElement);
 		return _View.iconSelectElement;
 	};
 
@@ -214,14 +214,14 @@ function IconSelect($$elementID, element, $$parameters) {
 		_View.iconSelectElement.setAttribute('class', 'icon-select');
 		_View.iconSelectElement.setAttribute('class', 'col-sm-1');
 
-
 		var selectedBoxElement = document.createElement('div');
-		selectedBoxElement.setAttribute('class', 'selected-box');
+		selectedBoxElement.setAttribute('class', 'selected-box dropup');
 
 		var selectedIconElement = document.createElement('div');
 		selectedIconElement.setAttribute('class', 'selected-icon');
-		//selectedIconElement.setAttribute('ng-model', 'diente.idEstadoDiente');
-		
+		// selectedIconElement.setAttribute('ng-model',
+		// 'diente.idEstadoDiente');
+
 		_View.selectedIconImgElement = document.createElement('img');
 		_View.selectedIconImgElement.setAttribute('src', '');
 		selectedIconElement.appendChild(_View.selectedIconImgElement);
@@ -237,7 +237,7 @@ function IconSelect($$elementID, element, $$parameters) {
 
 		_View.boxScrollElement = document.createElement('div');
 		_View.boxScrollElement.setAttribute('id', $$elementID + "-box-scroll");
-		_View.boxScrollElement.setAttribute('class', 'box');
+		_View.boxScrollElement.setAttribute('class', 'box dropdown-menu');
 
 		_View.boxElement = document.createElement('div');
 
@@ -302,7 +302,7 @@ function IconSelect($$elementID, element, $$parameters) {
 		 */
 
 		var iconElement = document.createElement('div');
-		iconElement.setAttribute('class', 'icon');
+		iconElement.setAttribute('class', 'icon dropdown-item');
 		iconElement.style.width = $parameters.iconsWidth;
 		iconElement.style.height = $parameters.iconsHeight;
 		iconElement.style.marginLeft = $parameters.boxIconSpace;
