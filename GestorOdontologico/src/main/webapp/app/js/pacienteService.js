@@ -1,4 +1,4 @@
-app.service('PacienteService', function($http,toaster, $location) {
+app.service('PacienteService', function($http,toaster, $location,$q) {
 
 	console.log("PacienteService");
 	this.pacientes = [];
@@ -83,6 +83,7 @@ app.service('PacienteService', function($http,toaster, $location) {
 		
 	}
 	this.obtenerPacienteDni = function(dni){
+		var deferred = $q.defer();
 		$http({
 			method : 'GET',
 			url : '/GestorOdontologico/service/paciente/getPacientePorDni/' +dni,
@@ -90,13 +91,38 @@ app.service('PacienteService', function($http,toaster, $location) {
 				'Content-Type' : 'application/json',
 			}
 		}).then(function mySucces(response) {
-			this.pacienteRet = response.data;
-			return this.pacienteRet;
+			 deferred.resolve(response.data);
+			 console.log(response.data);
 		}, function myError(response) {
 			toaster.pop('error', "Sistema no disponible en estos momentos");
 			console.log(response);
 			
 		});	
-		return this.pacienteRet;
+		
+		 return deferred.promise;
 	}
+	this.obtenerPacientesPorAlgunDato = function(dato){
+		var deferred = $q.defer();
+		$http({
+			method : 'GET',
+			url : '/GestorOdontologico/service/paciente/getPacientePorNombreApellidoDni/' +dato,
+			headers : {
+				'Content-Type' : 'application/json',
+			}
+		}).then(function mySucces(response) {
+	
+			 deferred.resolve(response.data);
+			if(response.data.length == 1)
+			{
+				toaster.pop('sucess', 'Se encontro: ' +response.data.length+  ' paciente')										
+			}else{
+				toaster.pop('sucess', 'Se encontraron: ' +response.data.length+  ' pacientes')					
+			}				
+		}, function myError(response) {
+			toaster.pop('error', "Sistema no disponible en estos momentos");
+			console.log(response);
+		});	
+		
+		 return deferred.promise;
+		 }
 });
