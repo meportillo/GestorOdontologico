@@ -1,32 +1,6 @@
-app.service('PacienteService', function($http,toaster, $location,$q) {
+app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 
 	console.log("PacienteService");
-	this.pacientes = [];
-
-	this.pacienteRet = {};
-	
-	this.init = function(pacienteParam) {
-		this.paciente = pacienteParam;
-		return this.paciente;
-	}
-	this.setPaciente = function(pacienteParam) {
-		this.paciente = pacienteParam
-	}
-	this.getPaciente = function() {
-		return this.paciente;
-	}
-	
-//	this.agregarPaciente= function(pacienteParam){
-//		this.pacientes.push(pacienteParam);
-//	}
-
-	this.setPacientes = function(pacientesParam) {
-		this.pacientes = pacientesParam;
-	}
-
-	this.getPacientes = function() {
-		return this.pacientes;
-	}
 
 	this.getPacienteDniIII= function(dniParam){
 		var temppacientes = this.pacientes.filter(function (el) {
@@ -36,9 +10,7 @@ app.service('PacienteService', function($http,toaster, $location,$q) {
 		return temppacientes[0];
 	}
 	this.updatePaciente=function(pacienteParam){
-		console.log("into service");
-		this.paciente = pacienteParam;
-		console.log(pacienteParam);
+		var deferred = $q.defer();
 		
 		$http({
 			method : 'PUT',
@@ -49,18 +21,21 @@ app.service('PacienteService', function($http,toaster, $location,$q) {
 			},
 			data: pacienteParam
 			
-		}).then(function mySucces(response) {
-			this.paciente = response.data;			
-			console.log(response.data)
+		}).then(function mySucces(response) {			
+			
 			toaster.pop('success', "Acutalizacion OK");
+			var pac = new Paciente(response.data.nombre, response.data.apellido, response.data.dni, response.data.direccion, response.data.fechaNac, response.data.ficha, response.data.anios, response.data.obraSocial);
+			deferred.resolve(pac);
 
 		}, function myError(response) {
 			toaster.pop('error', "Sistema no disponible en estos momentos");
 			console.log(response);
-			return null;
+			
+			 return deferred.promise;
 		});	
 
-		return this.paciente;
+		
+		 return deferred.promise;
 	}
 	
 	this.agregarPaciente= function(pacienteParam){
@@ -91,8 +66,13 @@ app.service('PacienteService', function($http,toaster, $location,$q) {
 				'Content-Type' : 'application/json',
 			}
 		}).then(function mySucces(response) {
-			 deferred.resolve(response.data);
-			 console.log(response.data);
+			 
+			 var pac = new Paciente(response.data.nombre, response.data.apellido, response.data.dni, response.data.direccion, response.data.fechaNac, response.data.ficha, response.data.anios, response.data.obraSocial);
+			 deferred.resolve(pac);
+			 console.log("----pac----");
+			 console.log(pac);
+			 console.log("----pac----");
+
 		}, function myError(response) {
 			toaster.pop('error', "Sistema no disponible en estos momentos");
 			console.log(response);

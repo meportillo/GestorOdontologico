@@ -91,10 +91,11 @@
       <div class="col-lg-6">
         <md-content>
             <p>Fecha Nacimiento</p>
-            <md-datepicker ng-change="diferencia()" 
-               ng-model="myDate" 
+            <!--  md-datepicker ng-change="diferencia()" 
+               ng-model="myDate"
                md-placeholder="Fecha Nacimiento Paciente"></md-datepicker>           
-         </md-content>
+         </md-content-->
+         <input  type="date" name="direccion" ng-model="myDate" ng-change="diferencia()" required>
       </div>
       
          </div>    	

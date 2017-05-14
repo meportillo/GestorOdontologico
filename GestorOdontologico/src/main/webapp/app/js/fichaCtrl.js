@@ -9,36 +9,28 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 	PacienteService.obtenerPacienteDni($scope.dni)
 	.then(function (pacienteRet) {
 		$scope.paciente = pacienteRet;
-		        });
-	console.log("+++++++++++++++");
-	console.log($scope.paciente);
-	console.log("+++++++++++++++");
+		console.log("+++++++++++++++");
+		console.log($scope.paciente);
+		
+		console.log("+++++++++++++++");	 
+	});
+	
 
 	
 	$scope.openModal();
 	}
 
 	$scope.updatePaciente=function(){
-		$http({
-			method : 'PUT',
-			url : '/GestorOdontologico/service/paciente/updatePaciente/' + $scope.paciente.dni,
-			headers : {
-				 'Content-Type' : 'application/json',
-                 'accept' : 'application/json'
-			},
-			data: $scope.paciente
+
+		PacienteService.updatePaciente($scope.paciente)
+		.then(function (pacienteRet) {
+			$scope.paciente = pacienteRet;
+			console.log("++++++UPDATE+++++++++");
+			console.log($scope.paciente);
 			
-		}).then(function mySucces(response) {
-			 $scope.paciente = response.data;			
-			console.log(response.data)
-			toaster.pop('success', "Acutalizacion OK");
-
-		}, function myError(response) {
-			toaster.pop('error', "Sistema no disponible en estos momentos");
-			console.log(response);
-		});	
-
-		
+			console.log("+++++++++++++++");	 
+		});
+			
 	}	
 	$scope.opened = {};
 	

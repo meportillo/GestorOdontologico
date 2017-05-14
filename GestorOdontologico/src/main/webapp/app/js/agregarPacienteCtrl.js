@@ -1,6 +1,6 @@
-app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteService,$location) {
+app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteService,$location,Paciente) {
 
-	$scope.paciente = {};
+	$scope.paciente = new Paciente("", "", "", "", "", null, 0, null);
  	$scope.paciente.anios = 0;
 
 	$scope.myDate = new Date();
@@ -13,13 +13,22 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 
 	$scope.diferencia = function ()
 	{
-		var fechaInicio = new Date('2016-07-12').getTime();
-		var fechaFin    = new Date('2017-07-12').getTime();
-
-		var diff = $scope.hoy - $scope.myDate;
-		$scope.paciente.anios= Math.trunc((diff/(1000*60*60*24))/365);
+//		var dateTemp = "";
+//		($scope.myDate.includes("-")) ? dateTemp = $scope.myDate.split("-")[1]+ '-' + $scope.myDate.split("-")[0] + '-' + $scope.myDate.split("-")[1]:
+//			$scope.myDate.split("/")[1]+ '/' + $scope.myDate.split("/")[0] + '/' + $scope.myDate.split("/")[1];
+		
+		$scope.myDate = new Date($scope.myDate);
+		$scope.paciente.setFechaNac($scope.myDate);
 	}
 
+	$scope.updateDate = function(){
+	
+//		var dateTemp = "";
+//		($scope.myDate.includes("-")) ? dateTemp = $scope.myDate.split("-")[1]+ '-' + $scope.myDate.split("-")[0] + '-' + $scope.myDate.split("-")[1]:
+//			$scope.myDate.split("/")[1]+ '/' + $scope.myDate.split("/")[0] + '/' + $scope.myDate.split("/")[1];
+//		
+		$scope.myDate = new Date($scope.myDate);
+	} 
 	$scope.onlyWeekendsPredicate = function(date) {
 		var day = date.getDay();
 		return day === 0 || day === 6;

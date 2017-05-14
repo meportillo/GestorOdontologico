@@ -237,7 +237,7 @@ function IconSelect($$elementID, element, $$parameters) {
 
 		_View.boxScrollElement = document.createElement('div');
 		_View.boxScrollElement.setAttribute('id', $$elementID + "-box-scroll");
-		_View.boxScrollElement.setAttribute('class', 'box dropdown-menu');
+		_View.boxScrollElement.setAttribute('class', 'box dropdown-menu col-md-3');
 
 		_View.boxElement = document.createElement('div');
 
