@@ -1,4 +1,4 @@
-app.controller('obraSocialCtrl',function($scope, $http, toaster,$route){
+app.controller('obraSocialCtrl',function($scope, $http, toaster, $route, ObraSocialService, ObraSocial ){
 
 	
     $scope.model = {
@@ -36,9 +36,11 @@ app.controller('obraSocialCtrl',function($scope, $http, toaster,$route){
             $scope.model.selected = angular.copy(contact);
         };
 
-        $scope.updatearOS = function (idx) {
+        $scope.updatearOS = function(idx) {
             console.log("Saving contact");
             $scope.model.obrasSociales[idx] = angular.copy($scope.model.selected);
+            ObraSocialService.updatearOS($scope.model.obrasSociales[idx]);
+            /*
             console.log($scope.model.obrasSociales[idx]);
             
     		$http({ 
@@ -53,7 +55,7 @@ app.controller('obraSocialCtrl',function($scope, $http, toaster,$route){
     			console.log(response);
     			toaster.pop('error', response.status + ', ' + response.message );
     		});
-            
+            */
             $scope.reset();
         };
 
@@ -61,12 +63,13 @@ app.controller('obraSocialCtrl',function($scope, $http, toaster,$route){
             $scope.model.selected = {};
         };
 	
-
 	
 	$scope.eliminarOS = function(idOS){		
 		$scope.model.obrasSociales[idOS] = angular.copy($scope.model.selected);
 		console.log($scope.model.obrasSociales[idOS]);
 		console.log(($scope.model.obrasSociales[idOS]).idObraSocial);
+		ObraSocialService.eliminarOS($scope.model.obrasSociales[idOS]);
+		/*
 		$http({ 
 			method : 'DELETE',
 			url : '/GestorOdontologico/service/obraSocial/deleteObraSocial/'+$scope.model.obrasSociales[idOS].idObraSocial,
@@ -80,11 +83,13 @@ app.controller('obraSocialCtrl',function($scope, $http, toaster,$route){
 			}, function myError(response) {
 			toaster.pop('error', response.status + ', ' + response.message );
 			$scope.myTxt = "error";
-		});	
+		});
+		*/
 	};
 	
 	
 	$scope.agregarObraSocial = function() {
+		/*
 		
 		$http(
 				{
@@ -107,6 +112,8 @@ app.controller('obraSocialCtrl',function($scope, $http, toaster,$route){
 			toaster.pop('error', response.status + ', ' + response.message );
 			$scope.myTxt = "error";
 		});
+		*/
+		ObraSocialService.agregarObraSocial($scope.obraSocial.nombre, $scope.obraSocial.codigo);
 
 	}
 });
