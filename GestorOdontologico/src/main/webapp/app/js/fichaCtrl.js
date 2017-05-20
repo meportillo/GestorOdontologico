@@ -2,9 +2,12 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 
 	$scope.showModal = false;
 	$scope.dni = $routeParams.dni;
-	
+	$scope.verInput = false;
+	$scope.verGuardar = false;
 	$scope.verFicha = function(dni) {
 	console.log($scope.dni);	
+	
+	$scope.dateHoy = new Date();
 	
 	PacienteService.obtenerPacienteDni($scope.dni)
 	.then(function (pacienteRet) {

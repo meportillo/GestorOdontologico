@@ -1,6 +1,7 @@
 	<div>
 		<div modal="showModal" close="cancel()" align="left"
 			style="width: 90%;  height:85%; display: block; left: 20%;">
+		<form editable-form name="textBtnForm"> 
 			<div class="modal-header"></div>
 			<div class="modal-body" >
 				<div class="panel panel-primary">
@@ -9,7 +10,7 @@
 					<ul class="list-group">
 						<li class="list-group-item">
 									
-								<form editable-form name="textBtnForm" > 
+							
 								
 								<table class="table table-striped">
 									<thead>
@@ -22,17 +23,21 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><span editable-text="paciente.nombre">
-								        			{{ paciente.nombre || 'empty' }}</span></td>
-											<td><span editable-text="paciente.apellido">
-								        			{{ paciente.apellido || 'empty' }}</span></td>
-											<td><span editable-text="paciente.dni">
-								       				 {{ paciente.dni || 'empty' }}
-								   			  </span>
+											<td>
+												<span  ng-show="!verInput">{{ paciente.nombre || 'empty' }}</span>
+								        		<input type="text" ng-show="verInput" ng-model="paciente.nombre">
+								        	</td>
+											<td>
+												<span ng-show="!verInput">{{ paciente.apellido || 'empty' }}</span>
+												<input type="text" ng-show="verInput" ng-model="paciente.apellido">
+											</td>
+											<td>
+												<span  ng-show="!verInput">{{ paciente.dni || 'empty' }}  </span>
+												<input type="text" ng-show="verInput" ng-model="paciente.dni">
 								    		</td>
-											<td>  <span editable-text="paciente.direccion">
-								        			{{ paciente.direccion || 'empty' }}
-								    			</span>
+											<td>  
+												<span ng-show="!verInput">{{ paciente.direccion || 'empty' }}</span>
+												<input type="text" ng-show="verInput" ng-model="paciente.direccion">
 								     		</td>
 										</tr>
 										<tr>
@@ -44,39 +49,25 @@
 										<tr>
 										<td> {{paciente.anios}}</td>
 										<td>
-										 <span   editable-bsdate="paciente.fechaNac"   e-is-open="opened.$data" e-ng-click="open($event,'$data')"  e-datepicker-popup="dd/MM/yyyy">
-								            {{ (paciente.fechaNac | date:"dd/MM/yyyy") || 'empty' }}
-								          </span>
+										    <span ng-show="!verInput">{{ paciente.fechaNac | date:"dd/MM/yyyy" }}</span>
+											<input type="date" ng-show="verInput" ng-model="paciente.fechaNac">
+											<input type="date" ng-show="verInput" ng-model="paciente.fechaNac" placeholder="yyyy-MM-dd" min="1900-01-01" max="dateHoy.start" required />
+											
 										</td>
 										<td>
-										 <span   editable-bsdate="paciente.ficha.fechaAlta"  e-is-open="openedAlta.$data" e-ng-click="openAlta($event,'$data')"  e-datepicker-popup="dd/MM/yyyy">
-											{{(paciente.ficha.fechaAlta | date : "dd/MM/y" ) || 'empty' }}
-									    </span>
+											 <span  ng-show="!verInput">{{paciente.ficha.fechaAlta | date : "dd/MM/y" }}</span>
+											 <input type="date" ng-show="verInput" ng-model="paciente.fechaNac">
 										</td>
-										
-											<td><span  editable-textarea="paciente.ficha.observaciones" e-rows="2" e-cols="40">
-								        {{ paciente.ficha.observaciones }}
-								    </span></td>
+										<td>
+											<span  ng-show="!verInput">{{ paciente.ficha.observaciones }}</span>
+     										<textarea  ng-show="verInput" rows="2" cols="30" ng-model="paciente.ficha.observaciones"></textarea>	
+										</td>
+											
 										</tr>
 									</tbody>
-									<tfoot>
-									<button type="button" class="btn btn-primary" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
-								        Editar
-								    </button>
-								    <span ng-show="textBtnForm.$visible">
-								        <button type="submit" class="btn btn-primary" ng-disabled="textBtnForm.$waiting">
-								         Ok
-								        </button>
-								        <button type="button" class="btn btn-danger" ng-disabled="textBtnForm.$waiting" ng-click="textBtnForm.$cancel()">
-								          Cancelar
-								        </button>
-								    </span>
-									
+									<tfoot>									
 									</tfoot>
 								</table>
-									
-							</form>
-							   															
 						</li>
 					</ul>
 				
@@ -93,10 +84,20 @@
 			</div>
 			</div>
 			<div class="modal-footer" style="height: 10%">
-				<button class="btn btn-success" ng-click="updatePaciente()">Guardar</button>
-				<button class="btn btn-danger" ng-click="cancel()">Cancelar</button>
-				<button class="btn btn-primary" ng-click="cancel()">Cerrar</button>
+				<button type="button" class="btn btn-primary" ng-show="!verGuardar" ng-click="; verInput = true; verGuardar = true">
+				     Editar
+				</button>
+				 <span ng-show="verGuardar">
+				     <button type="submit" class="btn btn-success"   ng-click="verGuardar = false; verInput = false; updatePaciente(); ">
+						Guardar
+					 </button>
+					 <button type="button" class="btn btn-danger"  ng-disabled="textBtnForm.$waiting" ng-click="verInput = false; verGuardar = false">
+					    Cancelar
+					 </button>
+				 </span>
+				 <button class="btn btn-primary" ng-click="cancel() ; verGuardar = false">Cerrar</button>
 			</div>
+		</form>
 		</div>
 
 	</div>
