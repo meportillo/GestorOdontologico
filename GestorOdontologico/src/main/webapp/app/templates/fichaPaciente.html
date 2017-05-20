@@ -1,12 +1,11 @@
-	<div>
-		<div modal="showModal" close="cancel()" align="left"
-			style="width: 90%;  height:85%; display: block; left: 20%;">
+	<div class="modal-dialog modal-lg" >
+		<div class="modal-content"  modal="showModal" close="cancel()">
 		<form editable-form name="textBtnForm"> 
-			<div class="modal-header"></div>
-			<div class="modal-body" >
+			<div class="modal-header popUp-header "></div>
+			<div class="modal-body popUp-body" >
 				<div class="panel panel-primary">
 					<div class="panel-heading">Ficha Paciente Encontrado</div>
-					<div class="panel-body">
+					<div class="panel-body ">
 					<ul class="list-group">
 						<li class="list-group-item">
 									
@@ -73,7 +72,7 @@
 				
 
 				<div ng-repeat="cuadrante in paciente.ficha.odontograma.cuadrantes">
-					<div class="col-lg-6">
+					<div class="col-lg-6 ">
 						<div ng-repeat="diente in cuadrante.dientes">
 							<div diente  estado="diente.idEstadoDiente" iddiente="diente.iddiente">
 								{{diente.posicionCuadrante}}</div>
@@ -83,7 +82,7 @@
 				</div>
 			</div>
 			</div>
-			<div class="modal-footer" style="height: 10%">
+			<div class="modal-footer popUp-footer">
 				<button type="button" class="btn btn-primary" ng-show="!verGuardar" ng-click="; verInput = true; verGuardar = true">
 				     Editar
 				</button>
