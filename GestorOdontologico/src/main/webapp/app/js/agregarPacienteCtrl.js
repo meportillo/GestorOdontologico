@@ -62,11 +62,13 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
  	 		   &&$scope.myDate.getDate() > new Date().getDate()
  	 		){
  			
+ 			
  			$scope.myDate = new Date($scope.myDate);
  			console.log($scope.myDate);
  			toaster.pop('error', 'Por favor ingresa una fecha de nacimiento valida' );
  			
  		}else{
+ 			JSON.stringify($scope.paciente)
  			PacienteService.agregarPaciente($scope.paciente);
  			
   		}

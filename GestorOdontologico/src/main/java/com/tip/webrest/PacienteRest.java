@@ -104,7 +104,7 @@ public class PacienteRest {
 	@Path("/crearPaciente")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response crearPaciente(Datos datos) {
+	public Response crearPaciente(Paciente datos) {
 
 		try {
 			Paciente paciente = new Paciente();
@@ -113,7 +113,7 @@ public class PacienteRest {
 			paciente.setDireccion(datos.getDireccion());
 			paciente.setNombre(datos.getNombre());
 
-			paciente.setObraSocial(this.getOsService().getById(datos.getIdObraSocial()));
+			paciente.setObraSocial(datos.getObraSocial());
 			paciente.setFechaNac(new Timestamp(datos.getFechaNac().getTime()));
 			paciente.setDni(datos.getDni());
 

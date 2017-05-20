@@ -1,6 +1,7 @@
 package com.tip.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,9 +17,11 @@ public class Datos implements Serializable {
 	private Date fechaNac;
 	private String direccion;
 	private Integer anios;
-	private String obraSocial;
 	private Integer idObraSocial;
-
+	private ObraSocial obraSocial;
+	private ArrayList<Turno> turnos = new ArrayList<Turno>();
+	
+	
 	public Datos() {
 
 	}
@@ -71,11 +74,11 @@ public class Datos implements Serializable {
 		this.anios = anios;
 	}
 
-	public String getObraSocial() {
+	public ObraSocial getObraSocial() {
 		return obraSocial;
 	}
 
-	public void setObraSocial(String obraSocial) {
+	public void setObraSocial(ObraSocial obraSocial) {
 		this.obraSocial = obraSocial;
 	}
 
@@ -85,6 +88,14 @@ public class Datos implements Serializable {
 
 	public void setIdObraSocial(Integer idObraSocial) {
 		this.idObraSocial = idObraSocial;
+	}
+
+	public ArrayList<Turno> getTurnos() {
+		return turnos;
+	}
+
+	public void setTurnos(ArrayList<Turno> turnos) {
+		this.turnos = turnos;
 	}
 
 }

@@ -11,7 +11,9 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 	}
 	this.updatePaciente=function(pacienteParam){
 		var deferred = $q.defer();
+
 		
+
 		$http({
 			method : 'PUT',
 			url : '/GestorOdontologico/service/paciente/updatePaciente/' + pacienteParam.dni,
@@ -40,6 +42,9 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 	
 	this.agregarPaciente= function(pacienteParam){
 	
+		var os = JSON.parse(pacienteParam.obraSocial);
+		pacienteParam.setObraSocial(os);
+		
 		$http({ 
 			method : 'POST',
 			url : '/GestorOdontologico/service/paciente/crearPaciente',
