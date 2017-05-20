@@ -39,5 +39,16 @@ public class PacienteRepository extends HibernateGenericDAO<Paciente> implements
 		return (Paciente) query.list().get(0);
 
 	}
+	
+	public List<Paciente> getTopPacientes(int nTop) {
+
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = "FROM Paciente";
+		Query query = session.createQuery(hql);
+		query.setMaxResults(nTop);
+
+		return query.list();
+	}
+			
 
 }

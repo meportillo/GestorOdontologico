@@ -22,5 +22,9 @@ public class PacienteService extends GenericService<Paciente> {
 		return ((PacienteRepository) this.getRepository()).updatePaciente(dni,paciente);
 		
 	}
+	@Transactional
+	public List<Paciente> getTopPacientes(int nTop) {
+		return ((PacienteRepository) this.getRepository()).getTopPacientes(nTop);
+	}
 
 }

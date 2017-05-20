@@ -182,6 +182,20 @@ public class PacienteRest {
 		return Response.ok(ret).build();
 	}
 	
+	@GET
+	@Path("/getTopPacientes")
+	@Produces("application/json")
+	public Response getTopPacientes() {
+		try {
+			List<Paciente> pacientes = this.getPacienteService().getTopPacientes(10);		
+			return Response.ok(pacientes).build();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+	}	
+	
 
 
 }
