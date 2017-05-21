@@ -1,12 +1,14 @@
 package com.tip.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -29,9 +31,14 @@ public class Diente implements Serializable{
 	@Column(name = "idCuadrante")
 	private Integer idCuadrante;
 
-	@Column(name = "idEstadoDiente")
+//	@Column(name = "idEstadoDiente")
 	private Integer idEstadoDiente;
+	
+//	@JoinColumn(name = "idEstadoDiente", referencedColumnName = "idEstadoDiente")
+//	private EstadoDiente estadoDiente;
 
+	
+	
 	public Diente(){
 		
 	}

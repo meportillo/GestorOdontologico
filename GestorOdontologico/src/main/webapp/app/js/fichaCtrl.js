@@ -180,7 +180,9 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 	 			$scope.paciente.setFechaNac($scope.dt);		
 	 		}
 
-	 	  
+	$(document).ready(function(){
+ 		    $('[data-toggle="tooltip"]').tooltip();   
+	}); 	  
 	$scope.verFicha($routeParams.DNI);
 	
 	

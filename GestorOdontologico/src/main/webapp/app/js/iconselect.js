@@ -224,8 +224,13 @@ function IconSelect($$elementID, element, $$parameters) {
 
 		_View.selectedIconImgElement = document.createElement('img');
 		_View.selectedIconImgElement.setAttribute('src', '');
-		selectedIconElement.appendChild(_View.selectedIconImgElement);
+		
+		_View.selectedIconImgElement.setAttribute('data-toggle', 'tooltip');
+		_View.selectedIconImgElement.setAttribute('title', 'diente');
 
+			selectedIconElement.appendChild(_View.selectedIconImgElement);
+
+		
 		var componentIconElement = document.createElement('div');
 		componentIconElement.setAttribute('class', 'component-icon');
 
