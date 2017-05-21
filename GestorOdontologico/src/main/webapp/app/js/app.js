@@ -1,10 +1,3 @@
 var app = angular
-		.module('gestorOdont', [ 'toaster', 'ngRoute', 'smart-table','ui.bootstrap.modal', 'ngMaterial','ngMessages', 'xeditable' ,'ui.bootstrap' ]);
+		.module('gestorOdont', [ 'mwl.calendar.docs' ,'toaster', 'ngRoute', 'smart-table','ui.bootstrap.modal', 'ngMaterial','ngMessages', 'xeditable' ,'ui.bootstrap', 'mwl.calendar', 'ngAnimate' ]);
 
-app.filter('ponerCero',function(){
-
-	return function(valor){
-	if(valor == 'NaN')
-		return "0";
-	}
-})

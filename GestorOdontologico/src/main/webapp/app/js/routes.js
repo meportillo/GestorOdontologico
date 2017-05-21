@@ -2,8 +2,8 @@ app.config(function($routeProvider) {
 	console.log("dentro routes config");
 	$routeProvider.when('/turnos', {
 		templateUrl : 'app/templates/turnos.html',
-		controller : 'turnosCtrl',
-		controllerAs : 'turnos'
+		controller : 'KitchenSinkCtrl',
+		controllerAs : 'vm'
 			
 	}).when('/historias', {
 		templateUrl : 'app/templates/historias.html',

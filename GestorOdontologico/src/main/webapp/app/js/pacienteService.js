@@ -25,7 +25,7 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 			
 		}).then(function mySucces(response) {			
 			
-			toaster.pop('success', "Acutalizacion OK");
+			toaster.pop('success', "Actualizacion OK");
 			var pac = new Paciente(response.data.nombre, response.data.apellido, response.data.dni, response.data.direccion, response.data.fechaNac, response.data.ficha, response.data.anios, response.data.obraSocial);
 			deferred.resolve(pac);
 
