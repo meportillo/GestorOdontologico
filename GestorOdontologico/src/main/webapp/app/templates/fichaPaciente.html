@@ -49,13 +49,27 @@
 										<td> {{paciente.anios}}</td>
 										<td>
 										    <span ng-show="!verInput">{{ paciente.fechaNac | date:"dd/MM/yyyy" }}</span>
-											<input type="date" ng-show="verInput" ng-model="paciente.fechaNac">
-											<input type="date" ng-show="verInput" ng-model="paciente.fechaNac" placeholder="yyyy-MM-dd" min="1900-01-01" max="dateHoy.start" required />
+									      <div ng-show="verInput">
+									        <p class="input-group">
+									          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 2000 }' />
+									          <span class="input-group-btn">
+									            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+									          </span>
+									        </p>
+									      </div>
 											
 										</td>
 										<td>
 											 <span  ng-show="!verInput">{{paciente.ficha.fechaAlta | date : "dd/MM/y" }}</span>
-											 <input type="date" ng-show="verInput" ng-model="paciente.fechaNac">
+									      <div ng-show="verInput">
+									        <p class="input-group">
+									          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="paciente.ficha.fechaAlta" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+									          <span class="input-group-btn">
+									            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+									          </span>
+									        </p>
+									      </div>
+
 										</td>
 										<td>
 											<span  ng-show="!verInput">{{ paciente.ficha.observaciones }}</span>
@@ -90,7 +104,7 @@
 				     <button type="submit" class="btn btn-success"   ng-click="verGuardar = false; verInput = false; updatePaciente(); ">
 						Guardar
 					 </button>
-					 <button type="button" class="btn btn-danger"  ng-disabled="textBtnForm.$waiting" ng-click="verInput = false; verGuardar = false">
+					 <button type="button" class="btn btn-danger"  ng-disabled="textBtnForm.$waiting" ng-click="verInput = false; verGuardar = false; cancel()">
 					    Cancelar
 					 </button>
 				 </span>

@@ -69,21 +69,20 @@
     </div>
     
     <div class="col-md-12">
-         <div class="col-md-4">
-        <md-content>
-            <p>Fecha Nacimiento</p>
-            <!--  md-datepicker ng-change="diferencia()" 
-               ng-model="myDate"
-               md-placeholder="Fecha Nacimiento Paciente"></md-datepicker>           
-         </md-content-->
-         <input  type="date" ng-model="myDate" ng-change="diferencia()" required>
+      <div class="col-md-4">
+	  <h4>Fecha Nacimiento:</h4>
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 2000 }' />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
       </div>
-      
-        
+	
+
      <div class="col-md-4">
           	<label> <br>
-			     <span>
-				      <label> Edad: {{paciente.anios}}</label>
+			      Edad: <span>{{paciente.anios}}
 			      </span>
 			</label>
           
