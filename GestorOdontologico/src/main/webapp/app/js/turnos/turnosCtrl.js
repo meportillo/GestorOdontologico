@@ -1,7 +1,7 @@
 angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module']);
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('KitchenSinkCtrl', function(moment, calendarConfig) {
+  .controller('KitchenSinkCtrl', function(moment, calendarConfig, $http, toaster) {
 
     var vm = this;
 
@@ -22,10 +22,41 @@ angular
         alert.show('Deleted', args.calendarEvent);
       }
     }];
+    
+    vm.guardarEditados = function(index, n) {
+//      console.log(index);		
+//      console.log(n);
+      console.log(vm.events[index]);
+      console.log(vm.events[index].color);
+      
+      var title = vm.events[index].title;
+      var startsAt = vm.events[index].startsAt;
+      var endsAt = vm.events[index].endsAt;
+      var dni = vm.events[index].dni;
+  
+  	
+  	$http(
+				{
+					method : 'POST',
+					url : "http://localhost:8080/GestorOdontologico/service/turno/crearTurno/"+ title + "/"  +startsAt + "/" 
+					+ endsAt + "/" + dni,
+					headers : { 'Content-Type' : 'application/json'},
+					data : title,
+				}).then(function mySucces(response) {
+				toaster.pop('sucess', 'Agregado en forma correcta');
+				console.log(response);
+				
+		}, function myError(response) {
+			console.log(response);
+			toaster.pop('error', response.status + ', ' + response.message );
+		});
+      
+   }
 
     vm.cellIsOpen = true;
 //pasar dia por parametro
     vm.addEvent = function() {
+    	
       vm.events.push({
         title: 'New event',
         startsAt: moment().startOf('day').toDate(),
@@ -99,7 +130,8 @@ else{*/
         endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
         draggable: true,
         resizable: true,
-        actions: actions
+        actions: actions,
+        dni: 123
       }, {
         title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
         color: calendarConfig.colorTypes.info,
@@ -107,7 +139,8 @@ else{*/
         endsAt: moment().add(5, 'days').toDate(),
         draggable: true,
         resizable: true,
-        actions: actions
+        actions: actions,
+        dni: 123
       }, {
         title: 'This is a really long event title that occurs on every year',
         color: calendarConfig.colorTypes.important,
@@ -116,7 +149,8 @@ else{*/
         recursOn: 'year',
         draggable: true,
         resizable: true,
-        actions: actions
+        actions: actions,
+        dni: 123
       }
     ];
 

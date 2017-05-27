@@ -73,6 +73,16 @@
       ng-click="vm.addEvent()">
       Add new
     </button>
+    
+    <!--
+   
+    <button
+      class="btn btn-primary pull-right"
+      ng-click="vm.guardarEditados()">
+     Save
+    </button>
+     -->
+    
     <div class="clearfix"></div>
   </h3>
 
@@ -81,6 +91,7 @@
     <thead>
       <tr>
         <th>Title</th>
+        <th>dni</th>
         <!--
         <th>Primary color</th>
         <th>Secondary color</th>
@@ -88,16 +99,24 @@
         <th>Starts at</th>
         <th>Ends at</th>
         <th>Remove</th>
+        <th>Guardar</th>
       </tr>
     </thead>
 
     <tbody>
+    
       <tr ng-repeat="event in (vm.events) track by $index">
         <td>
           <input
             type="text"
             class="form-control"
             ng-model="event.title">
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            ng-model="event.dni">
         </td>
 
 <!--
@@ -168,6 +187,13 @@
             class="btn btn-danger"
             ng-click="vm.events.splice($index, 1)">
             Delete
+          </button>
+        </td>
+        <td>
+        <button
+            class="btn btn-danger"
+            ng-click="vm.guardarEditados($index, 1)">
+            Guardar
           </button>
         </td>
       </tr>
