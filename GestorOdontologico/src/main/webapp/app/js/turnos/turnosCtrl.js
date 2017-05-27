@@ -1,7 +1,7 @@
 angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module']);
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('KitchenSinkCtrl', function(moment, calendarConfig, $http, toaster) {
+  .controller('KitchenSinkCtrl', function(moment, calendarConfig, $http, toaster, $scope) {
 
     var vm = this;
 
@@ -33,13 +33,15 @@ angular
       var startsAt = vm.events[index].startsAt;
       var endsAt = vm.events[index].endsAt;
       var dni = vm.events[index].dni;
+      var color = vm.events[index].color; 
   
+      console.log(vm.events[index].color.primary);
   	
   	$http(
 				{
 					method : 'POST',
 					url : "http://localhost:8080/GestorOdontologico/service/turno/crearTurno/"+ title + "/"  +startsAt + "/" 
-					+ endsAt + "/" + dni,
+					+ endsAt + "/" + dni ,
 					headers : { 'Content-Type' : 'application/json'},
 					data : title,
 				}).then(function mySucces(response) {
@@ -121,7 +123,22 @@ else{*/
       //}
 
     };
+    
+	$http({ 
+		method : 'GET',
+		url : 'http://localhost:8080/GestorOdontologico/service/turno/obtenerTodosLosTurnos',
+		headers : { 'Content-Type' : 'application/json'},
+		data : $scope.paciente,
+		}).then(function mySucces(response) {
+			vm.events = response.data;
+			console.log(response);
+		}, function myError(response) {
+		toaster.pop('error', response.status + ', ' + response.message );
+		$scope.myTxt = "error";
+	});
 
+    
+    /*
     vm.events = [
       {
         title: 'An event',
@@ -152,6 +169,6 @@ else{*/
         actions: actions,
         dni: 123
       }
-    ];
+    ];*/
 
   });

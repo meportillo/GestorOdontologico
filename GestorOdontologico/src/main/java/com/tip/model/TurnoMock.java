@@ -26,10 +26,19 @@ public class TurnoMock implements Serializable {
     private Date endsAt;
     private boolean draggable;
     private boolean resizable;
+    private Integer dni;
+    private Object colorPrimary;
 //    actions: actions
 	
-	public TurnoMock(Integer idTurno, Time horaInicio, Date horaFin, Integer dni) {
-		// TODO Auto-generated constructor stub
+	public TurnoMock(String title, Integer idTurno, Date horaInicio, Date horaFin, Integer dni) {
+		this.setTitle(title);
+		this.setDraggable(true);
+		this.setDraggable(true);
+		this.setStartsAt(horaInicio);
+		this.setEndsAt(horaFin);
+		
+//		this.setColorPrimary("#ad2121");
+		this.setDni(dni);
 	}
 
 	public String getTitle() {
@@ -71,7 +80,22 @@ public class TurnoMock implements Serializable {
 	public void setResizable(boolean resizable) {
 		this.resizable = resizable;
 	}
-	
+
+	public Integer getDni() {
+		return dni;
+	}
+
+	public void setDni(Integer dni) {
+		this.dni = dni;
+	}
+
+	public Object getColorPrimary() {
+		return colorPrimary;
+	}
+
+	public void setColorPrimary(Object colorPrimary) {
+		this.colorPrimary = colorPrimary;
+	}
 	
 	
 	

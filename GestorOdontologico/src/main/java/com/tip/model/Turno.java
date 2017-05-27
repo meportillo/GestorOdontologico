@@ -33,19 +33,30 @@ public class Turno implements Serializable {
 	private Integer idTurno;
 	
 	@Column(name = "horaInicio")
-	private Time horaInicio;
+	private Date horaInicio;
 	
 	@Column(name = "fechaTurno")
 	private Date fechaTurno;
 	
 	@Column(name = "horaFin")
-	private Time horaFin;
+	private Date horaFin;
+	
+	@Column(name = "descripcion")
+	private String descripcion;
 	
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	@JoinColumn(name = "dniPaciente", referencedColumnName = "dni")
 	private Paciente dniPaciente;
+
+	public TurnoMock toTurnoMock(){
+		
+		
+		TurnoMock turnoM = new TurnoMock(descripcion, idTurno, horaInicio, horaFin, this.getDniPaciente().getDni());
+		return turnoM;
+		
+	}
 	
 	public Turno(){
 		
@@ -62,12 +73,12 @@ public class Turno implements Serializable {
 	}
 
 
-	public Time getHoraInicio() {
+	public Date getHoraInicio() {
 		return horaInicio;
 	}
 
 
-	public void setHoraInicio(Time horaInicio) {
+	public void setHoraInicio(Date horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 
@@ -82,12 +93,12 @@ public class Turno implements Serializable {
 	}
 
 
-	public Time getHoraFin() {
+	public Date getHoraFin() {
 		return horaFin;
 	}
 
 
-	public void setHoraFin(Time horaFin) {
+	public void setHoraFin(Date horaFin) {
 		this.horaFin = horaFin;
 	}
 
@@ -105,5 +116,17 @@ public class Turno implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	
 
 }
