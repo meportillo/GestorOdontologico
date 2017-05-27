@@ -26,8 +26,8 @@ angular
     vm.guardarEditados = function(index, n) {
 //      console.log(index);		
 //      console.log(n);
-      console.log(vm.events[index]);
-      console.log(vm.events[index].color);
+//      console.log(vm.events[index]);
+//      console.log(vm.events[index].color);
       
       var title = vm.events[index].title;
       var startsAt = vm.events[index].startsAt;

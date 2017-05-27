@@ -28,7 +28,7 @@ public class TurnoMock implements Serializable {
     private boolean resizable;
 //    actions: actions
 	
-	public TurnoMock(Integer idTurno, Time horaInicio, Date fechaTurno, Time horaFin) {
+	public TurnoMock(Integer idTurno, Time horaInicio, Date horaFin, Integer dni) {
 		// TODO Auto-generated constructor stub
 	}
 
