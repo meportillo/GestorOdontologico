@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.tip.model.ObraSocial;
 import com.tip.model.Turno;
 import com.tip.model.TurnoMock;
 import com.tip.service.TurnoService;
@@ -31,16 +33,30 @@ public class TurnoRest {
 		this.turnoService = turnoService;
 	}
 	
+	@DELETE
+	@Path("/deleteTurno/{id}")
+	@Produces("application/json")
+	public Response deleteTurno(@PathParam("id") final Integer id) {
+
+		try {
+			Turno turno = this.getTurnoService().getById(id);
+			this.getTurnoService().delete(turno);
+		} catch (Exception e) {
+			return Response.ok(Response.Status.NOT_FOUND).build();
+		}
+		return Response.ok(Response.Status.OK).build();
+	}
+	
 	@POST
-	@Path("/crearTurno/{title}/{startsAt}/{endsAt}/{dni}")
+	@Path("/crearTurno/{title}/{startsAt}/{endsAt}")
 	@Produces("application/json")	
 	public Response crearTurno(@PathParam("title") final String title, @PathParam("startsAt") final Date startsAt,
-			@PathParam("endsAt") final Date endsAt, @PathParam("dni") final Integer dni
-			){
+			@PathParam("endsAt") final Date endsAt){
 		try {
 			
 		Turno turno = new Turno();
 //		turno.setDniPaciente(dni);
+		turno.setFechaTurno(startsAt);
 		turno.setHoraInicio(startsAt);
 		turno.setHoraFin(endsAt);
 		turno.setDescripcion(title);

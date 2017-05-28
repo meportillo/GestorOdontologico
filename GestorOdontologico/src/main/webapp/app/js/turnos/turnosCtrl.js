@@ -23,6 +23,11 @@ angular
       }
     }];
     
+    vm.eliminarTurnos = function(index, n) {
+    	console.log(vm.events[index].idTurno);
+    	vm.events.splice(index, n)
+    }
+    
     vm.guardarEditados = function(index, n) {
 //      console.log(index);		
 //      console.log(n);
@@ -35,13 +40,13 @@ angular
       var dni = vm.events[index].dni;
       var color = vm.events[index].color; 
   
-      console.log(vm.events[index].color.primary);
+//      console.log(vm.events[index].color.primary);
   	
   	$http(
 				{
 					method : 'POST',
 					url : "http://localhost:8080/GestorOdontologico/service/turno/crearTurno/"+ title + "/"  +startsAt + "/" 
-					+ endsAt + "/" + dni ,
+					+ endsAt ,
 					headers : { 'Content-Type' : 'application/json'},
 					data : title,
 				}).then(function mySucces(response) {
@@ -67,6 +72,8 @@ angular
         draggable: true,
         resizable: true
       });
+      
+      console.log(calendarConfig.colorTypes.important);
     }
 /*
     vm.eventClicked = function(event) {
@@ -124,6 +131,9 @@ else{*/
 
     };
     
+    
+//    TABLE DE DATOS - TUrNOS
+    
 	$http({ 
 		method : 'GET',
 		url : 'http://localhost:8080/GestorOdontologico/service/turno/obtenerTodosLosTurnos',
@@ -131,6 +141,15 @@ else{*/
 		data : $scope.paciente,
 		}).then(function mySucces(response) {
 			vm.events = response.data;
+			
+//			parche para los colores
+			
+            angular.forEach(vm.events, function(event, key){
+            	event.color = calendarConfig.colorTypes.warning;
+            });
+			
+//			parche para los colores
+            
 			console.log(response);
 		}, function myError(response) {
 		toaster.pop('error', response.status + ', ' + response.message );

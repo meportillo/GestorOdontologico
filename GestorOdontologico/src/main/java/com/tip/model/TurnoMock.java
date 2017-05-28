@@ -27,18 +27,30 @@ public class TurnoMock implements Serializable {
     private boolean draggable;
     private boolean resizable;
     private Integer dni;
-    private Object colorPrimary;
+    private ColorTurno colorPrimary;
+    private Integer idTurno;
+    
 //    actions: actions
 	
-	public TurnoMock(String title, Integer idTurno, Date horaInicio, Date horaFin, Integer dni) {
+	public TurnoMock(String title, Integer idTurno, Date fecha ,Date horaInicio, Date horaFin, Integer dni) {
 		this.setTitle(title);
 		this.setDraggable(true);
 		this.setDraggable(true);
-		this.setStartsAt(horaInicio);
-		this.setEndsAt(horaFin);
 		
-//		this.setColorPrimary("#ad2121");
-		this.setDni(dni);
+		fecha.setHours(horaInicio.getHours());
+		fecha.setMinutes(horaInicio.getMinutes());
+		this.setStartsAt(fecha);
+		
+		Date fechaFin = fecha;
+		fechaFin.setHours(horaFin.getHours());
+		fechaFin.setMinutes(horaFin.getMinutes());
+		this.setEndsAt(fechaFin);
+		
+		this.setColorPrimary(new ColorTurno());
+		this.setIdTurno(idTurno);
+		this.setDni(123456);
+		
+		
 	}
 
 	public String getTitle() {
@@ -89,11 +101,21 @@ public class TurnoMock implements Serializable {
 		this.dni = dni;
 	}
 
-	public Object getColorPrimary() {
+
+
+	public Integer getIdTurno() {
+		return idTurno;
+	}
+
+	public void setIdTurno(Integer idTurno) {
+		this.idTurno = idTurno;
+	}
+
+	public ColorTurno getColorPrimary() {
 		return colorPrimary;
 	}
 
-	public void setColorPrimary(Object colorPrimary) {
+	public void setColorPrimary(ColorTurno colorPrimary) {
 		this.colorPrimary = colorPrimary;
 	}
 	

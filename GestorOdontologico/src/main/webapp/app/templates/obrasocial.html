@@ -25,7 +25,7 @@
         <td><input type="text" ng-model="model.selected.codigo" /></td>
         <td>
             <button type="button" class="btn btn-success btn-sm" ng-click="updatearOS($index)" ng-disabled="!model.selected.nombre || !model.selected.codigo">Actualizar</button>
-			<button type="button" class="btn btn-sm" ng-click="eliminarOS($index)">Eliminar</button>
+			<button type="button" class="btn btn-danger btn-sm" ng-click="eliminarOS($index)">Eliminar</button>
             <button type="button" class="btn btn-default btn-sm" ng-click="reset()">Cancel</button>
         </td>
     </script>

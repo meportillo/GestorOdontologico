@@ -56,8 +56,6 @@
     on-event-click="vm.eventClicked(calendarEvent)"
     on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
     cell-is-open="vm.cellIsOpen"
-    day-view-start="00:00"
-    day-view-end="23:59"
     day-view-split="30"
     cell-modifier="vm.modifyCell(calendarCell)"
     cell-auto-open-disabled="true"
@@ -91,8 +89,8 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>dni</th>
         <!--
+        <th>dni</th>
         <th>Primary color</th>
         <th>Secondary color</th>
         -->
@@ -112,6 +110,7 @@
             class="form-control"
             ng-model="event.title">
         </td>
+        <!--
         <td>
           <input
             type="text"
@@ -119,7 +118,7 @@
             ng-model="event.dni">
         </td>
 
-<!--
+
         <td>
           <input class="form-control" colorpicker type="text" ng-model="event.color.primary">
         </td>
@@ -185,13 +184,14 @@
         <td>
           <button
             class="btn btn-danger"
-            ng-click="vm.events.splice($index, 1)">
+            
+            ng-click="vm.eliminarTurnos($index, 1)">
             Delete
           </button>
         </td>
         <td>
         <button
-            class="btn btn-danger"
+            class="btn btn-success"
             ng-click="vm.guardarEditados($index, 1)">
             Guardar
           </button>
