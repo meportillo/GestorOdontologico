@@ -34,15 +34,20 @@ angular
 //      console.log(vm.events[index]);
 //      console.log(vm.events[index].color);
       
+ 
+      var idTurno = vm.events[index].idTurno;
+  
+//      console.log(vm.events[index].color.primary);
+      
+      if(angular.equals(0, idTurno)){
+      
       var title = vm.events[index].title;
       var startsAt = vm.events[index].startsAt;
       var endsAt = vm.events[index].endsAt;
       var dni = vm.events[index].dni;
-      var color = vm.events[index].color; 
-  
-//      console.log(vm.events[index].color.primary);
+      var color = vm.events[index].color;
   	
-  	$http(
+  			$http(	
 				{
 					method : 'POST',
 					url : "http://localhost:8080/GestorOdontologico/service/turno/crearTurno/"+ title + "/"  +startsAt + "/" 
@@ -57,10 +62,14 @@ angular
 			console.log(response);
 			toaster.pop('error', response.status + ', ' + response.message );
 		});
-      
+      }else{
+    	  toaster.pop('sucess', 'UPDATEAR');
+    	  
+      }
    }
 
     vm.cellIsOpen = true;
+    
 //pasar dia por parametro
     vm.addEvent = function() {
     	
@@ -70,7 +79,8 @@ angular
         endsAt: moment().endOf('day').toDate(),
         color: calendarConfig.colorTypes.important,
         draggable: true,
-        resizable: true
+        resizable: true,
+        idTurno: 0
       });
       
       console.log(calendarConfig.colorTypes.important);
@@ -144,9 +154,9 @@ else{*/
 			
 //			parche para los colores
 			
-            angular.forEach(vm.events, function(event, key){
-            	event.color = calendarConfig.colorTypes.warning;
-            });
+//            angular.forEach(vm.events, function(event, key){
+//            	event.color = calendarConfig.colorTypes.warning;
+//            });
 			
 //			parche para los colores
             
