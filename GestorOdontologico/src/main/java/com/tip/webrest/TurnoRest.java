@@ -67,9 +67,10 @@ public class TurnoRest {
 //			System.out.println(endsAt);
 //			System.out.println(dni);
 //			System.out.println(color);
-		return Response.ok(Status.OK).build();
+		return Response.ok(turno).build();
 		}catch(Exception e){
-			return Response.status(Response.Status.NOT_FOUND).build();
+			e.printStackTrace();
+			return Response.status(Response.Status.CONFLICT).build();
 		}
 	}
 

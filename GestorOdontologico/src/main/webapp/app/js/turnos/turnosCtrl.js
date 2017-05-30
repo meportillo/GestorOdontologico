@@ -1,7 +1,7 @@
 angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module']);
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('KitchenSinkCtrl', function(moment, calendarConfig, $http, toaster, $scope) {
+  .controller('KitchenSinkCtrl', function(moment, calendarConfig, $http, toaster, $scope, TurnoService) {
 
     var vm = this;
 
@@ -46,22 +46,9 @@ angular
       var endsAt = vm.events[index].endsAt;
       var dni = vm.events[index].dni;
       var color = vm.events[index].color;
-  	
-  			$http(	
-				{
-					method : 'POST',
-					url : "http://localhost:8080/GestorOdontologico/service/turno/crearTurno/"+ title + "/"  +startsAt + "/" 
-					+ endsAt ,
-					headers : { 'Content-Type' : 'application/json'},
-					data : title,
-				}).then(function mySucces(response) {
-				toaster.pop('sucess', 'Agregado en forma correcta');
-				console.log(response);
-				
-		}, function myError(response) {
-			console.log(response);
-			toaster.pop('error', response.status + ', ' + response.message );
-		});
+  	     
+      TurnoService.guardarTurno(title, startsAt, endsAt);
+      
       }else{
     	  toaster.pop('sucess', 'UPDATEAR');
     	  
@@ -143,61 +130,11 @@ else{*/
     
     
 //    TABLE DE DATOS - TUrNOS
-    
-	$http({ 
-		method : 'GET',
-		url : 'http://localhost:8080/GestorOdontologico/service/turno/obtenerTodosLosTurnos',
-		headers : { 'Content-Type' : 'application/json'},
-		data : $scope.paciente,
-		}).then(function mySucces(response) {
-			vm.events = response.data;
-			
-//			parche para los colores
-			
-//            angular.forEach(vm.events, function(event, key){
-//            	event.color = calendarConfig.colorTypes.warning;
-//            });
-			
-//			parche para los colores
-            
-			console.log(response);
-		}, function myError(response) {
-		toaster.pop('error', response.status + ', ' + response.message );
-		$scope.myTxt = "error";
+	TurnoService.obtenerTodosLosTurnos()
+	.then(function (turnos) {
+		vm.events  = turnos;
 	});
 
+	
     
-    /*
-    vm.events = [
-      {
-        title: 'An event',
-        color: calendarConfig.colorTypes.warning,
-        startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-        endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-        draggable: true,
-        resizable: true,
-        actions: actions,
-        dni: 123
-      }, {
-        title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
-        color: calendarConfig.colorTypes.info,
-        startsAt: moment().subtract(1, 'day').toDate(),
-        endsAt: moment().add(5, 'days').toDate(),
-        draggable: true,
-        resizable: true,
-        actions: actions,
-        dni: 123
-      }, {
-        title: 'This is a really long event title that occurs on every year',
-        color: calendarConfig.colorTypes.important,
-        startsAt: moment().startOf('day').add(7, 'hours').toDate(),
-        endsAt: moment().startOf('day').add(19, 'hours').toDate(),
-        recursOn: 'year',
-        draggable: true,
-        resizable: true,
-        actions: actions,
-        dni: 123
-      }
-    ];*/
-
   });
