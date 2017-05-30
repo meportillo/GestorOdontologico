@@ -37,16 +37,9 @@ public class TurnoMock implements Serializable {
 		this.setDraggable(true);
 		this.setDraggable(true);
 		
-		Date fechaInicio = (Date) fecha.clone();
+		this.setStartsAt(horaInicio);
 		
-		fechaInicio.setHours(horaInicio.getHours());
-		fechaInicio.setMinutes(horaInicio.getMinutes());
-		this.setStartsAt(fechaInicio);
-		
-		Date fechaFin = (Date) fecha.clone();
-		fechaFin.setHours(horaFin.getHours());
-		fechaFin.setMinutes(horaFin.getMinutes());
-		this.setEndsAt(fechaFin);
+		this.setEndsAt(horaFin);
 		
 		this.setColorPrimary(new ColorTurno());
 		this.setIdTurno(idTurno);
