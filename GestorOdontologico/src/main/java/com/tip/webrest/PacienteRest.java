@@ -149,13 +149,10 @@ public class PacienteRest {
 	@GET
 	@Path("/getPacientePorDni/{dni}")
 	@Produces("application/json")
-	public Response getPacientePorDni(@PathParam("dni") final String dni) {
+	public Response getPacientePorDni(@PathParam("dni") final Integer dni) {
 		try {
-			List<Paciente> pacientes = this.getPacienteService().getEventsByNameDniSurname(dni);
-			if(pacientes.size() == 1)
-				return Response.ok(pacientes.get(0)).build();
-			else
-				return Response.status(Response.Status.NOT_FOUND).build();
+			Paciente paciente = this.getPacienteService().getEventsByDni(dni);
+				return Response.ok(paciente).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.status(Response.Status.NOT_FOUND).build();

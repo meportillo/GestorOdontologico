@@ -2,13 +2,6 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 
 	console.log("PacienteService");
 
-	this.getPacienteDniIII= function(dniParam){
-		var temppacientes = this.pacientes.filter(function (el) {
-			return el.dni == dniParam
-		});
-		console.log(temppacientes[0]);
-		return temppacientes[0];
-	}
 	this.updatePaciente=function(pacienteParam){
 		var deferred = $q.defer();
 

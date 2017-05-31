@@ -17,6 +17,13 @@ public class PacienteService extends GenericService<Paciente> {
 	public List<Paciente> getEventsByNameDniSurname(String valor) {
 		return ((PacienteRepository) this.getRepository()).getEventsByNameDniSurname(valor);
 	}
+	
+	@Transactional
+	public Paciente getEventsByDni(Integer dni) {
+		return ((PacienteRepository) this.getRepository()).getPacienteByDni(dni);
+	}
+
+	
 	@Transactional
 	public Paciente updatePaciente(Integer dni, Paciente paciente) {
 		return ((PacienteRepository) this.getRepository()).updatePaciente(dni,paciente);

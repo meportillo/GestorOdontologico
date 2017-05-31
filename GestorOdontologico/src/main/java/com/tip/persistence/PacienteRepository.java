@@ -1,11 +1,11 @@
 package com.tip.persistence;
 
 import java.util.List;
-import java.util.Set;
 
-import com.tip.model.Paciente;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.tip.model.Paciente;
 
 public class PacienteRepository extends HibernateGenericDAO<Paciente> implements GenericRepository<Paciente> {
 
@@ -23,6 +23,7 @@ public class PacienteRepository extends HibernateGenericDAO<Paciente> implements
 		Query query = session.createQuery(hql);
 		query.setParameter("value", "%" + value + "%");
 
+		
 		return query.list();
 	}
 
@@ -34,12 +35,10 @@ public class PacienteRepository extends HibernateGenericDAO<Paciente> implements
 		Query query = session.createQuery(hql);
 		query.setParameter("dni", dni);
 
-		
-		
 		return (Paciente) query.list().get(0);
 
 	}
-	
+
 	public List<Paciente> getTopPacientes(int nTop) {
 
 		Session session = this.getSessionFactory().getCurrentSession();
@@ -49,6 +48,17 @@ public class PacienteRepository extends HibernateGenericDAO<Paciente> implements
 
 		return query.list();
 	}
-			
+
+	public Paciente getPacienteByDni(Integer dni) {
+
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = "FROM Paciente P WHERE P.dni = :dni  ";
+		Query query = session.createQuery(hql);
+		query.setParameter("dni", dni);
+		
+		Paciente p = (Paciente) query.list().get(0); 
+		return p;
+
+	}
 
 }
