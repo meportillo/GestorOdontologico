@@ -24,8 +24,11 @@ angular
     }];
     
     vm.eliminarTurnos = function(index, n) {
-    	console.log(vm.events[index].idTurno);
-    	vm.events.splice(index, n)
+//    	console.log(vm.events[index].idTurno);
+    	
+    	
+    	TurnoService.eliminarTurno(vm.events[index].idTurno);
+//    	vm.events.splice(index, n);
     }
     
     vm.guardarEditados = function(index, n) {

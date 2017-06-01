@@ -1,4 +1,4 @@
-app.service('TurnoService', function($http,toaster,$q) {
+app.service('TurnoService', function($http,toaster,$q ,$route) {
 
 	console.log("TurnoService");
 
@@ -20,7 +20,7 @@ app.service('TurnoService', function($http,toaster,$q) {
 		});	
 		
 		 return deferred.promise;
-		 }
+	 }
 	
 	this.guardarTurno=function(title, startsAt, endsAt){
 		
@@ -30,14 +30,38 @@ app.service('TurnoService', function($http,toaster,$q) {
 				headers : { 'Content-Type' : 'application/json'},
 				data : title,
 			}).then(function mySucces(response) {
-			toaster.pop('sucess', 'Agregado en forma correcta');
-			console.log(response);
+				toaster.pop('sucess', 'Agregado en forma correcta');
+				console.log(response);
+				$route.reload();
 			
 			}, function myError(response) {
 				console.log(response);
 				toaster.pop('error', response.status + ', ' + response.message );
 			});
-   }
+    }
+	
+	this.eliminarTurno=function(idTurno){
+		
+	if(!angular.equals(0, idTurno)){
+		
+		$http({ 
+			method : 'DELETE',
+			url : '/GestorOdontologico/service/turno/borrarTurno/'+ idTurno,
+			headers : { 'Content-Type' : 'application/json'},
+			data : idTurno,
+			}).then(function mySucces(response) {
+				toaster.pop('sucess', 'Eliminado en forma correcta');
+				console.log(response);
+				$route.reload();
+
+			}, function myError(response) {
+			toaster.pop('error', response.status + ', ' + response.message );
+		});	
+	}else{
+		toaster.pop('error', 'Aun no esta almacenado el turno' );
+		
+	}
+   }	
 
 		
 	

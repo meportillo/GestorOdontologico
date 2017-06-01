@@ -1,7 +1,5 @@
 package com.tip.webrest;
 
-import java.awt.Color;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +13,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.tip.model.ObraSocial;
 import com.tip.model.Turno;
 import com.tip.model.TurnoMock;
 import com.tip.service.TurnoService;
@@ -34,9 +31,9 @@ public class TurnoRest {
 	}
 	
 	@DELETE
-	@Path("/deleteTurno/{id}")
+	@Path("/borrarTurno/{id}")
 	@Produces("application/json")
-	public Response deleteTurno(@PathParam("id") final Integer id) {
+	public Response borrarTurno(@PathParam("id") final Integer id) {
 
 		try {
 			Turno turno = this.getTurnoService().getById(id);
