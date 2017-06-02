@@ -30,7 +30,7 @@ app.service('ObraSocialService', function($http,toaster, $location, $route, Obra
 				$route.reload();
 
 			}, function myError(response) {
-			toaster.pop('error', response.status + ', ' + response.message );
+			toaster.pop('error',  ' Obra social utilzada, no puede ser eliminada '  );
 		});	
 	};
 	

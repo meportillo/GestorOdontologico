@@ -28,7 +28,7 @@ public class ObraSocialRest {
 			ObraSocial os = this.getObraSocialService().getById(id);
 			this.getObraSocialService().delete(os);
 		} catch (Exception e) {
-			return Response.ok(Response.Status.NOT_FOUND).build();
+			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 		return Response.ok(Response.Status.OK).build();
 	}
