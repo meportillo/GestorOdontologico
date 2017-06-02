@@ -7,7 +7,7 @@ app.factory('Paciente', function () {
     this.direccion = direccion;
     this.fechaNac = fechaNac;
     this.ficha = ficha;
-    this.anios = anios;
+    this.anios = 0;
     this.obraSocial = obraSocial;
   }
   
