@@ -183,6 +183,18 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 	$(document).ready(function(){
  		    $('[data-toggle="tooltip"]').tooltip();   
 	}); 	  
+	
+	$scope.titulos = ["Pieza Completa","Pieza Ausente","P. No Erupcionada","Extraccion","Coronas","Protesis Removible","Protesis Fija"];
+
+	$scope.titulo= function(estado){
+		
+		return $scope.titulos[estado];
+		
+		
+	}
+
+
+	
 	$scope.verFicha($routeParams.DNI);
 	
 	

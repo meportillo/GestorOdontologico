@@ -23,6 +23,8 @@ public class EstadoDiente implements Serializable {
 	@Column(name = "descripcion")
 	private Long descripcion;
 
+
+	
 	public Long getIdEstadoDiente() {
 		return idEstadoDiente;
 	}

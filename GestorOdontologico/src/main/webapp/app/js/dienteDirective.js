@@ -70,7 +70,9 @@ app.directive('diente',['$http', function($http) {
 
 				
 			});
-
+			
+			
+			
 		}
 	}
 }]);

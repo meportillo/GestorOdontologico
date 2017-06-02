@@ -226,7 +226,7 @@ function IconSelect($$elementID, element, $$parameters) {
 		_View.selectedIconImgElement.setAttribute('src', '');
 		
 		_View.selectedIconImgElement.setAttribute('data-toggle', 'tooltip');
-		_View.selectedIconImgElement.setAttribute('title', 'diente');
+//		_View.selectedIconImgElement.setAttribute('ng-attr-title', 'diente');
 
 			selectedIconElement.appendChild(_View.selectedIconImgElement);
 
