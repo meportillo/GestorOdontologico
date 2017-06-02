@@ -34,25 +34,30 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 	}
 	
 	this.agregarPaciente= function(pacienteParam){
-	
-		var os = JSON.parse(pacienteParam.obraSocial);
-		pacienteParam.setObraSocial(os);
 		
-		$http({ 
-			method : 'POST',
-			url : '/GestorOdontologico/service/paciente/crearPaciente',
-			headers : { 'Content-Type' : 'application/json'},
-			data : pacienteParam,
-		}).then(function mySucces(response) {
-			toaster.pop('sucess', 'Agregado en forma correcta');
+		if(pacienteParam.obraSocial == null){
+			toaster.pop('error', 'Seleccione una obra social');
+		}
+		else{
+			var os = JSON.parse(pacienteParam.obraSocial);
+			pacienteParam.setObraSocial(os);
+			
+			$http({ 
+				method : 'POST',
+				url : '/GestorOdontologico/service/paciente/crearPaciente',
+				headers : { 'Content-Type' : 'application/json'},
+				data : pacienteParam,
+			}).then(function mySucces(response) {
+				toaster.pop('sucess', 'Agregado en forma correcta');
+				console.log(response);
+				$location.path('/historias/ficha/'+response.data.dni);
+		}, function myError(response) {
 			console.log(response);
-			$location.path('/historias/ficha/'+response.data.dni);
-	}, function myError(response) {
-		console.log(response);
-		toaster.pop('error', response.status + ', Error en uno de los campos ingresados ' + response.message );
-	
-		});
-
+			toaster.pop('error', response.status + ', Error en uno de los campos ingresados ' + response.message );
+		
+			});
+			
+		}
 		
 	}
 	this.obtenerPacienteDni = function(dni){
