@@ -26,7 +26,7 @@ app.config(function($routeProvider) {
 		controllerAs : 'obraSocial'
 
 	}).otherwise({
-		redirectTo : '/'
+		redirectTo : '/turnos'
 	});
 });
 
