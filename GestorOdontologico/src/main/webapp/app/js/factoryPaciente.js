@@ -7,7 +7,7 @@ app.factory('Paciente', function () {
     this.direccion = direccion;
     this.fechaNac = fechaNac;
     this.ficha = ficha;
-    this.anios = 0;
+    this.anios = anios;
     this.obraSocial = obraSocial;
   }
   
@@ -16,7 +16,7 @@ app.factory('Paciente', function () {
 		var hoy = new Date();
 		this.fechaNac = new Date(fechaNac);
 		var diff = hoy - this.fechaNac;
-		this.anios= Math.trunc((diff/(1000*60*60*24))/365);
+		this.anios = Math.trunc((diff/(1000*60*60*24))/365);
   }
   
   Paciente.prototype.setNombre = function(nombre){

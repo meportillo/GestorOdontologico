@@ -1,7 +1,7 @@
 app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteService,$location,Paciente) {
 
-	$scope.paciente = new Paciente("", "", "", "", "", null, 0, null);
- 	$scope.paciente.setAnios(0);
+	$scope.paciente = new Paciente("", "", "", "", new Date(), null, 0, null);
+// 	$scope.paciente.setAnios(0);
  	
 /////////////////////////////////////////////////////////////////////////////////777
  	 $scope.today = function() {
@@ -56,7 +56,7 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 
  	  $scope.formats = ['dd-MM-yyyy', 'dd/MM/yyyy', 'shortDate'];
  	  $scope.format = $scope.formats[0];
- 	  $scope.altInputFormats = ['M!/d!/yyyy'];
+ 	  $scope.altInputFormats = ['M!/d!/yyyy', 'dd-MM-yyyy', 'dd/MM/yyyy', 'shortDate' ];
 
  	  $scope.popup1 = {
  	    opened: false
@@ -98,8 +98,9 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 
  	    return '';
  	  }
-////////////////////////////////////////////////////////////////////////////////7777 	  
+//////////////////////////////////////////////////////////////////////////////// 	  
 	$scope.myDate = new Date();
+	$scope.myDate.setDate($scope.myDate.getDate() - 1);
 	$scope.hoy = new Date();
 
 	$scope.edad = function(){ return Math.trunc((($scope.hoy -  $scope.dt)/(1000*60*60*24))/365)}
@@ -145,9 +146,9 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
 
 		$scope.paciente.fechaNac= $scope.myDate;
 		
- 		if($scope.myDate.getFullYear() <= new Date().getFullYear() 
- 	 		   && $scope.myDate.getMonth() <= new Date().getMonth()
- 	 		   &&$scope.myDate.getDate() > new Date().getDate()
+ 		if($scope.paciente.fechaNac.getFullYear() >= new Date().getFullYear() 
+ 	 		   && $scope.paciente.fechaNac.getMonth() >= new Date().getMonth()
+ 	 		   && $scope.paciente.fechaNac.getDate() > new Date().getDate()
  	 		){
  			
  			
