@@ -23,8 +23,7 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
  	  $scope.dateOptions = {
  	    dateDisabled: disabled,
  	    formatYear: 'yy',
- 	    maxDate: new Date(2020, 5, 22),
- 	    minDate: new Date(),
+ 	    maxDate: new Date(),
  	    startingDay: 1
  	  };
 
@@ -144,22 +143,18 @@ app.controller('agregarPacienteCtrl',function($scope, $http, toaster, PacienteSe
  	
 	$scope.guardarPaciente = function() {
 
-		$scope.paciente.fechaNac= $scope.myDate;
+		$scope.paciente.fechaNac = $scope.myDate;
 		
- 		if($scope.paciente.fechaNac.getFullYear() >= new Date().getFullYear() 
- 	 		   && $scope.paciente.fechaNac.getMonth() >= new Date().getMonth()
- 	 		   && $scope.paciente.fechaNac.getDate() > new Date().getDate()
- 	 		){
- 			
- 			
- 			$scope.myDate = new Date($scope.myDate);
+		var mensajesDeError = $scope.paciente.validar()
+		
+ 		if (mensajesDeError.length > 0) {
  			console.log($scope.myDate);
- 			toaster.pop('error', 'Por favor ingresa una fecha de nacimiento valida' );
- 			
- 		}else{
+ 			mensajesDeError.forEach(function(mensaje) {
+ 				toaster.pop('error', mensaje)	
+ 			})
+ 		} else{
  			JSON.stringify($scope.paciente)
  			PacienteService.agregarPaciente($scope.paciente);
- 			
   		}
 	}
 })
