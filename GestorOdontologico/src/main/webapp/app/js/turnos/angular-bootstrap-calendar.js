@@ -3740,7 +3740,7 @@ angular
         },
         title: {
           day: 'EEEE d MMMM, yyyy',
-          week: 'Week {week} of {year}',
+          week: 'Semana {week} of {year}',
           month: 'MMMM yyyy',
           year: 'yyyy'
         }
@@ -3756,7 +3756,7 @@ angular
         },
         title: {
           day: 'dddd D MMMM, YYYY',
-          week: 'Week {week} of {year}',
+          week: 'Semana {week} of {year}',
           month: 'MMMM YYYY',
           year: 'YYYY'
         }
@@ -3772,7 +3772,7 @@ angular
     showTimesOnWeekView: false,
     displayAllMonthEvents: false,
     i18nStrings: {
-      weekNumber: 'Week {week}'
+      weekNumber: 'Semana {week}'
     },
     templates: {},
     colorTypes: {
@@ -4034,6 +4034,7 @@ angular
           day.events = [];
         }
         cellModifier({calendarCell: day});
+        
         return day;
       });
 
@@ -4055,6 +4056,9 @@ angular
       }).map(function(day) {
         day.date = moment(day.date);
         day.weekDayLabel = formatDate(day.date, calendarConfig.dateFormats.weekDay);
+        console.log("///////////////////////");
+        console.log(day.date)
+        console.log("///////////////////////");
         day.dayLabel = formatDate(day.date, calendarConfig.dateFormats.day);
         return day;
       });
