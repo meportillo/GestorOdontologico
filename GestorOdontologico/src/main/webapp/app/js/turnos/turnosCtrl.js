@@ -1,16 +1,47 @@
 angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad']);
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad',
-	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad) {
+  .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad', 'PacienteService',
+	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService) {
 
-    var vm = this;
+	    var vm = this;
+	  
+	    vm.showModalPaciente = false;
+		vm.pacienteSeleccionado = null;	    
+		vm.verSeleccionado = false;
+		vm.cancel = function(){
+	    	vm.showModalPaciente = false;
+	    }
+	    
+		vm.buscarPorNombre=function(){
+			vm.verSeleccionado = false;
+
+			if(vm.nombreBsqd==null){
+				
+				toaster.pop('error', "Por favor, ingrese un nombre a buscar");
+				return;
+			}
+			else{
+					PacienteService.obtenerPacientesPorAlgunDato(vm.nombreBsqd)
+					.then(function (pacientes) {
+						vm.pacientesTurnos = pacientes;
+			            console.log(pacientes);
+			        });
+					vm.showModalPaciente = true;
+			}
+		}
+
+		vm.seleccionarPaciente = function(paciente){
+			vm.cancel();
+			vm.pacienteSeleccionado = paciente;
+			vm.verSeleccionado = true;
+
+		}
+	  
 
     //These variables MUST be set as a minimum for the calendar to work
     vm.calendarView = 'month';
     vm.viewDate = new Date();
-    
-
 
     var actions = [{
       label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
