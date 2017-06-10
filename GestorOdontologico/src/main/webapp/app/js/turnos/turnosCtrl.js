@@ -98,7 +98,7 @@ angular
       vm.events.push({
         title: 'Observaci&oacute;n',
         startsAt: moment().startOf('day').toDate(),
-        endsAt: moment().endOf('day').toDate(),
+        endsAt: moment().startOf('day').add(30, 'm').toDate(),
         color: calendarConfig.colorTypes.important,
         draggable: true,
         resizable: true,
