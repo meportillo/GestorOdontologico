@@ -29,7 +29,7 @@
           date="vm.viewDate"
           decrement="vm.calendarView"
           ng-click="vm.cellIsOpen = false">
-          Previous
+          Anterior
         </button>
         <button
           class="btn btn-default"
@@ -37,7 +37,7 @@
           date="vm.viewDate"
           set-to-today
           ng-click="vm.cellIsOpen = false">
-          Today
+          Hoy
         </button>
         <button
           class="btn btn-primary"
@@ -45,7 +45,7 @@
           date="vm.viewDate"
           increment="vm.calendarView"
           ng-click="vm.cellIsOpen = false">
-          Next
+          Proximo
         </button>
       </div>
     </div>
@@ -54,10 +54,10 @@
 
     <div class="col-md-6 text-center">
       <div class="btn-group">
-        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'" ng-click="vm.cellIsOpen = false">Year</label>
-        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'" ng-click="vm.cellIsOpen = false">Month</label>
-        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'" ng-click="vm.cellIsOpen = false">Week</label>
-        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'" ng-click="vm.cellIsOpen = false">Day</label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'" ng-click="vm.cellIsOpen = false">Año</label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'" ng-click="vm.cellIsOpen = false">Mes</label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'" ng-click="vm.cellIsOpen = false">Semana</label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'" ng-click="vm.cellIsOpen = false">Dia</label>
       </div>
     </div>
 
@@ -82,11 +82,11 @@
   <br><br><br>
 
   <h3 id="event-editor">
-    Edit events
+    Editar Turnos
     <button
       class="btn btn-primary pull-right"
       ng-click="vm.addEvent()">
-      Add new
+      Agregar Nuevo Turno
     </button>
     
     <!--
@@ -105,15 +105,15 @@
 
     <thead>
       <tr>
-        <th>Title</th>
+        <th>Observaci&oacute;n</th>
         <!--
         <th>dni</th>
         <th>Primary color</th>
         <th>Secondary color</th>
         -->
-        <th>Starts at</th>
-        <th>Ends at</th>
-        <th>Remove</th>
+        <th>Hora de Inicio</th>
+        <th>Hora de Fin</th>
+        <th>Eliminar</th>
         <th>Guardar</th>
       </tr>
     </thead>
@@ -203,7 +203,7 @@
             class="btn btn-danger"
             
             ng-click="vm.eliminarTurnos($index, 1)">
-            Delete
+            Borrar
           </button>
         </td>
         <td>

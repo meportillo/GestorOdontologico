@@ -22,13 +22,13 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 		 return deferred.promise;
 	 }
 	
-	this.guardarTurno=function(title, startsAt, endsAt){
+	this.guardarTurno=function(title, startsAt, endsAt, paciente){
 		
 			$http({
 				method : 'POST',
 				url : "/GestorOdontologico/service/turno/crearTurno/"+ title + "/"  +startsAt + "/" + endsAt ,
 				headers : { 'Content-Type' : 'application/json'},
-				data : title,
+				data : paciente
 			}).then(function mySucces(response) {
 				toaster.pop('sucess', 'Agregado en forma correcta');
 				console.log(response);

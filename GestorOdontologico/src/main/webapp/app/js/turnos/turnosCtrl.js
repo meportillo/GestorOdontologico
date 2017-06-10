@@ -82,7 +82,7 @@ angular
       var dni = vm.events[index].dni;
       var color = vm.events[index].color;
   	     
-      TurnoService.guardarTurno(title, startsAt, endsAt);
+      TurnoService.guardarTurno(title, startsAt, endsAt, vm.pacienteSeleccionado);
       
       }else{
     	  toaster.pop('sucess', 'UPDATEAR');
@@ -96,7 +96,7 @@ angular
     vm.addEvent = function() {
     	
       vm.events.push({
-        title: 'New event',
+        title: 'Observaci&oacute;n',
         startsAt: moment().startOf('day').toDate(),
         endsAt: moment().endOf('day').toDate(),
         color: calendarConfig.colorTypes.important,

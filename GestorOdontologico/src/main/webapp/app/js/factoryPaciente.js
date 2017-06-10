@@ -32,11 +32,11 @@ app.factory('Paciente', function () {
  * Paciente.prototype.setFicha = function(ficha){ this.ficha = ficha; }
  * 
  * Paciente.prototype.setAnios = function(anios){ this.anios = anios; }
- * 
- * Paciente.prototype.setObraSocial = function(obraSocial){ this.obraSocial =
- * obraSocial; }
- * 
- * Paciente.prototype.setNombre = function(nombre){ this.nombre = nombre; }
+ */
+  Paciente.prototype.setObraSocial = function(obraSocial){ this.obraSocial =
+  obraSocial; }
+  
+ /* Paciente.prototype.setNombre = function(nombre){ this.nombre = nombre; }
  * 
  * Paciente.prototype.setApellido = function(apellido){ this.apellido =
  * apellido; }

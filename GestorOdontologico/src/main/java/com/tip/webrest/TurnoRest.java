@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.tip.model.Paciente;
 import com.tip.model.Turno;
 import com.tip.model.TurnoMock;
 import com.tip.service.TurnoService;
@@ -48,11 +49,11 @@ public class TurnoRest {
 	@Path("/crearTurno/{title}/{startsAt}/{endsAt}")
 	@Produces("application/json")	
 	public Response crearTurno(@PathParam("title") final String title, @PathParam("startsAt") final Date startsAt,
-			@PathParam("endsAt") final Date endsAt){
+			@PathParam("endsAt") final Date endsAt, Paciente paciente){
 		try {
 			
 		Turno turno = new Turno();
-//		turno.setDniPaciente(dni);
+		turno.setDniPaciente(paciente);
 		turno.setFechaTurno(startsAt);
 		turno.setHoraInicio(startsAt);
 		turno.setHoraFin(endsAt);
