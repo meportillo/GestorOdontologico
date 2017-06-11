@@ -1,8 +1,10 @@
-angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad']);
+angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad', 'gestorOdont']);
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
   .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad', 'PacienteService',
 	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService) {
+	  
+	  moment.defineLocale('moment', {parentLocale:'angular-bootstrap-calendar.js'})
 
 	    var vm = this;
 	  
@@ -96,7 +98,7 @@ angular
     vm.addEvent = function() {
     	
       vm.events.push({
-        title: 'Observaci&oacute;n',
+        title: 'Observacion',
         startsAt: moment().startOf('day').toDate(),
         endsAt: moment().startOf('day').add(30, 'm').toDate(),
         color: calendarConfig.colorTypes.important,
@@ -133,31 +135,55 @@ angular
     };
 
     vm.timespanClicked = function(date, cell) {
-      console.log('FFFFF');
 
-   /*   if(vm.calendarView === 'day') {
-        console.log('day');
-        vm.events = [];        
-      }
-else{*/
+    	console.log(date);
+    	console.log(cell);
+    	
       if (vm.calendarView === 'month') {
-        console.log('month');
         if ((vm.cellIsOpen && moment(date).startOf('day').isSame(moment(vm.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
+        	console.log('vista month if sin turnos');
+        	
+//        	vm.eventsCopy  = [];
+//        	console.log(vm.eventsCopy.length);
+        	
           vm.cellIsOpen = false;
-
         } else {
+          console.log('vista month else con turnos' );
+          
+          console.log(vm.calendarView);
+          console.log('vista month else con turnos' );          
+
+//          TurnoService.turnosDelMes(date)
+//          .then(function (turnos) {
+//        		vm.eventsCopy = turnos;
+//          });
+        	
           vm.cellIsOpen = true;
           vm.viewDate = date;
         }
       } else if (vm.calendarView === 'year') {
         console.log('year');
         if ((vm.cellIsOpen && moment(date).startOf('month').isSame(moment(vm.viewDate).startOf('month'))) || cell.events.length === 0) {
+            console.log('vista year if sin turnos');
+            
+//            vm.eventsCopy  = [];
+//            console.log(vm.eventsCopy.length);
+            
           vm.cellIsOpen = false;
         } else {
+          console.log('vista year else con turnos');
+            
+//      	TurnoService.turnosDelAnio(date)
+//    	.then(function (turnos) {
+//    		vm.eventsCopy = turnos;
+//    	});
+          
           vm.cellIsOpen = true;
           vm.viewDate = date;
+          
         }
       }
+      
 
       //}
 
@@ -186,9 +212,10 @@ else{*/
     
     
 //    TABLE DE DATOS - TUrNOS
-	TurnoService.obtenerTodosLosTurnos()
+	TurnoService.obtenerTodosLosTurnos(vm)
 	.then(function (turnos) {
 		vm.events  = turnos;
+		vm.eventsTable = turnos;
 	});
 
 	

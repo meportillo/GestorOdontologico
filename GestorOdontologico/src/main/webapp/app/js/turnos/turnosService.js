@@ -1,8 +1,25 @@
 app.service('TurnoService', function($http,toaster,$q ,$route) {
 
 	console.log("TurnoService");
+	
+	var scopeTurnos = '';
+	
+	this.turnosDelMes = function(date){
+		console.log(date);
+	}
+	
+	this.turnosDelAnio = function(date){
+		console.log(date);
+	}
+	this.turnosDeLaSemana=function(inicioSemana , FinSemana){
+		scopeTurnos.events = [];
+		
+	}
+	
 
-	this.obtenerTodosLosTurnos = function(){
+	this.obtenerTodosLosTurnos = function(vm){
+		scopeTurnos = vm;
+		
 		var deferred = $q.defer();
 		$http({
 			method : 'GET',

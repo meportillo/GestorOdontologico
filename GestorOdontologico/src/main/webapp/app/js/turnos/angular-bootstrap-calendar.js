@@ -733,7 +733,15 @@ function getWeekView(_a) {
     return eventRows;
 }
 function getMonthView(_a) {
-    var _b = _a.events, events = _b === void 0 ? [] : _b, viewDate = _a.viewDate, weekStartsOn = _a.weekStartsOn, _c = _a.excluded, excluded = _c === void 0 ? [] : _c, _d = _a.viewStart, viewStart = _d === void 0 ? __WEBPACK_IMPORTED_MODULE_10_date_fns_start_of_month___default()(viewDate) : _d, _e = _a.viewEnd, viewEnd = _e === void 0 ? __WEBPACK_IMPORTED_MODULE_11_date_fns_end_of_month___default()(viewDate) : _e;
+	
+//	console.log("3333333333333333");
+//	console.log(_a);
+//	console.log("3333333333333333");
+	
+//	_a.eventsCopy = [];
+
+    var _b =   _a.events, events = _b === void 0 ? [] : _b, viewDate = _a.viewDate, weekStartsOn = _a.weekStartsOn, _c = _a.excluded, excluded = _c === void 0 ? [] : _c, _d = _a.viewStart, viewStart = _d === void 0 ? __WEBPACK_IMPORTED_MODULE_10_date_fns_start_of_month___default()(viewDate) : _d, _e = _a.viewEnd, viewEnd = _e === void 0 ? __WEBPACK_IMPORTED_MODULE_11_date_fns_end_of_month___default()(viewDate) : _e;
+    
     if (!events) {
         events = [];
     }
@@ -2043,6 +2051,7 @@ angular
       }
 
       vm.events = vm.events || [];
+      
 
       var previousDate = moment(vm.viewDate);
       var previousView = vm.view;
@@ -2504,10 +2513,14 @@ angular
     }
 
     $scope.$on('calendar.refreshView', function() {
+    	
+
 
       vm.weekDays = calendarHelper.getWeekDayNames();
 
       var monthView = calendarHelper.getMonthView(vm.events, vm.viewDate, vm.cellModifier);
+      
+      
       vm.view = monthView.days;
       vm.monthOffsets = monthView.rowOffsets;
 
@@ -3863,14 +3876,16 @@ angular
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+''
 
 var angular = __webpack_require__(0);
 var calendarUtils = __webpack_require__(4);
 
+
+
 angular
   .module('mwl.calendar')
-  .factory('calendarHelper', ["$q", "$templateRequest", "dateFilter", "moment", "calendarConfig", function($q, $templateRequest, dateFilter, moment, calendarConfig) {
+  .factory('calendarHelper', ["$q", "$templateRequest", "dateFilter", "moment", "calendarConfig", "TurnoService", function($q, $templateRequest, dateFilter, moment, calendarConfig, TurnoService) {
 
     function formatDate(date, format) {
       if (calendarConfig.dateFormatter === 'angular') {
@@ -3965,9 +3980,9 @@ angular
       while (count < 7) {
         weekdays.push(formatDate(moment().weekday(count++), calendarConfig.dateFormats.weekDay));
       }
-      console.log("----------------------------- aaaaaaaaaaaaaaa -------------------");
-      console.log(weekdays);
-      console.log("----------------------------- aaaaaaaaaaaaaaa -------------------");
+//      console.log("----------------------------- aaaaaaaaaaaaaaa -------------------");
+//      console.log(weekdays);
+//      console.log("----------------------------- aaaaaaaaaaaaaaa -------------------");
       weekdays = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
       return weekdays;
 
@@ -4050,15 +4065,17 @@ angular
 
     function getWeekView(events, viewDate) {
 
+// TEST--    	
+    	
       var days = calendarUtils.getWeekViewHeader({
         viewDate: viewDate,
         weekStartsOn: moment().startOf('week').day()
       }).map(function(day) {
         day.date = moment(day.date);
         day.weekDayLabel = formatDate(day.date, calendarConfig.dateFormats.weekDay);
-        console.log("///////////////////////");
-        console.log(day.date)
-        console.log("///////////////////////");
+//        console.log("///////////////////////");
+//        console.log(day.date)
+//        console.log("///////////////////////");
         day.dayLabel = formatDate(day.date, calendarConfig.dateFormats.day);
         return day;
       });
@@ -4066,6 +4083,8 @@ angular
       var startOfWeek = moment(viewDate).startOf('week');
       var endOfWeek = moment(viewDate).endOf('week');
 
+      TurnoService.turnosDeLaSemana(startOfWeek, endOfWeek, events);
+      
       var eventRows = calendarUtils.getWeekView({
         viewDate: viewDate,
         weekStartsOn: moment().startOf('week').day(),
@@ -4099,12 +4118,16 @@ angular
         return eventRow;
 
       });
+      
+      TurnoService.turnosDeLaSemana(startOfWeek, endOfWeek);
 
       return {days: days, eventRows: eventRows};
 
     }
 
     function getDayView(events, viewDate, dayViewStart, dayViewEnd, dayViewSplit, dayViewEventWidth) {
+    	
+    
 
       var dayStart = (dayViewStart || '00:00').split(':');
       var dayEnd = (dayViewEnd || '23:59').split(':');
