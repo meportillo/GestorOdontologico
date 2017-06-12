@@ -191,7 +191,20 @@ else{*/
 		vm.events  = turnos;
 	});
 
+	vm.nombre = "";
+	vm.apellido = "";
+	vm.dni = null;
 	
+	vm.agregarPacienteSimple = function(){
+		PacienteService.agregarPacienteSimple(vm.dni,vm.nombre, vm.apellido)
+		.then(function (paciente) {
+
+			vm.pacienteSeleccionado = paciente;
+			vm.verSeleccionado = true;
+
+			
+		});
+	}
 	
 	
     

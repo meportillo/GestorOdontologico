@@ -60,6 +60,29 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 		}
 		
 	}
+	
+	this.agregarPacienteSimple= function(dni, nombre , apellido){
+	
+		var deferred = $q.defer();
+
+			$http({ 
+				method : 'POST',
+				url : '/GestorOdontologico/service/paciente/crearPacienteSimple/'+ dni+'/' + nombre +'/' + apellido +'/',
+				headers : { 'Content-Type' : 'application/json'},
+			}).then(function mySucces(response) {
+				toaster.pop('sucess', 'Agregado en forma correcta');
+				 deferred.resolve(response.data);
+
+		}, function myError(response) {
+			console.log(response);
+			toaster.pop('error', response.status + ', Error en uno de los campos ingresados ' + response.message );
+		
+			});
+			
+		 return deferred.promise;
+
+	}
+	
 	this.obtenerPacienteDni = function(dni){
 		var deferred = $q.defer();
 		$http({

@@ -193,6 +193,31 @@ public class PacienteRest {
 		}
 	}	
 	
+	@POST
+	@Path("/crearPacienteSimple/{dni}/{nombre}/{apellido}")
+	@Produces("application/json")
+	public Response crearPacienteSimple(@PathParam("dni") final Integer dni,@PathParam("nombre") final String nombre,@PathParam("apellido") final String apellido ) {
+
+		try {
+			Paciente paciente = new Paciente();
+			paciente.setApellido(apellido);
+			paciente.setNombre(nombre);
+			paciente.setDni(dni);
+			
+			this.getPacienteService().save(paciente);
+			paciente.getFicha().setIdPaciente(new Long(dni));
+			paciente.getFicha().getOdontograma().setIdFicha(paciente.getFicha().getIdFicha());
+			paciente.getFicha().getOdontograma().actualizarcuadrantes();
+			this.getPacienteService().update(paciente);
+			
+			return Response.ok(paciente).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+
+	}
+
+
 
 
 }

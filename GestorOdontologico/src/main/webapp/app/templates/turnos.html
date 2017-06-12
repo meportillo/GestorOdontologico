@@ -1,5 +1,10 @@
     <div ng-controller="KitchenSinkCtrl as vm">
 
+	<div>
+		 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Agregar Paciente</button>
+		 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#bsqP">Buscar Paciente</button>
+	</div>
+	  <div id="bsqP" class="collapse">
 
 	<form name="bsqPaciente"  ui-keypress="{13:'vm.buscarPorNombre()'}" novalidate>
 		<div class="form-group">
@@ -9,12 +14,30 @@
 				<button class="btn btn-primary" ng-click="vm.buscarPorNombre()"  ng-disabled="vm.nombreBsqd == null || vm.nombreBsqd == ''" ui-keypress="{13:'vm.buscarPorNombre()'}">Buscar</button>
 		</div>
    </form>
+	</div>
+	  <div id="demo" class="collapse">
+		<form name="addPacienteSimple"  ui-keypress="{13:'vm.agregarPacienteSimple()'}" novalidate>
+			
+			<div class="col-md-12" >
+					<div class="col-md-3"> Nombre: <input type="text" class="form-control"    height="5px" ng-model="vm.nombre" required></div>
+					<div class="col-md-3"> Apellido <input type="text" class="form-control"    height="5px" ng-model="vm.apellido" required></div>
+					<div class="col-md-3"> Dni: <input type="text" class="form-control"     height="5px" ng-model="vm.dni" required></div>
+							<div class="col-md-3" >
+			<br>
+			<button class="btn btn-primary" ng-click="vm.agregarPacienteSimple()"  ng-disabled="" >Agregar</button>
+			</div>
+					
+			</div>		
+	   </form>
+	</div>
 	
-
+			<hr>
+			<hr>
 			<div ng-show="vm.verSeleccionado" class="alert alert-info" role="alert">
 				<label>NOMBRE:{{vm.pacienteSeleccionado.nombre}}  {{vm.pacienteSeleccionado.apellido}}, DNI: {{vm.pacienteSeleccionado.dni}} </label>
 			</div>
-
+			<hr>
+			<hr>
 
   <h2 class="text-center">{{ vm.calendarTitle }}</h2>
 
