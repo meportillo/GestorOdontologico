@@ -60,8 +60,11 @@ angular
     vm.eliminarTurnos = function(index, n) {
 //    	console.log(vm.events[index].idTurno);
     	
-    	
-    	TurnoService.eliminarTurno(vm.events[index].idTurno);
+    	if(!angular.equals(0, vm.eventsTable[index].idTurno)){
+    		TurnoService.eliminarTurno(vm.events[index].idTurno);
+    	}else{
+    		vm.eventsTable.splice(index, n);
+    	}
 //    	vm.events.splice(index, n);
     }
     
@@ -97,7 +100,7 @@ angular
 //pasar dia por parametro
     vm.addEvent = function() {
     	
-      vm.events.push({
+      vm.eventsTable.push({
         title: 'Observacion',
         startsAt: moment().startOf('day').toDate(),
         endsAt: moment().startOf('day').add(30, 'm').toDate(),
@@ -107,7 +110,7 @@ angular
         idTurno: 0
       });
       
-      console.log(calendarConfig.colorTypes.important);
+//      console.log(calendarConfig.colorTypes.important);
     }
 /*
     vm.eventClicked = function(event) {
