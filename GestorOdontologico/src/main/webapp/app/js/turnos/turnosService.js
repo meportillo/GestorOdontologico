@@ -59,8 +59,6 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 	
 	this.eliminarTurno=function(idTurno){
 		
-	if(!angular.equals(0, idTurno)){
-		
 		$http({ 
 			method : 'DELETE',
 			url : '/GestorOdontologico/service/turno/borrarTurno/'+ idTurno,
@@ -74,10 +72,6 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 			}, function myError(response) {
 			toaster.pop('error', response.status + ', ' + response.message );
 		});	
-	}else{
-		toaster.pop('error', 'Aun no esta almacenado el turno' );
-		
-	}
    }	
 
 		
