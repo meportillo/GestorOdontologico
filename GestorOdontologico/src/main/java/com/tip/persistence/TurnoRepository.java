@@ -1,5 +1,10 @@
 package com.tip.persistence;
 
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import java.util.Date;
 import com.tip.model.Turno;
 
 public class TurnoRepository extends HibernateGenericDAO<Turno> implements GenericRepository<Turno> {
@@ -9,6 +14,24 @@ public class TurnoRepository extends HibernateGenericDAO<Turno> implements Gener
 	@Override
 	protected Class getDomainClass() {
 		return Turno.class;
+	}
+	
+	public List<Turno> turnosDelMes(Date startsAt, Date endsAt){
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = "FROM Turno t WHERE t.horaInicio >= :startsAt and t.horaFin <= :endsAt ";
+		Query query = session.createQuery(hql);
+		query.setParameter("startsAt", startsAt);
+		query.setParameter("endsAt", endsAt);
+		return query.list();
+	}
+	
+	public List<Turno> turnosDeLaSemana(Date startsAt, Date endsAt){
+		Session session = this.getSessionFactory().getCurrentSession();
+		String hql = "FROM Turno t WHERE t.horaInicio >= :startsAt and t.horaFin <= :endsAt ";
+		Query query = session.createQuery(hql);
+		query.setParameter("startsAt", startsAt);
+		query.setParameter("endsAt", endsAt);
+		return query.list();
 	}
 
 }

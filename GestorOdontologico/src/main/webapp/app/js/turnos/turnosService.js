@@ -11,8 +11,39 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 	this.turnosDelAnio = function(date){
 		console.log(date);
 	}
+	
+	this.turnosDelMes = function( inicioSemana , asd){
+		console.log(inicioSemana);
+		console.log(asd);
+		
+		
+	}
+	
+	
 	this.turnosDeLaSemana=function(inicioSemana , FinSemana){
-		scopeTurnos.events = [];
+		
+		$http({
+			method : 'GET',
+			url : "/GestorOdontologico/service/turno/turnosDeLaSemana/" + inicioSemana + "/" + FinSemana ,
+			headers : {
+				'Content-Type' : 'application/json',
+			}
+		}).then(function mySucces(response) {
+			scopeTurnos.eventsTable = response.data;
+			var turno = scopeTurnos.eventsTable[0]; 
+			
+			   angular.forEach(scopeTurnos.events, function(value, key){
+				      if(value.idTurno == 0)
+				         value = turno;
+				   });
+//			scopeTurnos.events = response.data;
+			
+//			 deferred.resolve(response.data);
+		}, function myError(response) {
+			
+			toaster.pop('error', response.status + ', ' + response.message );
+			console.log(response);
+		});
 		
 	}
 	

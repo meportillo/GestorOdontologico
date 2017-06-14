@@ -3938,7 +3938,7 @@ angular
       return {start: eventStart, end: eventEnd};
 
     }
-
+// FILTER
     function eventIsInPeriod(event, periodStart, periodEnd) {
 
       periodStart = moment(periodStart);
@@ -3961,6 +3961,7 @@ angular
         return eventIsInPeriod(event, startPeriod, endPeriod);
       });
     }
+ // FILTER
 
     function getEventsInPeriod(calendarDate, period, allEvents) {
       var startPeriod = moment(calendarDate).startOf(period);
@@ -4021,10 +4022,15 @@ angular
       if (event.endsAt) {
         event.end = eventPeriod.end.toDate();
       }
+      
+      TurnoService.turnosDelMes(eventPeriod.start.toDate(), eventPeriod.end.toDate());
+      
       return event;
     }
 
     function getMonthView(events, viewDate, cellModifier) {
+    	
+    	console.log('AAAAA');
 
       // hack required to work with the calendar-utils api
       events.forEach(function(event) {
@@ -4058,6 +4064,8 @@ angular
         delete event.start;
         delete event.end;
       });
+      
+      TurnoService.turnosDelMes(view)
 
       return view;
 
@@ -4066,6 +4074,7 @@ angular
     function getWeekView(events, viewDate) {
 
 // TEST--    	
+//    	TurnoService.turnosDeLaSemana(startOfWeek, endOfWeek);
     	
       var days = calendarUtils.getWeekViewHeader({
         viewDate: viewDate,
@@ -4083,7 +4092,7 @@ angular
       var startOfWeek = moment(viewDate).startOf('week');
       var endOfWeek = moment(viewDate).endOf('week');
 
-      TurnoService.turnosDeLaSemana(startOfWeek, endOfWeek, events);
+      TurnoService.turnosDeLaSemana(moment(viewDate).startOf('week').toDate(), moment(viewDate).endOf('week').toDate());
       
       var eventRows = calendarUtils.getWeekView({
         viewDate: viewDate,
@@ -4119,7 +4128,7 @@ angular
 
       });
       
-      TurnoService.turnosDeLaSemana(startOfWeek, endOfWeek);
+//      TurnoService.turnosDeLaSemana(startOfWeek, endOfWeek);
 
       return {days: days, eventRows: eventRows};
 

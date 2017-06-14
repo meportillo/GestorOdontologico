@@ -73,6 +73,28 @@ public class TurnoRest {
 	}
 
 	@GET
+	@Path("/turnosDeLaSemana/{startsAt}/{endsAt}")
+	@Produces("application/json")
+	public Response turnosDeLaSemana(@PathParam("startsAt") final Date startsAt, @PathParam("endsAt") final Date endsAt){
+//		System.out.println(startsAt);
+//		System.out.println(endsAt);
+		List<Turno> ret = null;
+		List<TurnoMock> retMocks = new ArrayList<TurnoMock>();
+		try {
+			ret = this.getTurnoService().turnosDeLaSemana(startsAt, endsAt);
+			for (Turno turno : ret) {
+				retMocks.add(turno.toTurnoMock());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.NOT_FOUND).build();
+		}
+
+		return Response.ok(retMocks).build();
+	}
+	
+	
+	@GET
 	@Path("/obtenerTodosLosTurnos")
 	@Produces("application/json")
 	public Response todosLosTurnos() {
