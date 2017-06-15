@@ -1,4 +1,4 @@
-app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteService,toaster) {
+app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteService,toaster, $location) {
 
 	$scope.showModal = false;
 	$scope.dni = $routeParams.dni;
@@ -76,6 +76,7 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 	$scope.cancel = function() {
 		$scope.showModal = false;
 		$scope.paciente = {};
+		$location.path('/historias');
 	};
 	
 	/////////////////////////////////////datepicker//////////////////////////////////////////////////
@@ -188,10 +189,6 @@ app.controller('fichaCtrl', function($scope,$http , $routeParams, PacienteServic
 	 			
 	 			$scope.paciente.setFechaNac($scope.dt);		
 	 		}
-
-	$(document).ready(function(){
- 		    $('[data-toggle="tooltip"]').tooltip();   
-	}); 	  
 		
 	$scope.verFicha($routeParams.DNI);
 	

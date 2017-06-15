@@ -250,9 +250,13 @@
 					<div class="panel-body ">
 					<ul class="list-group" ng-repeat="paciente in vm.pacientesTurnos">
 						<li class="list-group-item">
-						 <div>
+						 <div class="col-md-10">
+						 <div class="col-md-8">
 						 <label>NOMBRE:{{paciente.nombre}}  {{paciente.apellido}}, DNI: {{paciente.dni}} </label> 
+						 </div>
+						 <div class="col-md-2">
 						 <button class="btn btn-primary" ng-click="vm.seleccionarPaciente(paciente)">Seleccionar</button>
+						 </div>
 						</div>
 						</li>
 					</ul>

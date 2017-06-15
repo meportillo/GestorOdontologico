@@ -140,7 +140,6 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 		headers : { 'Content-Type' : 'application/json'},
 		}).then(function mySucces(response) {
 			 deferred.resolve(response.data);
-			 console.log(response);
 		}, function myError(response) {
 		toaster.pop('error', response.status + ', ' + response.message );
 		});

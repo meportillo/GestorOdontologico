@@ -24,6 +24,7 @@ IconSelect.DEFAULT.VECTORAL_ICON_NUMBER = 3;
 
 IconSelect.COMPONENT_ICON_FILE_PATH = "images/control/icon-select/arrow.png";
 
+
 function IconSelect($$elementID, element, $$parameters) {
 
 	// console.log("id ---" + $$elementID);
@@ -71,6 +72,15 @@ function IconSelect($$elementID, element, $$parameters) {
 		}
 
 	}
+	
+	var titulos = ["Pieza Completa","Pieza Ausente","P. No Erupcionada","Extraccion","Coronas","Protesis Removible","Protesis Fija"];
+
+	this.titulo = function(estado){
+		
+		return titulos[estado];
+	}
+
+
 
 	// Tüm iconları yeniden yükle.
 	this.refresh = function($icons, ind) {
@@ -108,6 +118,13 @@ function IconSelect($$elementID, element, $$parameters) {
 	this.setSelectedIndex = function($index) {
 
 		var icon;
+		var titulos = ["Pieza Completa","Pieza Ausente","P. No Erupcionada","Extraccion","Coronas","Protesis Removible","Protesis Fija"];
+
+		var titulo = function(estado){
+			
+			return titulos[estado];
+		}
+
 
 		if (_icons.length > $index)
 			icon = _icons[$index];
@@ -117,7 +134,10 @@ function IconSelect($$elementID, element, $$parameters) {
 			if (_selectedIndex != -1)
 				_icons[_selectedIndex].element.setAttribute('class', 'icon');
 			_selectedIndex = $index;
+			
 			_View.selectedIconImgElement.setAttribute('src', icon.iconFilePath);
+			//CAMBIAR
+			_View.selectedIconImgElement.setAttribute("ng-attr-title",titulo($index));
 			if (_selectedIndex != -1)
 				_icons[_selectedIndex].element.setAttribute('class',
 						'icon selected dropdown-toggle');
@@ -225,7 +245,7 @@ function IconSelect($$elementID, element, $$parameters) {
 		_View.selectedIconImgElement = document.createElement('img');
 		_View.selectedIconImgElement.setAttribute('src', '');
 		
-		_View.selectedIconImgElement.setAttribute('data-toggle', 'tooltip');
+//		_View.selectedIconImgElement.setAttribute('data-toggle', 'tooltip');
 //		_View.selectedIconImgElement.setAttribute('ng-attr-title', 'diente');
 
 			selectedIconElement.appendChild(_View.selectedIconImgElement);

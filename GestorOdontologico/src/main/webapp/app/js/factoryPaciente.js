@@ -44,11 +44,12 @@ app.factory('Paciente', function () {
  * Paciente.prototype.setDni = function(dni){ this.dni = dni; }
  * Paciente.prototype.setApellido = function(apellido){ this.apellido =
  * apellido; }
- * 
- * Paciente.prototype.setFicha = function(ficha){ this.ficha = ficha; }
- * 
- * Paciente.prototype.setFicha = function(ficha){ this.ficha = ficha; }
- * 
+ */
+  
+  Paciente.prototype.getFicha = function(){ return this.ficha; }
+  
+  Paciente.prototype.setFicha = function(ficha){ this.ficha = ficha; }
+  /* 
  * Paciente.prototype.setAnios = function(anios){ this.anios = anios; }
  * 
  * Paciente.prototype.setObraSocial = function(obraSocial){ this.obraSocial =

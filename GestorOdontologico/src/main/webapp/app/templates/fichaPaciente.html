@@ -87,8 +87,8 @@
 
 				<div ng-repeat="cuadrante in paciente.ficha.odontograma.cuadrantes">
 					<div class="col-lg-6 ">
-						<div ng-repeat="diente in cuadrante.dientes">
-							<div diente  estado="diente.idEstadoDiente" ng-attr-title="{{titulo(diente.idEstadoDiente)}}" iddiente="diente.iddiente">
+						<div ng-repeat="diente in cuadrante.dientes"  ng-attr-title="{{titulo(diente.idEstadoDiente)}}">
+							<div diente  estado="diente.idEstadoDiente" iddiente="diente.iddiente">
 								{{diente.posicionCuadrante}}</div>
 						</div>
 					</div>
