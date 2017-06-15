@@ -131,4 +131,20 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 		
 		 return deferred.promise;
 		 }
+	
+	this.getTopPaciente = function(){
+		var deferred = $q.defer();
+	$http({ 
+		method : 'GET',
+		url : '/GestorOdontologico/service/paciente/getTopPacientes',
+		headers : { 'Content-Type' : 'application/json'},
+		}).then(function mySucces(response) {
+			 deferred.resolve(response.data);
+			 console.log(response);
+		}, function myError(response) {
+		toaster.pop('error', response.status + ', ' + response.message );
+		});
+	 return deferred.promise;
+	}
+	
 });
