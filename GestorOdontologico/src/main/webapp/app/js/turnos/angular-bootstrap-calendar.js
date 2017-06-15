@@ -4012,6 +4012,8 @@ angular
         month.add(1, 'month');
         count++;
       }
+      
+      TurnoService.turnosDeLaSemana(moment(viewDate).startOf('year').toDate(), moment(viewDate).endOf('year').toDate());
 
       return view;
 
