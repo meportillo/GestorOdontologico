@@ -93,6 +93,18 @@ public class TurnoRest {
 		return Response.ok(retMocks).build();
 	}
 	
+	@GET
+	@Path("/turnosDelMes/{mes}")
+	@Produces("application/json")
+	public Response turnosDelMes(@PathParam("mes") final Date mes){
+//		System.out.println(startsAt);
+//		System.out.println(endsAt);
+		System.out.println(mes.getMonth());
+
+		return Response.ok(Status.NOT_FOUND).build();
+	}
+	
+	
 	
 	@GET
 	@Path("/obtenerTodosLosTurnos")

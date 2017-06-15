@@ -4023,7 +4023,7 @@ angular
         event.end = eventPeriod.end.toDate();
       }
       
-      TurnoService.turnosDelMes(eventPeriod.start.toDate(), eventPeriod.end.toDate());
+//      TurnoService.turnosDelMes(eventPeriod.start.toDate(), eventPeriod.end.toDate());
       
       return event;
     }
@@ -4065,7 +4065,7 @@ angular
         delete event.end;
       });
       
-      TurnoService.turnosDelMes(view)
+      TurnoService.turnosDeLaSemana(moment(viewDate).startOf('month').toDate(), moment(viewDate).endOf('month').toDate());
 
       return view;
 
@@ -4073,8 +4073,6 @@ angular
 
     function getWeekView(events, viewDate) {
 
-// TEST--    	
-//    	TurnoService.turnosDeLaSemana(startOfWeek, endOfWeek);
     	
       var days = calendarUtils.getWeekViewHeader({
         viewDate: viewDate,
@@ -4082,9 +4080,6 @@ angular
       }).map(function(day) {
         day.date = moment(day.date);
         day.weekDayLabel = formatDate(day.date, calendarConfig.dateFormats.weekDay);
-//        console.log("///////////////////////");
-//        console.log(day.date)
-//        console.log("///////////////////////");
         day.dayLabel = formatDate(day.date, calendarConfig.dateFormats.day);
         return day;
       });
@@ -4140,6 +4135,8 @@ angular
 
       var dayStart = (dayViewStart || '00:00').split(':');
       var dayEnd = (dayViewEnd || '23:59').split(':');
+      
+      TurnoService.turnosDeLaSemana(moment(viewDate).startOf('day').toDate(), moment(viewDate).endOf('day').toDate());
 
       var view = calendarUtils.getDayView({
         events: events.map(function(event) { // hack required to work with event API
