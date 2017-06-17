@@ -38,6 +38,7 @@ public class TurnoRest {
 
 		try {
 			Turno turno = this.getTurnoService().getById(id);
+			turno.setDniPaciente(null);
 			this.getTurnoService().delete(turno);
 		} catch (Exception e) {
 			return Response.ok(Response.Status.NOT_FOUND).build();

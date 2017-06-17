@@ -72,22 +72,18 @@ angular
 //      console.log(index);		
 //      console.log(n);
 //      console.log(vm.events[index]);
-//      console.log(vm.events[index].color);
-      
- 
+//      console.log(vm.events[index].color); 
       var idTurno = vm.eventsTable[index].idTurno;
-  
 //      console.log(vm.events[index].color.primary);
-      
       if(angular.equals(0, idTurno)){
       
-      var title = vm.eventsTable[index].title;
-      var startsAt = vm.eventsTable[index].startsAt;
-      var endsAt = vm.eventsTable[index].endsAt;
-      var dni = vm.eventsTable[index].dni;
-      var color = vm.eventsTable[index].color;
-  	     
-      TurnoService.guardarTurno(title, startsAt, endsAt, vm.pacienteSeleccionado);
+	      var title = vm.eventsTable[index].title;
+	      var startsAt = vm.eventsTable[index].startsAt;
+	      var endsAt = vm.eventsTable[index].endsAt;
+	      var dni = vm.eventsTable[index].dni;
+	      var color = vm.eventsTable[index].color;
+	  	     
+	      TurnoService.guardarTurno(title, startsAt, endsAt, vm.pacienteSeleccionado);
       
       }else{
     	  toaster.pop('sucess', 'UPDATEAR');
@@ -138,18 +134,15 @@ angular
     };
 
     vm.timespanClicked = function(date, cell) {
-
-//    	console.log(date);
-//    	console.log(cell);
     	
       if (vm.calendarView === 'month') {
         if ((vm.cellIsOpen && moment(date).startOf('day').isSame(moment(vm.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
-        	console.log('vista month if sin turnos');
+//        	console.log('vista month if sin turnos');
             vm.cellIsOpen = false;
             
             vm.eventsTable = [];
         } else {
-          console.log('vista month else con turnos' ); 
+//          console.log('vista month else con turnos' ); 
           
           TurnoService.turnosDeLaSemana(date, moment(date).endOf('day').toDate());
 
@@ -160,12 +153,12 @@ angular
       } else if (vm.calendarView === 'year') {
 //        console.log('year');
         if ((vm.cellIsOpen && moment(date).startOf('month').isSame(moment(vm.viewDate).startOf('month'))) || cell.events.length === 0) {
-            console.log('vista year if sin turnos');
+//            console.log('vista year if sin turnos');
             vm.eventsTable = [];
             
           vm.cellIsOpen = false;
         } else {
-          console.log('vista year else con turnos');
+//          console.log('vista year else con turnos');
           TurnoService.turnosDeLaSemana(moment(date).startOf('month').toDate(), moment(date).endOf('month').endOf('day').toDate());
             
           
