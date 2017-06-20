@@ -84,9 +84,29 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 			
 			}, function myError(response) {
 				console.log(response);
-				toaster.pop('error', response.status + ', ' + response.message );
+				toaster.pop('error', response.status + ', ' + ((paciente == null)? "Debe eligir primero el cliete": " verifique los campos"));
 			});
     }
+	
+	//editarTurno
+
+	this.editarTurno = function(turno){
+		
+		$http({
+			method : 'POST',
+			url : "/GestorOdontologico/service/turno/editarTurno/"+ turno.title +"/"+ new Date(turno.startsAt) + "/"+ new Date(turno.endsAt) +"/" + turno.idTurno ,
+			headers : { 'Content-Type' : 'application/json' , 'accept' : 'application/json'	},
+			data : {}
+		}).then(function mySucces(response) {
+			toaster.pop('sucess', 'Editado en forma correcta');
+			console.log(response);
+			$route.reload();
+		
+		}, function myError(response) {
+			console.log(response);
+			toaster.pop('error', response.status + ', ' + response.mesage);
+		});
+}
 	
 	this.eliminarTurno=function(idTurno){
 		

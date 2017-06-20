@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -30,7 +31,7 @@ public class TurnoRest {
 	public void setTurnoService(TurnoService turnoService) {
 		this.turnoService = turnoService;
 	}
-	
+
 	@DELETE
 	@Path("/borrarTurno/{id}")
 	@Produces("application/json")
@@ -41,33 +42,73 @@ public class TurnoRest {
 			turno.setDniPaciente(null);
 			this.getTurnoService().delete(turno);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return Response.ok(Response.Status.NOT_FOUND).build();
 		}
 		return Response.ok(Response.Status.OK).build();
 	}
-	
+
 	@POST
 	@Path("/crearTurno/{title}/{startsAt}/{endsAt}")
-	@Produces("application/json")	
+	@Produces("application/json")
 	public Response crearTurno(@PathParam("title") final String title, @PathParam("startsAt") final Date startsAt,
-			@PathParam("endsAt") final Date endsAt, Paciente paciente){
+			@PathParam("endsAt") final Date endsAt, Paciente paciente) {
 		try {
-			
-		Turno turno = new Turno();
-		turno.setDniPaciente(paciente);
-		turno.setFechaTurno(startsAt);
-		turno.setHoraInicio(startsAt);
-		turno.setHoraFin(endsAt);
-		turno.setDescripcion(title);
-		this.getTurnoService().save(turno);
+
+			List<Turno> turnos = this.getTurnoService().validarTurno(startsAt, endsAt);
+			if (!turnos.isEmpty()) {
+				System.out.print("------------------LISTA VACIA------------------------------------------------------");
+				System.out.print(turnos.size());
+				System.out.print("------------------LISTA VACIA------------------------------------------------------");
+
+				return Response.status(Response.Status.CONFLICT).build();
+			}
+
+			Turno turno = new Turno();
+			turno.setDniPaciente(paciente);
+			turno.setFechaTurno(startsAt);
+			turno.setHoraInicio(startsAt);
+			turno.setHoraFin(endsAt);
+			turno.setDescripcion(title);
+
+			this.getTurnoService().save(turno);
+			return Response.ok(turno).build();
 		
-//			System.out.println(title);
-//			System.out.println(startsAt);
-//			System.out.println(endsAt);
-//			System.out.println(dni);
-//			System.out.println(color);
-		return Response.ok(turno).build();
-		}catch(Exception e){
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Response.Status.CONFLICT).build();
+		}
+	}
+
+	@POST
+	@Path("/editarTurno/{title}/{startsAt}/{endsAt}/{idTurno}")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public Response editarTurno(@PathParam("title") final String title, @PathParam("startsAt") final Date startsAt,
+			@PathParam("endsAt") final Date endsAt, @PathParam("idTurno") final Integer idTurno) {
+		try {
+
+			List<Turno> turnos = this.getTurnoService().validarTurno(startsAt, endsAt, idTurno);
+			if (!turnos.isEmpty()) {
+				System.out.print("------------------editar VACIA 7777777777777777777777777777777777777777");
+				System.out.print(turnos.size());
+				System.out.print("------------------editar VACIA 7777777777777777777777777777777777777777");
+
+				
+				
+				return Response.status(Response.Status.BAD_REQUEST).build();
+	
+			} else {
+
+				Turno  t = this.getTurnoService().getById(idTurno);
+				t.setDescripcion(title);
+				t.setHoraInicio(startsAt);
+				t.setHoraFin(endsAt);
+				
+				this.getTurnoService().refresh(t);
+				return Response.ok(new Turno()).build();
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.status(Response.Status.CONFLICT).build();
 		}
@@ -76,9 +117,10 @@ public class TurnoRest {
 	@GET
 	@Path("/turnosDeLaSemana/{startsAt}/{endsAt}")
 	@Produces("application/json")
-	public Response turnosDeLaSemana(@PathParam("startsAt") final Date startsAt, @PathParam("endsAt") final Date endsAt){
-//		System.out.println(startsAt);
-//		System.out.println(endsAt);
+	public Response turnosDeLaSemana(@PathParam("startsAt") final Date startsAt,
+			@PathParam("endsAt") final Date endsAt) {
+		// System.out.println(startsAt);
+		// System.out.println(endsAt);
 		List<Turno> ret = null;
 		List<TurnoMock> retMocks = new ArrayList<TurnoMock>();
 		try {
@@ -93,20 +135,18 @@ public class TurnoRest {
 
 		return Response.ok(retMocks).build();
 	}
-	
+
 	@GET
 	@Path("/turnosDelMes/{mes}")
 	@Produces("application/json")
-	public Response turnosDelMes(@PathParam("mes") final Date mes){
-//		System.out.println(startsAt);
-//		System.out.println(endsAt);
+	public Response turnosDelMes(@PathParam("mes") final Date mes) {
+		// System.out.println(startsAt);
+		// System.out.println(endsAt);
 		System.out.println(mes.getMonth());
 
 		return Response.ok(Status.NOT_FOUND).build();
 	}
-	
-	
-	
+
 	@GET
 	@Path("/obtenerTodosLosTurnos")
 	@Produces("application/json")
@@ -114,7 +154,7 @@ public class TurnoRest {
 
 		List<Turno> ret = null;
 		List<TurnoMock> retMocks = new ArrayList<TurnoMock>();
-		
+
 		try {
 			ret = this.getTurnoService().obtenerTodosLosTurnos();
 			for (Turno turno : ret) {

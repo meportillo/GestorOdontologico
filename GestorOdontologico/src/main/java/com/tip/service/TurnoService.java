@@ -18,8 +18,22 @@ public class TurnoService extends GenericService<Turno> {
 
 	@Transactional
 	public List<Turno> turnosDeLaSemana(Date startsAt, Date endsAt) {
-		// TODO Auto-generated method stub
 		return ((TurnoRepository) this.getRepository()).turnosDeLaSemana(startsAt, endsAt);
+	}
+
+	@Transactional
+	public List<Turno> validarTurno(Date startsAt, Date endsAt) {
+		return ((TurnoRepository) this.getRepository()).validarTurno(startsAt, endsAt);
+	}
+
+	@Transactional
+	public List<Turno> validarTurno(Date horaInicio, Date horaFin, Integer idTurno) {
+		return ((TurnoRepository) this.getRepository()).validarTurno(horaInicio, horaFin, idTurno);
+	}
+	@Transactional
+	public Turno refresh(Turno t) {
+		return ((TurnoRepository) this.getRepository()).refresh(t);
+		
 	}
 
 }

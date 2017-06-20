@@ -61,14 +61,16 @@ angular
 //    	console.log(vm.events[index].idTurno);
     	
     	if(!angular.equals(0, vm.eventsTable[index].idTurno)){
+    		console.log("eliminar IFFFFFF");
     		TurnoService.eliminarTurno(vm.events[index].idTurno);
     	}else{
+    		console.log("eliminar ELSE");
     		vm.eventsTable.splice(index, n);
     	}
 //    	vm.events.splice(index, n);
     }
     
-    vm.guardarEditados = function(index, n) {
+    vm.guardarEditados = function(index, n , turno) {
 //      console.log(index);		
 //      console.log(n);
 //      console.log(vm.events[index]);
@@ -86,7 +88,8 @@ angular
 	      TurnoService.guardarTurno(title, startsAt, endsAt, vm.pacienteSeleccionado);
       
       }else{
-    	  toaster.pop('sucess', 'UPDATEAR');
+    	  TurnoService.editarTurno(turno);
+//    	  toaster.pop('sucess', 'UPDATEAR');
     	  
       }
    }
