@@ -202,6 +202,14 @@ angular
 	TurnoService.obtenerTodosLosTurnos(vm)
 	.then(function (turnos) {
 		vm.events  = turnos;
+//		datosPaciente
+		
+        angular.forEach(vm.events, function (value, key) {
+        	value.title = value.title + " " + value.datosPaciente;
+        });
+		
+		
+		
 		vm.eventsTable = turnos;
 	});
 

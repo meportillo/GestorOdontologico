@@ -26,13 +26,23 @@ public class TurnoMock implements Serializable {
     private Date endsAt;
     private boolean draggable;
     private boolean resizable;
-    private Integer dni;
-    private ColorTurno colorPrimary;
+    private String datosPaciente;
+    
+    
+    public String getDatosPaciente() {
+		return datosPaciente;
+	}
+
+	public void setDatosPaciente(String datosPaciente) {
+		this.datosPaciente = datosPaciente;
+	}
+
+	private ColorTurno colorPrimary;
     private Integer idTurno;
     
 //    actions: actions
 	
-	public TurnoMock(String title, Integer idTurno, Date fecha ,Date horaInicio, Date horaFin, Integer dni) {
+	public TurnoMock(String title, Integer idTurno, Date fecha ,Date horaInicio, Date horaFin, Paciente dniPaciente) {
 		this.setTitle(title);
 		this.setDraggable(true);
 		this.setDraggable(true);
@@ -43,7 +53,7 @@ public class TurnoMock implements Serializable {
 		
 		this.setColorPrimary(new ColorTurno());
 		this.setIdTurno(idTurno);
-		this.setDni(123456);
+		this.setDatosPaciente(" - " + dniPaciente.getNombre() + ", " + dniPaciente.getApellido());
 	}
 
 	public String getTitle() {
@@ -85,16 +95,6 @@ public class TurnoMock implements Serializable {
 	public void setResizable(boolean resizable) {
 		this.resizable = resizable;
 	}
-
-	public Integer getDni() {
-		return dni;
-	}
-
-	public void setDni(Integer dni) {
-		this.dni = dni;
-	}
-
-
 
 	public Integer getIdTurno() {
 		return idTurno;

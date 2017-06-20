@@ -53,7 +53,7 @@ public class Turno implements Serializable {
 	public TurnoMock toTurnoMock(){
 		
 		
-		TurnoMock turnoM = new TurnoMock(descripcion, idTurno, fechaTurno, horaInicio, horaFin, 123242);
+		TurnoMock turnoM = new TurnoMock(descripcion, idTurno, fechaTurno, horaInicio, horaFin, dniPaciente);
 		return turnoM;
 		
 	}
