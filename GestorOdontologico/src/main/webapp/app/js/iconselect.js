@@ -229,6 +229,7 @@ function IconSelect($$elementID, element, $$parameters) {
 		 * 
 		 */
 
+		
 		_View.clearUI();
 
 		_View.iconSelectElement.setAttribute('class', 'icon-select');
@@ -247,6 +248,7 @@ function IconSelect($$elementID, element, $$parameters) {
 		
 //		_View.selectedIconImgElement.setAttribute('data-toggle', 'tooltip');
 //		_View.selectedIconImgElement.setAttribute('ng-attr-title', 'diente');
+//		_View.selectedIconImgElement.setAttribute('title', titulo(0));
 
 			selectedIconElement.appendChild(_View.selectedIconImgElement);
 
@@ -341,6 +343,14 @@ function IconSelect($$elementID, element, $$parameters) {
 		iconImgElement.setAttribute('width', $parameters.iconsWidth);
 		iconImgElement.setAttribute('height', $parameters.iconsHeight);
 		iconImgElement.style.cssFloat = 'left';
+		
+		var titulos = ["Pieza Completa","Pieza Ausente","P. No Erupcionada","Extraccion","Coronas","Protesis Removible","Protesis Fija"];
+
+		var titulo = function(estado){
+			
+			return titulos[estado];
+		}
+		iconImgElement.setAttribute('title', titulo($index));
 
 		iconElement.appendChild(iconImgElement);
 		_View.boxElement.appendChild(iconElement);
