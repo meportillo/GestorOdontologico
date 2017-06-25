@@ -122,12 +122,8 @@
 
     <thead>
       <tr>
+      	<th>Nombre/Apellido Paciente</th>
         <th>Observaci&oacute;n</th>
-        <!--
-        <th>dni</th>
-        <th>Primary color</th>
-        <th>Secondary color</th>
-        -->
         <th>Hora de Inicio</th>
         <th>Hora de Fin</th>
         <th>Eliminar</th>
@@ -138,29 +134,39 @@
     <tbody>
     
       <tr ng-repeat="event in (vm.eventsTable) track by $index"> 
+      	<td>
+      	 <md-content class="md-padding">
+    <form ng-submit="$event.preventDefault()">
+      <md-autocomplete
+          ng-disabled="vm.isDisabled"
+          md-no-cache="vm.noCache"
+          md-selected-item="vm.selectedItem"
+          md-search-text-change="vm.searchTextChange(vm.searchText)"
+          md-search-text="vm.searchText"
+          md-selected-item-change="vm.selectedItemChange(item)"
+          md-items="item in vm.querySearch(vm.searchText)"
+          md-item-text="item.nombre"
+          md-min-length="0"
+          placeholder="nombre, apellido de paciente">
+        <md-item-template>
+          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
+        </md-item-template>
+        <md-not-found>
+          No se econtro ningun paciente con el valor: "{{vm.searchText}}".
+       
+        </md-not-found>
+      </md-autocomplete>
+      <br/>
+    </form>
+  </md-content>
+
+      	</td>
         <td>
           <input
             type="text"
             class="form-control"
             ng-model="event.title"  placeholder="Observacion">
         </td>
-        <!--
-        <td>
-          <input
-            type="text"
-            class="form-control"
-            ng-model="event.dni">
-        </td>
-
-
-        <td>
-          <input class="form-control" colorpicker type="text" ng-model="event.color.primary">
-        </td>
-        <td>
-          <input class="form-control" colorpicker type="text" ng-model="event.color.secondary">
-        </td>
--->
-
         <td>
           <p class="input-group" style="max-width: 250px">
             <input

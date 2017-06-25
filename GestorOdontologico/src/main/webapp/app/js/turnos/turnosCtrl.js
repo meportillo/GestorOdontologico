@@ -1,8 +1,8 @@
 angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad', 'gestorOdont']);
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad', 'PacienteService','Paciente',
-	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService, Paciente) {
+  .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad', 'PacienteService','Paciente','$timeout', '$q', '$log', 
+	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService, Paciente, $timeout, $q, $log) {
 	  
 	  moment.defineLocale('moment', {parentLocale:'angular-bootstrap-calendar.js'})
 
@@ -12,6 +12,8 @@ angular
 		vm.pacienteSeleccionado = null;
 		vm.pacienteTemp = null;
 		vm.verSeleccionado = false;
+		vm.simulateQuery = false;
+		vm.isDisabled    = false;
 		vm.cancel = function(){
 	    	vm.showModalPaciente = false;
 	    }
@@ -241,5 +243,72 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
 			});
  		}
 	}
+	
+	  // list of `state` value/display objects
+    
+
+
+
+    // ******************************
+    // Internal methods
+    // ******************************
+
+    /**
+     * Search for states... use $timeout to simulate
+     * remote dataservice call.
+     */
+    vm.querySearch = function(query) {
+      var results = query ? vm.states.filter( vm.createFilterFor(query) ) : vm.states,
+          deferred;
+      if (vm.simulateQuery) {
+        deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
+      } else {
+        return results;
+      }
+    }
+
+    vm.searchTextChange = function (text) {
+      $log.info('Text changed to ' + text);
+    }
+
+   vm. selectedItemChange =  function(item) {
+      $log.info('Item changed to ' + JSON.stringify(item));
+    }
+
+    /**
+     * Build `states` list of key/value pairs
+     */
+    vm.loadAll = function() {
+      var allStates = [new Paciente("mau","test", 234, "", null, null, null, null),
+    	  new Paciente("aaaaaaaaa","bbbb", 2343434, "", null, null, null, null)
+    	  ];
+
+      return allStates.map( function (paciente) {
+        return {
+          value: paciente,
+          display: paciente.nombre
+        };
+      });
+    }
+
+    /**
+     * Create filter function for a query string
+     */
+    vm.createFilterFor = function (query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(state) {
+        return (state.nombre.indexOf(lowercaseQuery) === 0);
+      };
+
+    }
+
+     vm.states        = vm.loadAll();
+      vm.querySearch   = vm.querySearch;
+      vm.selectedItemChange = vm.selectedItemChange;
+      vm.searchTextChange   = vm.searchTextChange;
+
 
   }]);
