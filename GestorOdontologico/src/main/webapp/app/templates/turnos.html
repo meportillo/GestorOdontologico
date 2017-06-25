@@ -1,43 +1,5 @@
     <div ng-controller="KitchenSinkCtrl as vm">
 
-	<div>
-		 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Agregar Paciente</button>
-		 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#bsqP">Buscar Paciente</button>
-	</div>
-	  <div id="bsqP" class="collapse">
-
-	<form name="bsqPaciente"  ui-keypress="{13:'vm.buscarPorNombre()'}" novalidate>
-		<div class="form-group">
-			<label>Ingresar Nombre, Apellido o Numero de Documento:</label> 
-				 <input type="text" class="form-control" style="height:30px;font-size:14pt;"    height="5px" ng-model="vm.nombreBsqd" required>
-				<br>	
-				<button class="btn btn-primary" ng-click="vm.buscarPorNombre()"  ng-disabled="vm.nombreBsqd == null || vm.nombreBsqd == ''" ui-keypress="{13:'vm.buscarPorNombre()'}">Buscar</button>
-		</div>
-   </form>
-	</div>
-	  <div id="demo" class="collapse">
-		<form name="addPacienteSimple"  ui-keypress="{13:'vm.agregarPacienteSimple()'}" novalidate>
-			
-			<div class="col-md-12" >
-					<div class="col-md-3"> Nombre: <input type="text" class="form-control"    height="5px" ng-model="vm.nombre" required></div>
-					<div class="col-md-3"> Apellido <input type="text" class="form-control"    height="5px" ng-model="vm.apellido" required></div>
-					<div class="col-md-3"> Dni: <input type="text" class="form-control"     height="5px" ng-model="vm.dni" required></div>
-							<div class="col-md-3" >
-			<br>
-			<button class="btn btn-primary" ng-click="vm.agregarPacienteSimple()"  ng-disabled="" >Agregar</button>
-			</div>
-					
-			</div>		
-	   </form>
-	</div>
-	
-			<hr>
-			<hr>
-			<div ng-show="vm.verSeleccionado" class="alert alert-info" role="alert">
-				<label>NOMBRE:{{vm.pacienteSeleccionado.nombre}}  {{vm.pacienteSeleccionado.apellido}}, DNI: {{vm.pacienteSeleccionado.dni}} </label>
-			</div>
-			<hr>
-			<hr>
 
   <h2 class="text-center">{{ vm.calendarTitle }}</h2>
 
@@ -104,6 +66,36 @@
 
   <br><br><br>
 
+	<div>
+		 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo" ng-click="vm.crearPacienteSimple()">Agregar Paciente</button>
+	</div>
+	  <div id="demo" class="collapse">
+		<form name="addPacienteSimple"  ui-keypress="{13:'vm.agregarPacienteSimple()'}" novalidate>
+			
+			<div class="col-md-12" >
+					<div class="col-md-3"> Nombre: <input type="text" class="form-control"    height="5px" ng-model="vm.pacienteTemp.nombre" required></div>
+					<div class="col-md-3"> Apellido <input type="text" class="form-control"    height="5px" ng-model="vm.pacienteTemp.apellido" required></div>
+					<div class="col-md-3"> Dni: <input type="number" class="form-control"     height="5px" ng-model="vm.pacienteTemp.dni" required min="1000000" max="1000000000" >
+			</div>
+							
+			<div class="col-md-3" >
+				<br>
+				<button class="btn btn-primary" ng-click="vm.agregarPacienteSimple()"  ng-disabled="" >Agregar</button>
+			</div>
+			</div>		
+	   </form>
+	</div>
+	
+	  <br><br><br>
+	
+			<div ng-show="vm.verSeleccionado" class="alert alert-info" role="alert">
+				<label>NOMBRE:{{vm.pacienteSeleccionado.nombre}}  {{vm.pacienteSeleccionado.apellido}}, DNI: {{vm.pacienteSeleccionado.dni}} </label>
+			</div>
+	
+  <br><br><br>
+
+
+
   <h3 id="event-editor">
     Editar Turnos
     <button
@@ -123,6 +115,8 @@
     
     <div class="clearfix"></div>
   </h3>
+
+	
 
   <table class="table table-bordered">
 
@@ -148,7 +142,7 @@
           <input
             type="text"
             class="form-control"
-            ng-model="event.title">
+            ng-model="event.title"  placeholder="Observacion">
         </td>
         <!--
         <td>
@@ -239,39 +233,6 @@
       </tr>
     </tbody>
 
-  </table>
-  
-  	<div class="modal-dialog modal-lg" >
-		<div class="modal-content"  modal="vm.showModalPaciente" close="vm.cancel()">
-			<div class="modal-header popUp-header "></div>
-			<div class="modal-body popUp-body" >
-				<div class="panel panel-primary">
-					<div class="panel-heading">Pacientes Encontrados</div>
-					<div class="panel-body ">
-					<ul class="list-group" ng-repeat="paciente in vm.pacientesTurnos">
-						<li class="list-group-item">
-						 <div class="col-md-10">
-						 <div class="col-md-8">
-						 <label>NOMBRE:{{paciente.nombre}}  {{paciente.apellido}}, DNI: {{paciente.dni}} </label> 
-						 </div>
-						 <div class="col-md-2">
-						 <button class="btn btn-primary" ng-click="vm.seleccionarPaciente(paciente)">Seleccionar</button>
-						 </div>
-						</div>
-						</li>
-					</ul>
-				
-				</div>
-			</div>
-			</div>
-			<div class="modal-footer popUp-footer">
-					 <button type="button" class="btn btn-danger"  ng-click="vm.cancel()">
-					    Cancelar
-					 </button>
-			</div>
-		</div>
-
-	</div>
-  
+  </table>  
   
 </div>

@@ -72,6 +72,7 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 	
 	this.guardarTurno=function(title, startsAt, endsAt, paciente){
 		
+		var deferred = $q.defer();
 			$http({
 				method : 'POST',
 				url : "/GestorOdontologico/service/turno/crearTurno/"+ title + "/"  +startsAt + "/" + endsAt ,
@@ -80,12 +81,13 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 			}).then(function mySucces(response) {
 				toaster.pop('sucess', 'Agregado en forma correcta');
 				console.log(response);
-				$route.reload();
+				 deferred.resolve(response.data);
 			
 			}, function myError(response) {
 				console.log(response);
 				toaster.pop('error', response.status + ', ' + ((paciente == null)? "Debe eligir primero el cliete": (response.status == 409)? "Verificar fecha, hora de inicio y fin " : " verifique los campos"));
 			});
+			 return deferred.promise;
     }
 	
 	//editarTurno

@@ -1,20 +1,26 @@
 angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad', 'gestorOdont']);
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad', 'PacienteService',
-	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService) {
+  .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad', 'PacienteService','Paciente',
+	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService, Paciente) {
 	  
 	  moment.defineLocale('moment', {parentLocale:'angular-bootstrap-calendar.js'})
 
 	    var vm = this;
 	  
 	    vm.showModalPaciente = false;
-		vm.pacienteSeleccionado = null;	    
+		vm.pacienteSeleccionado = null;
+		vm.pacienteTemp = null;
 		vm.verSeleccionado = false;
 		vm.cancel = function(){
 	    	vm.showModalPaciente = false;
 	    }
 	    
+		vm.crearPacienteSimple = function(){
+			vm.pacienteTemp =  new Paciente("", "", "", "", null, null, null, null);
+			console.log(vm.pacienteTemp);
+		}
+		
 		vm.buscarPorNombre=function(){
 			vm.verSeleccionado = false;
 
@@ -100,7 +106,7 @@ angular
     vm.addEvent = function() {
     	
       vm.eventsTable.push({
-        title: 'Observacion',
+        title: '',
         startsAt: moment().startOf('day').toDate(),
         endsAt: moment().startOf('day').add(30, 'm').toDate(),
         color: calendarConfig.colorTypes.important,
@@ -218,16 +224,22 @@ angular
 	vm.dni = null;
 	
 	vm.agregarPacienteSimple = function(){
-		PacienteService.agregarPacienteSimple(vm.dni,vm.nombre, vm.apellido)
-		.then(function (paciente) {
-
-			vm.pacienteSeleccionado = paciente;
-			vm.verSeleccionado = true;
-
-			
-		});
+	
+var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
+		
+ 		if (mensajesDeError.length > 0) {
+ 			console.log($scope.myDate);
+ 			mensajesDeError.forEach(function(mensaje) {
+ 				toaster.pop('error', mensaje)	
+ 			})
+ 		} else{
+ 			JSON.stringify($scope.paciente)
+ 			PacienteService.agregarPacienteSimple(vm.pacienteTemp.dni,vm.pacienteTemp.nombre, vm.pacienteTemp.apellido)
+			.then(function (paciente) {
+				vm.pacienteSeleccionado = paciente;
+				vm.verSeleccionado = true;
+			});
+ 		}
 	}
-	
-	
-    
+
   }]);
