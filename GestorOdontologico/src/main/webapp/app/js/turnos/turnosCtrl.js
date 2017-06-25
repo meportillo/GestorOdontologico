@@ -12,7 +12,7 @@ angular
 		vm.pacienteSeleccionado = null;
 		vm.pacienteTemp = null;
 		vm.verSeleccionado = false;
-		vm.simulateQuery = false;
+		vm.simulateQuery = true;
 		vm.isDisabled    = false;
 		vm.cancel = function(){
 	    	vm.showModalPaciente = false;
@@ -273,9 +273,13 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
       $log.info('Text changed to ' + text);
     }
 
-   vm. selectedItemChange =  function(item) {
-      $log.info('Item changed to ' + JSON.stringify(item));
-    }
+
+    vm. selectedItemChange =  function(item) {
+       $log.info('Item changed to ' + JSON.stringify(item));
+       vm.pacienteSeleccionado = item.value;
+       vm.searchText = item.display;
+       vm.verSeleccionado = true;
+     }
 
     /**
      * Build `states` list of key/value pairs
@@ -288,7 +292,7 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
       return allStates.map( function (paciente) {
         return {
           value: paciente,
-          display: paciente.nombre
+          display: paciente.nombre + ", " + paciente.apellido 
         };
       });
     }
