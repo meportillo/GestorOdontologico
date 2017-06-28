@@ -72,7 +72,9 @@
       <div class="col-md-4">
 	  <h4>Fecha Nacimiento:</h4>
         <p class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 2000 }' />
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"  alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 2000 }' close-text="Cerrar"
+              current-text="Hoy"
+              clear-text="Limpiar" />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>

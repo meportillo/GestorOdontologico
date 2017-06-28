@@ -1,9 +1,10 @@
-angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad', 'gestorOdont']);
+angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad','gestorOdont']);
+
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
   .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad', 'PacienteService','Paciente','$timeout', '$q', '$log', 
-	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService, Paciente, $timeout, $q, $log) {
-	  
+	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService, Paciente, $timeout, $q, $log, datepickerPopupConfig) {
+
 	  moment.defineLocale('moment', {parentLocale:'angular-bootstrap-calendar.js'})
 
 	    var vm = this;
@@ -313,6 +314,7 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
       vm.querySearch   = vm.querySearch;
       vm.selectedItemChange = vm.selectedItemChange;
       vm.searchTextChange   = vm.searchTextChange;
+
 
 
   }]);

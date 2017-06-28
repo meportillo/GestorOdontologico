@@ -51,7 +51,10 @@
 										    <span ng-show="!verInput">{{ paciente.fechaNac | date:"dd/MM/yyyy" }}</span>
 									      <div ng-show="verInput">
 									        <p class="input-group">
-									          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 2000 }' />
+									          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 2000 }'
+									          close-text="Cerrar"
+								              current-text="Hoy"
+								              clear-text="Limpiar" />
 									          <span class="input-group-btn">
 									            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
 									          </span>
@@ -63,7 +66,9 @@
 											 <span  ng-show="!verInput">{{paciente.ficha.fechaAlta | date : "dd/MM/y" }}</span>
 									      <div ng-show="verInput">
 									        <p class="input-group">
-									          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="paciente.ficha.fechaAlta" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+									          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="paciente.ficha.fechaAlta" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Cerrar"
+           										   current-text="Hoy"
+              											clear-text="Limpiar"  alt-input-formats="altInputFormats" />
 									          <span class="input-group-btn">
 									            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
 									          </span>
