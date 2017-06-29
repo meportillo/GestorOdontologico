@@ -97,8 +97,8 @@ angular
 	      TurnoService.guardarTurno(title, startsAt, endsAt, vm.pacienteSeleccionado);
       
       }else{
+    	  
     	  TurnoService.editarTurno(turno);
-//    	  toaster.pop('sucess', 'UPDATEAR');
     	  
       }
    }
@@ -214,11 +214,9 @@ angular
 //		datosPaciente
 		
         angular.forEach(vm.events, function (value, key) {
-        	value.title = value.title + " " + value.datosPaciente;
+        	value.title = value.datosPaciente  + " " + value.title ;
         });
-		
-		
-		
+        
 		vm.eventsTable = turnos;
 	});
 

@@ -100,13 +100,13 @@ public class TurnoRest {
 	
 			} else {
 
-				Turno  t = this.getTurnoService().getById(idTurno);
-				t.setDescripcion(title);
-				t.setHoraInicio(startsAt);
-				t.setHoraFin(endsAt);
+				Turno  turno = this.getTurnoService().getById(idTurno);
+				turno.setDescripcion(title);
+				turno.setHoraInicio(startsAt);
+				turno.setHoraFin(endsAt);
 				
-				this.getTurnoService().refresh(t);
-				return Response.ok(new Turno()).build();
+				this.getTurnoService().refresh(turno);
+				return Response.ok(turno).build();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
