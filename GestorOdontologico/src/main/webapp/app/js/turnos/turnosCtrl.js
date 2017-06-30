@@ -1,4 +1,4 @@
-angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad','gestorOdont']);
+angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad','gestorOdont','ngMaterial']);
 
 angular
   .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
@@ -258,39 +258,45 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
      */
 	
     vm.querySearch = function(query) {
+    	var deferred = $q.defer();
     	
-    	
-			vm.pacientes = [new Paciente("mau","test", 234, "", null, null, null, null),
-		    	  new Paciente("aaaaaaaaa","bbbb", 2343434, "", null, null, null, null)
-	    	  ];
-		   vm.states        = vm.loadAll();
-			return pacientes;
-		
-
-    	
+    	PacienteService.obtenerPacientesPorAlgunDato(vm.searchText).
+    	then(function(pacientes){
+    		
+    		vm.pacientes = pacientes;
+    		vm.pacientes  = vm.loadAll();
+    		 deferred.resolve(vm.pacientes);
+    	});
+    	console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFff");
+//		vm.pacientes  = vm.loadAll();
+//		return vm.pacientes;
+		 return deferred.promise;
+    
     }
+    
 
     vm.searchTextChange = function (text) {
       $log.info('Text changed to ' + text);
     }
 
-
-    vm. selectedItemChange =  function(item) {
-       $log.info('Item changed to ' + JSON.stringify(item));
+    vm.searchText = "";
+    vm.selectedItem = null;
+    
+    vm.selectedItemChange =  function(item) {
+       
+   	   console.log('------ertwertwertw-------------- ' + JSON.stringify(vm.selectedItem));
+   	   console.log('Item changed to ' + JSON.stringify(item));
        vm.pacienteSeleccionado = item.value;
        vm.searchText = item.display;
        vm.verSeleccionado = true;
      }
 
-    /**
-     * Build `states` list of key/value pairs
-     */
     vm.loadAll = function() {
-      var allStates = vm.pacientes;
+      var pacientes = vm.pacientes;
       console.log("---------------------------------------------------------------------");
-      console.log(allStates);
+      console.log(pacientes);
       console.log("---------------------------------------------------------------------");
-      return allStates.map( function (paciente) {
+      return pacientes.map( function (paciente) {
 
     	  console.log("--ppppppppppppppppppppppppppppppppppppppp");
     	  console.log(paciente);
@@ -298,31 +304,12 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
 
     	  return {
           value: paciente,
-          display: paciente.nombre + ", " + paciente.apellido 
+          display:  paciente.dni +":" + paciente.nombre+" ," + paciente.apellido 
         };
       });
-    
-      
-      
     }
 
-    /**
-     * Create filter function for a query string
-     */
-    vm.createFilterFor = function (query) {
-      var lowercaseQuery = angular.lowercase(query);
-
-      return function filterFn(state) {
-        return (state.nombre.indexOf(lowercaseQuery) === 0);
-      };
-
-    }
     vm.pacientes = [];
-     vm.states        = [];
-      vm.querySearch   = vm.querySearch;
-      vm.selectedItemChange = vm.selectedItemChange;
-      vm.searchTextChange   = vm.searchTextChange;
-
 
 
   }]);

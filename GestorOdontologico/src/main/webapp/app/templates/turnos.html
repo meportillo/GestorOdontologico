@@ -133,12 +133,11 @@
     <tbody>
     
       <tr ng-repeat="event in (vm.eventsTable) track by $index"> 
-      	<td>
+      	<td>      	
       	 <md-content class="md-padding">
     <form ng-submit="$event.preventDefault()">
       <md-autocomplete
           ng-disabled="vm.isDisabled"
-        
           md-selected-item="vm.selectedItem"
           md-search-text-change="vm.searchTextChange(vm.searchText)"
           md-search-text="vm.searchText"
@@ -146,7 +145,9 @@
           md-items="item in vm.querySearch(vm.searchText)"
           md-item-text="item.nombre"
           md-min-length="1"
-          placeholder="nombre, apellido de paciente">
+          placeholder="nombre, apellido de paciente"
+           ng-model-options='{ debounce: 2000 }'>
+        
         <md-item-template>
           <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
         </md-item-template>

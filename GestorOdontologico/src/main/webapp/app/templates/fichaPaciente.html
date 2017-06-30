@@ -52,7 +52,7 @@
 										    <span ng-show="!verInput">{{ paciente.fechaNac | date:"dd/MM/yyyy" }}</span>
 									      <div ng-show="verInput">
 									        <p class="input-group">
-									          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 2000 }'
+									          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 1000 }'
 									          close-text="Cerrar"
 								              current-text="Hoy"
 								              clear-text="Limpiar" />
