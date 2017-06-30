@@ -258,16 +258,18 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
      * Search for states... use $timeout to simulate
      * remote dataservice call.
      */
+	
     vm.querySearch = function(query) {
-      var results = query ? vm.states.filter( vm.createFilterFor(query) ) : vm.states,
-          deferred;
-      if (vm.simulateQuery) {
-        deferred = $q.defer();
-        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-        return deferred.promise;
-      } else {
-        return results;
-      }
+    	
+    	
+			vm.pacientes = [new Paciente("mau","test", 234, "", null, null, null, null),
+		    	  new Paciente("aaaaaaaaa","bbbb", 2343434, "", null, null, null, null)
+	    	  ];
+		   vm.states        = vm.loadAll();
+			return pacientes;
+		
+
+    	
     }
 
     vm.searchTextChange = function (text) {
@@ -286,16 +288,24 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
      * Build `states` list of key/value pairs
      */
     vm.loadAll = function() {
-      var allStates = [new Paciente("mau","test", 234, "", null, null, null, null),
-    	  new Paciente("aaaaaaaaa","bbbb", 2343434, "", null, null, null, null)
-    	  ];
-
+      var allStates = vm.pacientes;
+      console.log("---------------------------------------------------------------------");
+      console.log(allStates);
+      console.log("---------------------------------------------------------------------");
       return allStates.map( function (paciente) {
-        return {
+
+    	  console.log("--ppppppppppppppppppppppppppppppppppppppp");
+    	  console.log(paciente);
+    	  console.log("--ppppppppppppppppppppppppppppppppppppppp");
+
+    	  return {
           value: paciente,
           display: paciente.nombre + ", " + paciente.apellido 
         };
       });
+    
+      
+      
     }
 
     /**
@@ -309,8 +319,8 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
       };
 
     }
-
-     vm.states        = vm.loadAll();
+    vm.pacientes = [];
+     vm.states        = [];
       vm.querySearch   = vm.querySearch;
       vm.selectedItemChange = vm.selectedItemChange;
       vm.searchTextChange   = vm.searchTextChange;

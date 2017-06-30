@@ -32,7 +32,8 @@
 											</td>
 											<td>
 												<span  ng-show="!verInput">{{ paciente.dni || 'empty' }}  </span>
-												<input type="text" ng-show="verInput" ng-model="paciente.dni">
+											   <input type="number" ng-show="verInput" ng-model="paciente.dni"  min="1000000" max="1000000000" required>
+												
 								    		</td>
 											<td>  
 												<span ng-show="!verInput">{{ paciente.direccion || 'empty' }}</span>

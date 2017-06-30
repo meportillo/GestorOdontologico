@@ -126,8 +126,7 @@
         <th>Observaci&oacute;n</th>
         <th>Hora de Inicio</th>
         <th>Hora de Fin</th>
-        <th>Eliminar</th>
-        <th>Guardar</th>
+        <th>Acciones</th>
       </tr>
     </thead>
 
@@ -139,14 +138,14 @@
     <form ng-submit="$event.preventDefault()">
       <md-autocomplete
           ng-disabled="vm.isDisabled"
-          md-no-cache="vm.noCache"
+        
           md-selected-item="vm.selectedItem"
           md-search-text-change="vm.searchTextChange(vm.searchText)"
           md-search-text="vm.searchText"
           md-selected-item-change="vm.selectedItemChange(item)"
           md-items="item in vm.querySearch(vm.searchText)"
           md-item-text="item.nombre"
-          md-min-length="0"
+          md-min-length="1"
           placeholder="nombre, apellido de paciente">
         <md-item-template>
           <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
@@ -232,8 +231,6 @@
             ng-click="vm.eliminarTurnos($index, 1)">
             Borrar
           </button>
-        </td>
-        <td>
         <button
             class="btn btn-success"
             ng-click="vm.guardarEditados($index, 1, event)">
