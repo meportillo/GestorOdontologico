@@ -144,6 +144,20 @@ public class PacienteRest {
 		}
 	}
 
+	@GET
+	@Path("/obtenerTodosLosPacientes")
+	@Produces("application/json")
+	public Response obtenerTodosLosPacientes() {
+		try {
+			List<Paciente> pacientes = this.getPacienteService().retriveAll();
+			return Response.ok(pacientes).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+	}
+
+	
 	
 
 	@GET

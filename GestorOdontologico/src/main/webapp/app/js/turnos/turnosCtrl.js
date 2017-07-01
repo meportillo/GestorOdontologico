@@ -1,14 +1,11 @@
-angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad','gestorOdont','ngMaterial']);
+var appc = angular.module('mwl.calendar.docs', ['mwl.calendar', 'ngAnimate', 'ui.bootstrap', 'colorpicker.module','oc.lazyLoad','gestorOdont','ngMaterial']);
 
-angular
-  .module('mwl.calendar.docs') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('KitchenSinkCtrl',['moment', 'calendarConfig', '$http', 'toaster', '$scope', 'TurnoService', '$window', '$ocLazyLoad', 'PacienteService','Paciente','$timeout', '$q', '$log', 
-	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService, Paciente, $timeout, $q, $log, datepickerPopupConfig) {
+appc.controller('KitchenSinkCtrl',
+	  function(moment, calendarConfig, $http, toaster, $scope, TurnoService,  $window, $ocLazyLoad, PacienteService, Paciente, $timeout, $q, $log,Turno) {
 
 	  moment.defineLocale('moment', {parentLocale:'angular-bootstrap-calendar.js'})
 
 	    var vm = this;
-	  
 	    vm.showModalPaciente = false;
 		vm.pacienteSeleccionado = null;
 		vm.pacienteTemp = null;
@@ -33,12 +30,12 @@ angular
 				return;
 			}
 			else{
-					PacienteService.obtenerPacientesPorAlgunDato(vm.nombreBsqd)
+				PacienteService.obtenerPacientesPorAlgunDato(vm.nombreBsqd)
 					.then(function (pacientes) {
 						vm.pacientesTurnos = pacientes;
 			            console.log(pacientes);
 			        });
-					vm.showModalPaciente = true;
+				vm.showModalPaciente = true;
 			}
 		}
 
@@ -57,17 +54,16 @@ angular
     var actions = [{
       label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
       onClick: function(args) {
-        alert.show('Edited', args.calendarEvent);
-      }
-    }, {
-      label: '<i class=\'glyphicon glyphicon-remove\'></i>',
-      onClick: function(args) {
-        alert.show('Deleted', args.calendarEvent);
-      }
+	        alert.show('Edited', args.calendarEvent);
+	      }
+	    }, {
+	      label: '<i class=\'glyphicon glyphicon-remove\'></i>',
+	      onClick: function(args) {
+	        alert.show('Deleted', args.calendarEvent);
+	      }
     }];
     
     vm.eliminarTurnos = function(index, n) {
-//    	console.log(vm.events[index].idTurno);
     	
     	if(!angular.equals(0, vm.eventsTable[index].idTurno)){
     		console.log("eliminar IFFFFFF");
@@ -76,55 +72,40 @@ angular
     		console.log("eliminar ELSE");
     		vm.eventsTable.splice(index, n);
     	}
-//    	vm.events.splice(index, n);
     }
     
     vm.guardarEditados = function(index, n , turno) {
-//      console.log(index);		
-//      console.log(n);
-//      console.log(vm.events[index]);
-//      console.log(vm.events[index].color); 
-      var idTurno = vm.eventsTable[index].idTurno;
-//      console.log(vm.events[index].color.primary);
+    
+    turno.paciente = vm.pacienteSeleccionado;
+    
+    var mensajesDeError = turno.validar();	
+    
+    if(mensajesDeError.length > 0){
+    	
+    	mensajesDeError.forEach(function(mensaje) {
+ 				toaster.pop('error', mensaje)	
+ 			})
+
+    	
+    }else{
+    var idTurno = vm.eventsTable[index].idTurno;
+
       if(angular.equals(0, idTurno)){
-      
-	      var title = vm.eventsTable[index].title;
-	      var startsAt = vm.eventsTable[index].startsAt;
-	      var endsAt = vm.eventsTable[index].endsAt;
-	      var dni = vm.eventsTable[index].dni;
-	      var color = vm.eventsTable[index].color;
-	  	     
-	      TurnoService.guardarTurno(title, startsAt, endsAt, vm.pacienteSeleccionado);
+	  	    console.log("--------------------------ALTA--------------------------------------")
+	      	TurnoService.guardarTurno(turno);
       
       }else{
-    	  
-    	  TurnoService.editarTurno(turno);
-    	  
-      }
-   }
-
-//    vm.cellIsOpen = true;
-    
+	  	    console.log("--------------------------EDICION--------------------------------------")
+    	    TurnoService.editarTurno(turno);
+      	  }
+       }
+    }
 //pasar dia por parametro
     vm.addEvent = function() {
-    	
-      vm.eventsTable.push({
-        title: '',
-        startsAt: moment().startOf('day').toDate(),
-        endsAt: moment().startOf('day').add(30, 'm').toDate(),
-        color: calendarConfig.colorTypes.important,
-        draggable: true,
-        resizable: true,
-        idTurno: 0
-      });
-      
-//      console.log(calendarConfig.colorTypes.important);
-    }
-/*
-    vm.eventClicked = function(event) {
-      alert.show('Clicked', event);
-    };
-*/
+    	var turno = new Turno(0,'',moment().startOf('day').toDate(),moment().startOf('day').add(30, 'm').toDate(), true, true,null,calendarConfig.colorTypes.important);
+    	vm.eventsTable.push(turno);
+        }
+
     vm.eventEdited = function(event) {
       alert.show('Edited', event);
     };
@@ -142,47 +123,32 @@ angular
       $event.preventDefault();
       $event.stopPropagation();
       event[field] = !event[field];
-//      console.log('day');
     };
 
     vm.timespanClicked = function(date, cell) {
     	
       if (vm.calendarView === 'month') {
         if ((vm.cellIsOpen && moment(date).startOf('day').isSame(moment(vm.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
-//        	console.log('vista month if sin turnos');
             vm.cellIsOpen = false;
-            
             vm.eventsTable = [];
         } else {
-//          console.log('vista month else con turnos' ); 
-          
-          TurnoService.turnosDeLaSemana(date, moment(date).endOf('day').toDate());
 
-        	
+          TurnoService.turnosDeLaSemana(date, moment(date).endOf('day').toDate());
           vm.cellIsOpen = true;
           vm.viewDate = date;
         }
       } else if (vm.calendarView === 'year') {
-//        console.log('year');
         if ((vm.cellIsOpen && moment(date).startOf('month').isSame(moment(vm.viewDate).startOf('month'))) || cell.events.length === 0) {
-//            console.log('vista year if sin turnos');
             vm.eventsTable = [];
             
           vm.cellIsOpen = false;
         } else {
-//          console.log('vista year else con turnos');
           TurnoService.turnosDeLaSemana(moment(date).startOf('month').toDate(), moment(date).endOf('month').endOf('day').toDate());
-            
-          
           vm.cellIsOpen = true;
           vm.viewDate = date;
           
         }
       }
-      
-
-      //}
-
     };
     
     
@@ -210,7 +176,9 @@ angular
 //    TABLE DE DATOS - TUrNOS
 	TurnoService.obtenerTodosLosTurnos(vm)
 	.then(function (turnos) {
+		console.log(turnos);
 		vm.events  = turnos;
+		
 //		datosPaciente
 		
         angular.forEach(vm.events, function (value, key) {
@@ -242,21 +210,6 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
 			});
  		}
 	}
-	
-	  // list of `state` value/display objects
-    
-
-
-
-    // ******************************
-    // Internal methods
-    // ******************************
-
-    /**
-     * Search for states... use $timeout to simulate
-     * remote dataservice call.
-     */
-	
     vm.querySearch = function(query) {
     	var deferred = $q.defer();
     	
@@ -265,11 +218,8 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
     		
     		vm.pacientes = pacientes;
     		vm.pacientes  = vm.loadAll();
-    		 deferred.resolve(vm.pacientes);
+    		deferred.resolve(vm.pacientes);
     	});
-    	console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFff");
-//		vm.pacientes  = vm.loadAll();
-//		return vm.pacientes;
 		 return deferred.promise;
     
     }
@@ -293,23 +243,16 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
 
     vm.loadAll = function() {
       var pacientes = vm.pacientes;
-      console.log("---------------------------------------------------------------------");
-      console.log(pacientes);
-      console.log("---------------------------------------------------------------------");
       return pacientes.map( function (paciente) {
-
-    	  console.log("--ppppppppppppppppppppppppppppppppppppppp");
-    	  console.log(paciente);
-    	  console.log("--ppppppppppppppppppppppppppppppppppppppp");
-
     	  return {
-          value: paciente,
-          display:  paciente.dni +":" + paciente.nombre+" ," + paciente.apellido 
-        };
+	          value: paciente,
+	          display:  paciente.dni +":" + paciente.nombre+" ," + paciente.apellido 
+    	  	};
       });
     }
 
+    
     vm.pacientes = [];
 
 
-  }]);
+  });

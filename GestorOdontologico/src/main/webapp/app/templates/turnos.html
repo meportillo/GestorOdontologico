@@ -122,7 +122,7 @@
 
     <thead>
       <tr>
-      	<th>Nombre/Apellido Paciente</th>
+      	<th>Nombre,Apellido y Dni de Paciente</th>
         <th>Observaci&oacute;n</th>
         <th>Hora de Inicio</th>
         <th>Hora de Fin</th>
@@ -134,28 +134,32 @@
     
       <tr ng-repeat="event in (vm.eventsTable) track by $index"> 
       	<td>      	
-      	 <md-content class="md-padding">
-    <form ng-submit="$event.preventDefault()">
-      <md-autocomplete
-          ng-disabled="vm.isDisabled"
-          md-selected-item="vm.selectedItem"
-          md-search-text-change="vm.searchTextChange(vm.searchText)"
-          md-search-text="vm.searchText"
-          md-selected-item-change="vm.selectedItemChange(item)"
-          md-items="item in vm.querySearch(vm.searchText)"
-          md-item-text="item.nombre"
-          md-min-length="1"
-          placeholder="nombre, apellido de paciente"
-           ng-model-options='{ debounce: 2000 }'>
+      	 <label ng-show="!(event.datosPaciente == '') || !(event.datosPaciente == null)">
+      	 {{event.datosPaciente.split(',')[0]}}
+		 <br>
+		 {{event.datosPaciente.split(',')[1]}}      	 
+      	 </label>
+      	 <md-content class="md-padding" ng-show="(event.datosPaciente == '') || (event.datosPaciente == null)" >
+    		<form ng-submit="$event.preventDefault()">
+      		<md-autocomplete
+	          ng-disabled="vm.isDisabled"
+	          md-selected-item="vm.selectedItem"
+	          md-search-text-change="vm.searchTextChange(vm.searchText)"
+	          md-search-text="vm.searchText"
+	          md-selected-item-change="vm.selectedItemChange(item)"
+	          md-items="item in vm.querySearch(vm.searchText)"
+	          md-item-text="item.nombre"
+	          md-min-length="1"
+	          placeholder="nombre, apellido de paciente"
+	           ng-model-options='{ debounce: 2000 }'>
         
-        <md-item-template>
-          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
-        </md-item-template>
-        <md-not-found>
-          No se econtro ningun paciente con el valor: "{{vm.searchText}}".
-       
-        </md-not-found>
-      </md-autocomplete>
+		        <md-item-template>
+		          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
+		        </md-item-template>
+		        <md-not-found>
+			          No se encontro ningun paciente con el valor: "{{vm.searchText}}".
+	        	</md-not-found>
+      		</md-autocomplete>
       <br/>
     </form>
   </md-content>

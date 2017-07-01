@@ -1,33 +1,20 @@
 package com.tip.model;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 
 public class TurnoMock implements Serializable {
 	
 	private static final long serialVersionUID = 1L;	
-	/*
-	    title: 'An event',
-        color: calendarConfig.colorTypes.warning,
-        startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-        endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-        draggable: true,
-        resizable: true,
-        actions: actions 
-        dni
-	 
-	 */
-	
 	
 	private String title;
-//    color: calendarConfig.colorTypes.warning,
     private Date startsAt;
     private Date endsAt;
     private boolean draggable;
     private boolean resizable;
     private String datosPaciente;
-    
+    private ColorTurno colorPrimary;
+    private Integer idTurno;
     
     public String getDatosPaciente() {
 		return datosPaciente;
@@ -37,23 +24,17 @@ public class TurnoMock implements Serializable {
 		this.datosPaciente = datosPaciente;
 	}
 
-	private ColorTurno colorPrimary;
-    private Integer idTurno;
-    
-//    actions: actions
-	
 	public TurnoMock(String title, Integer idTurno, Date fecha ,Date horaInicio, Date horaFin, Paciente dniPaciente) {
+
 		this.setTitle(title);
 		this.setDraggable(true);
 		this.setDraggable(true);
-		
 		this.setStartsAt(horaInicio);
-		
 		this.setEndsAt(horaFin);
-		
 		this.setColorPrimary(new ColorTurno());
 		this.setIdTurno(idTurno);
-		this.setDatosPaciente(" - " + dniPaciente.getNombre() + ", " + dniPaciente.getApellido());
+		this.setDatosPaciente(dniPaciente.getNombre() + " " + dniPaciente.getApellido()+", " + dniPaciente.getDni());
+	
 	}
 
 	public String getTitle() {
@@ -111,8 +92,4 @@ public class TurnoMock implements Serializable {
 	public void setColorPrimary(ColorTurno colorPrimary) {
 		this.colorPrimary = colorPrimary;
 	}
-	
-	
-	
-
 }

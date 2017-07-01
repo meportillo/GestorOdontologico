@@ -1,4 +1,4 @@
-app.service('TurnoService', function($http,toaster,$q ,$route) {
+app.service('TurnoService', function($http,toaster,$q ,$route, Turno, Paciente) {
 
 	console.log("TurnoService");
 	
@@ -15,11 +15,7 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 	this.turnosDelMes = function( inicioSemana , asd){
 		console.log(inicioSemana);
 		console.log(asd);
-		
-		
 	}
-	
-	
 	this.turnosDeLaSemana=function(inicioSemana , FinSemana){
 		
 		$http({
@@ -29,18 +25,19 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 				'Content-Type' : 'application/json',
 			}
 		}).then(function mySucces(response) {
-			scopeTurnos.eventsTable = response.data;
+			scopeTurnos.eventsTable = response.data.map(function(elem){
+				var turno = new Turno(elem.idTurno,elem.title,elem.startsAt,elem.endsAt,elem.draggable,elem.resizable,elem.datosPaciente,elem.color)
+				turno.paciente = new Paciente();
+				turno.paciente.dni = elem.datosPaciente.split(",")[0];
+				return turno
+			}) ;
 			var turno = scopeTurnos.eventsTable[0]; 
 			
 			   angular.forEach(scopeTurnos.events, function(value, key){
 				      if(value.idTurno == 0)
 				         value = turno;
 				   });
-//			scopeTurnos.events = response.data;
-			
-//			 deferred.resolve(response.data);
 		}, function myError(response) {
-			
 			toaster.pop('error', response.status + ', ' + response.message );
 			console.log(response);
 		});
@@ -60,7 +57,14 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 			}
 		}).then(function mySucces(response) {
 	
-			 deferred.resolve(response.data);
+		var turnos = response.data.map(function(elem){
+				var turno = new Turno(elem.idTurno,elem.title,elem.startsAt,elem.endsAt,elem.draggable,elem.resizable,elem.datosPaciente,elem.color)
+				turno.paciente = new Paciente();
+				turno.paciente.dni = elem.datosPaciente.split(",")[0];
+				return turno
+			}) ;
+			
+			 deferred.resolve(turnos);
 		}, function myError(response) {
 			
 			toaster.pop('error', response.status + ', ' + response.message );
@@ -70,24 +74,19 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 		 return deferred.promise;
 	 }
 	
-	this.guardarTurno=function(title, startsAt, endsAt, paciente){
+	this.guardarTurno=function(turno){
 		
 		var deferred = $q.defer();
 			$http({
 				method : 'POST',
-				url : "/GestorOdontologico/service/turno/crearTurno/"+ title + "/"  +startsAt + "/" + endsAt ,
+				url : "/GestorOdontologico/service/turno/crearTurno/"+ turno.title + "/"  + turno.startsAt + "/" + turno.endsAt ,
 				headers : { 'Content-Type' : 'application/json'},
-				data : paciente
+				data : turno.paciente
 			}).then(function mySucces(response) {
 //				SOLUCION TEMPORAL 
 				scopeTurnos.events.push(response.data);
-//	
-				
-				
 				toaster.pop('sucess', 'Agregado en forma correcta');
-//				console.log(response);
 				deferred.resolve(response.data);
-//				console.log(deferred.promise);
 			}, function myError(response) {
 				console.log(response);
 				toaster.pop('error', response.status + ', ' + ((paciente == null)? "Debe eligir primero el paciente": (response.status == 409)? "Verificar fecha, hora de inicio y fin " : " verifique los campos"));
@@ -98,7 +97,7 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 	//editarTurno
 
 	this.editarTurno = function(turno){
-		
+
 		var deferred = $q.defer();
 		$http({
 			method : 'POST',
@@ -106,11 +105,11 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 			headers : { 'Content-Type' : 'application/json'	},
 			data : {}
 		}).then(function mySucces(response) {
+			console.log(response);
+			var turno = new Turno();
 			deferred.resolve(response);
+			
 			toaster.pop('sucess', 'Editado en forma correcta');
-//			console.log(response);
-
-//			SOLUCION TEMPORAL 
 			var i = scopeTurnos.events.length;
 			while( i-- ) {
 			    if( scopeTurnos.events[i].idTurno == turno.idTurno ){ 
@@ -118,12 +117,7 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 			    	break
 			    }
 			}
-
-			
-//			
-		
 		}, function myError(response) {
-//			console.log(response);
 			toaster.pop('error', response.status + ', ' + response.mesage);
 		});
 		
@@ -146,11 +140,8 @@ app.service('TurnoService', function($http,toaster,$q ,$route) {
 				    	break
 				    }
 				}
-//			
-				
 				toaster.pop('sucess', 'Eliminado en forma correcta');
 				console.log(response);
-//				$route.reload();
 
 			}, function myError(response) {
 			toaster.pop('error', response.status + ', ' + response.message );

@@ -1,19 +1,14 @@
 app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 
-	console.log("PacienteService");
-
 	this.updatePaciente=function(pacienteParam){
 		var deferred = $q.defer();
-
-		
-
 		$http({
 			method : 'PUT',
 			url : '/GestorOdontologico/service/paciente/updatePaciente/' + pacienteParam.dni,
 			headers : {
 				 'Content-Type' : 'application/json',
                  'accept' : 'application/json'
-			},
+				},
 			data: pacienteParam
 			
 		}).then(function mySucces(response) {			
@@ -24,13 +19,9 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 
 		}, function myError(response) {
 			toaster.pop('error', "Sistema no disponible en estos momentos");
-			console.log(response);
-			
-			 return deferred.promise;
+    		return deferred.promise;
 		});	
-
-		
-		 return deferred.promise;
+			return deferred.promise;
 	}
 	
 	this.agregarPaciente= function(pacienteParam){
@@ -41,7 +32,6 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 		else{
 			var os = JSON.parse(pacienteParam.obraSocial);
 			pacienteParam.setObraSocial(os);
-			
 			$http({ 
 				method : 'POST',
 				url : '/GestorOdontologico/service/paciente/crearPaciente',
@@ -52,35 +42,29 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 				console.log(response);
 				$location.path('/historias/ficha/'+response.data.dni);
 		}, function myError(response) {
-			console.log(response);
-			toaster.pop('error', response.status + ', Error en uno de los campos ingresados ' + response.message );
-		
+				console.log(response);
+				toaster.pop('error', response.status + ', Error en uno de los campos ingresados ' + response.message );
 			});
-			
 		}
-		
 	}
 	
 	this.agregarPacienteSimple= function(dni, nombre , apellido){
 	
 		var deferred = $q.defer();
-
 			$http({ 
 				method : 'POST',
 				url : '/GestorOdontologico/service/paciente/crearPacienteSimple/'+ dni+'/' + nombre +'/' + apellido +'/',
 				headers : { 'Content-Type' : 'application/json'},
 			}).then(function mySucces(response) {
+
 				toaster.pop('sucess', 'Agregado en forma correcta');
-				 deferred.resolve(response.data);
+				deferred.resolve(response.data);
 
-		}, function myError(response) {
-			console.log(response);
-			toaster.pop('error', response.status + ', Error en uno de los campos ingresados ' + response.message );
-		
-			});
-			
-		 return deferred.promise;
-
+			}, function myError(response) {
+				console.log(response);
+				toaster.pop('error', response.status + ', Error en uno de los campos ingresados ' + response.message );
+	       });
+				return deferred.promise;
 	}
 	
 	this.obtenerPacienteDni = function(dni){
@@ -112,9 +96,7 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 		$http({
 			method : 'GET',
 			url : '/GestorOdontologico/service/paciente/getPacientePorNombreApellidoDni/' +dato,
-			headers : {
-				'Content-Type' : 'application/json',
-			}
+			headers : {'Content-Type' : 'application/json',}
 		}).then(function mySucces(response) {
 	
 			 deferred.resolve(response.data);
@@ -129,21 +111,40 @@ app.service('PacienteService', function($http,toaster, $location,$q, Paciente) {
 			console.log(response);
 		});	
 		
-		 return deferred.promise;
+			return deferred.promise;
 		 }
+
+
+	this.getAllPacientes = function(){
+		var deferred = $q.defer();
+
+		$http({ 
+			method : 'GET',
+			url : '/GestorOdontologico/service/paciente	/obtenerTodosLosPacientes',
+			headers : { 'Content-Type' : 'application/json'},
+		}).then(function mySucces(response) {
+			deferred.resolve(response.data);
+		}, function myError(response) {
+			toaster.pop('error', response.status + ', ' + response.message );
+		});
+			return deferred.promise;
+	}
+	
+
 	
 	this.getTopPaciente = function(){
 		var deferred = $q.defer();
-	$http({ 
-		method : 'GET',
-		url : '/GestorOdontologico/service/paciente/getTopPacientes',
-		headers : { 'Content-Type' : 'application/json'},
+		$http({ 
+			method : 'GET',
+			url : '/GestorOdontologico/service/paciente/getTopPacientes',
+			headers : { 'Content-Type' : 'application/json'},
 		}).then(function mySucces(response) {
-			 deferred.resolve(response.data);
+			deferred.resolve(response.data);
 		}, function myError(response) {
-		toaster.pop('error', response.status + ', ' + response.message );
+		
+			toaster.pop('error', response.status + ', ' + response.message );
 		});
-	 return deferred.promise;
+			return deferred.promise;
 	}
 	
 });
