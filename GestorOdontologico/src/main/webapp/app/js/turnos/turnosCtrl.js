@@ -154,7 +154,7 @@ appc.controller('KitchenSinkCtrl',
     
     calendarConfig.dateFormatter = 'moment'; // use moment instead of angular for formatting dates
     var originali18n = angular.copy(calendarConfig.i18nStrings);
-    calendarConfig.i18nStrings.weekNumber = 'Semaine {week}';
+    calendarConfig.i18nStrings.weekNumber = 'Semana {week}';
     
     $window.moment = $window.moment || moment;
     $ocLazyLoad.load('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js').then(function() {
