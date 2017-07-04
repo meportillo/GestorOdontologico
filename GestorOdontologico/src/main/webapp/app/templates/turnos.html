@@ -148,10 +148,9 @@
 	          md-search-text="vm.searchText"
 	          md-selected-item-change="vm.selectedItemChange(item)"
 	          md-items="item in vm.querySearch(vm.searchText)"
-	          md-item-text="item.nombre"
+	          md-item-text="item.display"
 	          md-min-length="1"
-	          placeholder="nombre, apellido de paciente"
-	           ng-model-options='{ debounce: 2000 }'>
+	          placeholder="nombre, apellido de paciente">
         
 		        <md-item-template>
 		          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>

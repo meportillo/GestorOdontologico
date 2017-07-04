@@ -75,6 +75,7 @@ appc.controller('KitchenSinkCtrl',
     }
     
     vm.guardarEditados = function(index, n , turno) {
+    	console.log(vm.pacienteSeleccionado);
     
     turno.paciente = vm.pacienteSeleccionado;
     
@@ -176,7 +177,7 @@ appc.controller('KitchenSinkCtrl',
 //    TABLE DE DATOS - TUrNOS
 	TurnoService.obtenerTodosLosTurnos(vm)
 	.then(function (turnos) {
-		console.log(turnos);
+//		console.log(turnos);
 		vm.events  = turnos;
 		
 //		datosPaciente
@@ -194,7 +195,7 @@ appc.controller('KitchenSinkCtrl',
 	
 	vm.agregarPacienteSimple = function(){
 	
-var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
+		var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
 		
  		if (mensajesDeError.length > 0) {
  			console.log($scope.myDate);
@@ -211,16 +212,15 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
  		}
 	}
     vm.querySearch = function(query) {
-    	var deferred = $q.defer();
-    	
-    	PacienteService.obtenerPacientesPorAlgunDato(vm.searchText).
-    	then(function(pacientes){
-    		
-    		vm.pacientes = pacientes;
-    		vm.pacientes  = vm.loadAll();
-    		deferred.resolve(vm.pacientes);
-    	});
-		 return deferred.promise;
+   //    var temp =	vm.todosLosPacientes.filter
+    console.log("---------------------------------------------------------")
+    console.log(vm.todosLosPacientes);
+    console.log("---------------------------------------------------------")
+
+    	return	vm.todosLosPacientes.filter(function(item){
+    		console.log(item);
+    		    return item.value.nombre.indexOf(query) !== -1 || item.value.apellido.indexOf(query) !== -1
+    		});
     
     }
     
@@ -242,17 +242,34 @@ var mensajesDeError = vm.pacienteTemp.errorMsjSimple()
      }
 
     vm.loadAll = function() {
-      var pacientes = vm.pacientes;
-      return pacientes.map( function (paciente) {
-    	  return {
-	          value: paciente,
-	          display:  paciente.dni +":" + paciente.nombre+" ," + paciente.apellido 
-    	  	};
-      });
+    	
+   return 	PacienteService.getAllPacientes().
+    	then(function(pacientes){
+    		
+    		vm.pacientes = pacientes;
+    	
+    	      var pacientess = vm.pacientes;
+    	      return pacientess.map( function (paciente) {
+    	    	  return {
+    		          value: paciente,
+    		          display:  paciente.dni +":" + paciente.nombre+" ," + paciente.apellido 
+    	    	  	};
+    	      });
+    	});
+    	
     }
+    vm.loadAll()
+    .then(function(pacientes){
+    	vm.todosLosPacientes = pacientes;
+    });
+	PacienteService.getAllPacientes().
+	then(function(pacientes){
+		console.log("--------------------------todos los pacientes-------------------------------")
+		console.log(pacientes);
 
-    
-    vm.pacientes = [];
+	});
+
+//    vm.pacientes = [];
 
 
   });

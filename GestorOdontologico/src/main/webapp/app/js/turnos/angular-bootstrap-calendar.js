@@ -3984,7 +3984,7 @@ angular
 //      console.log("----------------------------- aaaaaaaaaaaaaaa -------------------");
 //      console.log(weekdays);
 //      console.log("----------------------------- aaaaaaaaaaaaaaa -------------------");
-      weekdays = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
+      weekdays = ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"];
       return weekdays;
 
     }

@@ -4,19 +4,7 @@ app.service('TurnoService', function($http,toaster,$q ,$route, Turno, Paciente) 
 	
 	var scopeTurnos = '';
 	
-	this.turnosDelMes = function(date){
-		console.log(date);
-	}
-	
-	this.turnosDelAnio = function(date){
-		console.log(date);
-	}
-	
-	this.turnosDelMes = function( inicioSemana , asd){
-		console.log(inicioSemana);
-		console.log(asd);
-	}
-	this.turnosDeLaSemana=function(inicioSemana , FinSemana){
+	this.turnosDeLaSemana = function(inicioSemana , FinSemana){
 		
 		$http({
 			method : 'GET',
@@ -85,6 +73,7 @@ app.service('TurnoService', function($http,toaster,$q ,$route, Turno, Paciente) 
 			}).then(function mySucces(response) {
 //				SOLUCION TEMPORAL 
 				scopeTurnos.events.push(response.data);
+				console.log(response.data);
 				toaster.pop('sucess', 'Agregado en forma correcta');
 				deferred.resolve(response.data);
 			}, function myError(response) {
@@ -106,17 +95,22 @@ app.service('TurnoService', function($http,toaster,$q ,$route, Turno, Paciente) 
 			data : {}
 		}).then(function mySucces(response) {
 			console.log(response);
-			var turno = new Turno();
+//			var turno = new Turno();
 			deferred.resolve(response);
 			
 			toaster.pop('sucess', 'Editado en forma correcta');
 			var i = scopeTurnos.events.length;
+			var n = 0 ;
 			while( i-- ) {
 			    if( scopeTurnos.events[i].idTurno == turno.idTurno ){ 
-			    	scopeTurnos.events[i] = turno;
+//			    	scopeTurnos.events[i] = turno;
+			    	n = i;
 			    	break
 			    }
 			}
+			scopeTurnos.events.splice(i, 1);
+			scopeTurnos.events.push(turno);
+			
 		}, function myError(response) {
 			toaster.pop('error', response.status + ', ' + response.mesage);
 		});
