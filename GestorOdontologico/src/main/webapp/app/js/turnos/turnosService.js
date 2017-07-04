@@ -72,7 +72,10 @@ app.service('TurnoService', function($http,toaster,$q ,$route, Turno, Paciente) 
 				data : turno.paciente
 			}).then(function mySucces(response) {
 //				SOLUCION TEMPORAL 
-				scopeTurnos.events.push(response.data);
+				var turno =  response.data ;
+				turno.title = turno.datosPaciente  + " " + turno.title ;
+
+				scopeTurnos.events.push(turno);
 				console.log(response.data);
 				toaster.pop('sucess', 'Agregado en forma correcta');
 				deferred.resolve(response.data);

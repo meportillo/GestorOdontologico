@@ -72,7 +72,7 @@ public class TurnoRest {
 			turno.setDescripcion(title);
 
 			this.getTurnoService().save(turno);
-			return Response.ok(turno).build();
+			return Response.ok(turno.toTurnoMock()).build();
 		
 		} catch (Exception e) {
 			e.printStackTrace();
