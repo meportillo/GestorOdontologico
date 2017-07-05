@@ -81,7 +81,7 @@ app.service('TurnoService', function($http,toaster,$q ,$route, Turno, Paciente) 
 				deferred.resolve(response.data);
 			}, function myError(response) {
 				console.log(response);
-				toaster.pop('error', response.status + ', ' + ((paciente == null)? "Debe eligir primero el paciente": (response.status == 409)? "Verificar fecha, hora de inicio y fin " : " verifique los campos"));
+				toaster.pop('error', response.status + ', ' + ((turno.paciente == null)? "Debe eligir primero el paciente": (response.status == 409)? "Verificar fecha, hora de inicio y fin " : " verifique los campos"));
 			});
 			 return deferred.promise;
     }
