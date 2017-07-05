@@ -6,11 +6,11 @@
   <div class="panel-body">      
      <form name="pacienteForm"  ng-submit="guardarPaciente()" novalidate>
     
-    <div class="col-md-12">
-     <div class="col-md-4">
+    <div class="col-md-12 col-sm-12">
+     <div class="col-md-4 col-sm-4">
      <label>
       <p>Nombre:<br>
-	  <input type="text" name="nombre" ng-model="paciente.nombre" style="width:160%"  required>
+	  <input class="form-control" type="text" name="nombre" ng-model="paciente.nombre"  required>
 	  <br>
 	  <span style="color:red" ng-show="!paciente.nombre">
 	  <span ng-show="pacienteForm.nombre.$error.required">Por favor complete el campo.</span>
@@ -19,10 +19,10 @@
 	  </label>
 	</div>
 
-     <div class="col-md-4">
+     <div class="col-md-4 col-sm-4">
 	 <label>  
       <p>Apellido:<br>
-	  <input type="text" name="apellido" ng-model="paciente.apellido" style="width:160%" required>
+	  <input class="form-control" type="text" name="apellido" ng-model="paciente.apellido"  required>
 	  <br>
 	  <span style="color:red" ng-show="!paciente.apellido">
 	  <span ng-show="pacienteForm.apellido.$error.required">Por favor complete el campo.</span>
@@ -30,9 +30,9 @@
 	  </p>
 	</label>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 col-sm-4">
       DNI:<br>
-      <input type="number" name="dni" ng-model="paciente.dni"  min="1000000" max="1000000000" style="width:80%" required>
+      <input type="number" name="dni" ng-model="paciente.dni"  min="1000000" max="1000000000" class="form-control"  required>
       <br>
       <span style="color:red" ng-show="!paciente.dni">
       <span ng-show="pacienteForm.dni.$error.required">Por favor complete el campo.</span>
@@ -45,8 +45,8 @@
 	
      </div>
     
-    <div class="col-md-12">
-        <div class="col-md-4">
+    <div class="col-md-12 col-sm-12">
+        <div class="col-md-4 col-sm-4">
     
           <label for="pacienteObraSocial" class="ng-scope" style="width:80%">Obra Social:<br> <select ng-model="paciente.obraSocial" >
 	      
@@ -55,9 +55,9 @@
 	  </label>
     
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-8">
       Direccion:<br>
-      <input  type="text" name="direccion" ng-model="paciente.direccion" style="width:80%" required>
+      <input  type="text" name="direccion" ng-model="paciente.direccion" class="form-control" required>
       <br>
       <span style="color:red" ng-show="!paciente.direccion">
       <span ng-show="pacienteForm.direccion.$error.required">Por favor complete el campo.</span>
@@ -68,8 +68,8 @@
  
     </div>
     
-    <div class="col-md-12">
-      <div class="col-md-4">
+    <div class="col-md-12 col-sm-12">
+      <div class="col-md-4 col-sm-4">
 	  <h4>Fecha Nacimiento:</h4>
         <p class="input-group">
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"  alt-input-formats="altInputFormats"  ng-change="diferencia()"    ng-model-options='{ debounce: 2000 }' close-text="Cerrar"
@@ -82,16 +82,17 @@
       </div>
 	
 
-     <div class="col-md-4">
+     <div class="col-md-4 col-sm-4">
           	<label> <br>
 			      Edad: {{ (+paciente.anios)}}
 			      </span>
 			</label>
           
        </div>
-       <div class="col-md-4">
-			<br>
-	    	<input ui-keypress="{13:'submit'}" class="btn btn-primary col-sm-3" type="submit" id="submit"  value="Guardar"
+       <br>
+       <div class="col-md-4 col-sm-4">
+			
+	    	<input ui-keypress="{13:'submit'}" class="btn btn-primary col-sm-3" type="submit" class="form-control" id="submit"  value="Guardar"
 		ng-disabled="pacienteForm.apellido.$error.required ||  
 		pacienteForm.nombre.$error.required ||
 		pacienteForm.direccion.$error.required ||  

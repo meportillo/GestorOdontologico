@@ -122,18 +122,18 @@
 
     <thead>
       <tr>
-      	<th>Nombre,Apellido y Dni de Paciente</th>
-        <th>Observaci&oacute;n</th>
-        <th>Hora de Inicio</th>
-        <th>Hora de Fin</th>
-        <th>Acciones</th>
+      	<th class="col-md-3 col-sm-3">Nombre,Apellido y Dni de Paciente</th>
+        <th class="col-md-3 col-sm-3">Observaci&oacute;n</th>
+        <th class="col-md-3 col-sm-3">Hora de Inicio</th>
+        <th class="col-md-3 col-sm-3">Hora de Fin</th>
+        <th class="col-md-3 col-sm-3">Acciones</th>
       </tr>
     </thead>
 
     <tbody>
     
       <tr ng-repeat="event in (vm.eventsTable) track by $index"> 
-      	<td>      	
+      	<td class="col-md-3 col-sm-3">      	
       	 <label ng-show="!(event.datosPaciente == '') || !(event.datosPaciente == null)">
       	 {{event.datosPaciente.split(',')[0]}}
 		 <br>
@@ -164,13 +164,13 @@
   </md-content>
 
       	</td>
-        <td>
+        <td class="col-md-3 col-sm-3">
           <input
             type="text"
             class="form-control"
             ng-model="event.title"  placeholder="Observacion">
         </td>
-        <td>
+        <td class="col-md-3 col-sm-3">
           <p class="input-group" style="max-width: 250px">
             <input
               type="text"
@@ -199,7 +199,7 @@
             show-meridian="true">
           </div>
         </td>
-        <td>
+        <td class="col-md-3 col-sm-3">
           <p class="input-group" style="max-width: 250px">
             <input
               type="text"
@@ -228,7 +228,7 @@
             show-meridian="true">
           </div>
         </td>
-        <td>
+        <td class="col-md-3 col-sm-3">
           <button
             class="btn btn-danger"
             

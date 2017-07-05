@@ -14,16 +14,16 @@
     </table>
     
     <script type="text/ng-template" id="display">
-        <td>{{obraSocial.nombre}}</td>
-        <td>{{obraSocial.codigo}}</td>
+        <td class="col-md-4 col-sm-4">{{obraSocial.nombre}}</td>
+        <td class="col-md-4 col-sm-4">{{obraSocial.codigo}}</td>
         <td>
-            <button type="button" class="btn btn-primary btn-sm" ng-click="editobraSocial(obraSocial)">Edit</button>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="editobraSocial(obraSocial)">Editar</button>
         </td>
     </script>
     <script type="text/ng-template" id="edit">
-        <td><input type="text" ng-model="model.selected.nombre" /></td>
-        <td><input type="text" ng-model="model.selected.codigo" /></td>
-        <td>
+        <td class="col-md-4 col-sm-4" ><input class="form-control" type="text" ng-model="model.selected.nombre" /></td>
+        <td class="col-md-4 col-sm-4" ><input class="form-control" type="text" ng-model="model.selected.codigo" /></td>
+        <td class="col-md-4 col-sm-4">
             <button type="button" class="btn btn-success btn-sm" ng-click="updatearOS($index)" ng-disabled="!model.selected.nombre || !model.selected.codigo">Actualizar</button>
 			<button type="button" class="btn btn-danger btn-sm" ng-click="eliminarOS($index)">Eliminar</button>
             <button type="button" class="btn btn-default btn-sm" ng-click="reset()">Cancel</button>
@@ -37,7 +37,7 @@
     <form name="obraSocialForm" novalidate>
     	
       <p>Nombre:<br>
-	  <input type="text" name="nombre" ng-model="obraSocial.nombre" required>
+	  <input class="form-control"  type="text" name="nombre" ng-model="obraSocial.nombre" required>
 	  <span style="color:red" ng-show="!obraSocial.nombre">
 	  <span ng-show="obraSocialForm.nombre.$error.required">Por favor complete el campo.</span>
 	  </span>
@@ -45,7 +45,7 @@
 	  
 	  
       <p>C&oacute;digo:<br>
-	  <input type="text" name="codigo" ng-model="obraSocial.codigo" required>
+	  <input class="form-control"  type="text" name="codigo" ng-model="obraSocial.codigo" required>
 	  <span style="color:red" ng-show="!obraSocial.codigo">
 	  <span ng-show="obraSocialForm.codigo.$error.required">Por favor complete el campo.</span>
 	  </span>

@@ -22,33 +22,33 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>
+											<td class="col-md-3 col-sm-3">
 												<span  ng-show="!verInput">{{ paciente.nombre || 'empty' }}</span>
-								        		<input type="text" ng-show="verInput" ng-model="paciente.nombre">
+								        		<input class="form-control" type="text" ng-show="verInput" ng-model="paciente.nombre">
 								        	</td>
-											<td>
+											<td class="col-md-3 col-sm-3">
 												<span ng-show="!verInput">{{ paciente.apellido || 'empty' }}</span>
-												<input type="text" ng-show="verInput" ng-model="paciente.apellido">
+												<input class="form-control" type="text" ng-show="verInput" ng-model="paciente.apellido">
 											</td>
-											<td>
+											<td class="col-md-3 col-sm-3">
 												<span  ng-show="!verInput">{{ paciente.dni || 'empty' }}  </span>
-											   <input type="number" ng-show="verInput" ng-model="paciente.dni"  min="1000000" max="1000000000" required>
+											   <input class="form-control" type="number" ng-show="verInput" ng-model="paciente.dni"  min="1000000" max="1000000000" required>
 												
 								    		</td>
-											<td>  
+											<td class="col-md-3 col-sm-3">  
 												<span ng-show="!verInput">{{ paciente.direccion || 'empty' }}</span>
-												<input type="text" ng-show="verInput" ng-model="paciente.direccion">
+												<input class="form-control" type="text" ng-show="verInput" ng-model="paciente.direccion">
 								     		</td>
 										</tr>
 										<tr>
-											<td><b>Años </b></td>
-											<td><b> Fecha Nacimiento</b></td>
-											<td><b>Fecha Alta </b></td>
-											<td><b>Observaciones</b></td>
+											<td class="col-md-3 col-sm-3"><b>Años </b></td>
+											<td class="col-md-3 col-sm-3"><b> Fecha Nacimiento</b></td>
+											<td class="col-md-3 col-sm-3"><b>Fecha Alta </b></td>
+											<td class="col-md-3 col-sm-3"><b>Observaciones</b></td>
 										</tr>
 										<tr>
-										<td> {{paciente.anios}}</td>
-										<td>
+										<td class="col-md-3 col-sm-3"> {{paciente.anios}}</td>
+										<td class="col-md-3 col-sm-3">
 										    <span ng-show="!verInput">{{ paciente.fechaNac | date:"dd/MM/yyyy" }}</span>
 									      <div ng-show="verInput">
 									        <p class="input-group">
@@ -63,7 +63,7 @@
 									      </div>
 											
 										</td>
-										<td>
+										<td  class="col-md-3 col-sm-3">
 											 <span  ng-show="!verInput">{{paciente.ficha.fechaAlta | date : "dd/MM/y" }}</span>
 									      <div ng-show="verInput">
 									        <p class="input-group">
@@ -77,9 +77,9 @@
 									      </div>
 
 										</td>
-										<td>
+										<td  class="col-md-3 col-sm-3">
 											<span  ng-show="!verInput">{{ paciente.ficha.observaciones }}</span>
-     										<textarea  ng-show="verInput" rows="2" cols="30" ng-model="paciente.ficha.observaciones"></textarea>	
+     										<textarea class="form-control"  ng-show="verInput"  ng-model="paciente.ficha.observaciones"></textarea>	
 										</td>
 											
 										</tr>
