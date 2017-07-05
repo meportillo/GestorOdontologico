@@ -20,15 +20,28 @@ app.factory('Turno', function() {
   
   Turno.prototype.validar = function() {
 	  var mensajesDeError = []
-	  if (this.startsAt < moment().startOf('day').toDate()) {
-		  mensajesDeError.push("Verificar la fecha y hora de inicio del turno, debe ser posterior al dia y a la hora actual")	  
-	  }
+	  console.log(this);
+	  
+	  if(this.startsAt == null)
+		  mensajesDeError.push("Fecha y Hora de inicio sin definir")
+	  
+	  else  
+		  if (this.startsAt < moment().startOf('day').toDate()) 
+			  mensajesDeError.push("Verificar la fecha y hora de inicio del turno, debe ser posterior al dia y a la hora actual")	  
+
+	  if (this.endsAt == null)
+		  mensajesDeError.push("Fecha y Hora de fin sin definir")
+
+      else   
+		  if (this.endsAt < moment().startOf('day').toDate()) 
+			  mensajesDeError.push("Verificar la fecha y hora de fin de turno debe ser posterior a la hora actual")	  
+	
+			  
 	  if (this.startsAt > this.endsAt) {
 		  mensajesDeError.push("la fecha y hora de inicio tiene que ser menor a la fecha y hora de fin del turno")	  
 	  }
-	  if (this.endsAt < moment().startOf('day').toDate()) {
-		  mensajesDeError.push("Verificar la fecha y hora de fin de turno debe ser posterior a la hora actual")	  
-	  }	  
+	 
+
 	  if (this.title == "" || this.title == null) {
 		  mensajesDeError.push("Debe ingresar alguna observacion en el turno")
 	  }	  

@@ -96,7 +96,7 @@ public class TurnoRest {
 
 				
 				
-				return Response.status(Response.Status.BAD_REQUEST).build();
+				return Response.status(Response.Status.CONFLICT).build();
 	
 			} else {
 
