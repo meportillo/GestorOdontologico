@@ -75,10 +75,7 @@ appc.controller('KitchenSinkCtrl',
     }
     
     vm.guardarEditados = function(index, n , turno) {
-    	console.log(vm.pacienteSeleccionado);
-    
-//    turno.paciente = vm.pacienteSeleccionado;
-    
+       
     var mensajesDeError = turno.validar();	
     
     if(mensajesDeError.length > 0){
@@ -207,6 +204,10 @@ appc.controller('KitchenSinkCtrl',
  			PacienteService.agregarPacienteSimple(vm.pacienteTemp.dni,vm.pacienteTemp.nombre, vm.pacienteTemp.apellido)
 			.then(function (paciente) {
 				vm.pacienteSeleccionado = paciente;
+				vm.todosLosPacientes.push(
+						{'value': paciente,
+	    		          'display':  paciente.dni +":" + paciente.nombre+" ," + paciente.apellido 
+						})
 				vm.verSeleccionado = true;
 			});
  		}
@@ -237,6 +238,7 @@ appc.controller('KitchenSinkCtrl',
     	console.log('Item changed to ' + JSON.stringify(item));
        vm.searchText = item.display;
        turno.paciente = item.value;
+       vm.pacienteSeleccionado = item.value;
        console.log(turno.paciente);
      }
 
