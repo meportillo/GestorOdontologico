@@ -134,12 +134,7 @@
     
       <tr ng-repeat="event in (vm.eventsTable) track by $index"> 
       	<td class="col-md-3 col-sm-3">      	
-      	 <label ng-show="!(event.datosPaciente == '') || !(event.datosPaciente == null)">
-      	 {{event.datosPaciente.split(',')[0]}}
-		 <br>
-		 {{event.datosPaciente.split(',')[1]}}      	 
-      	 </label>
-      	 <md-content class="md-padding" ng-show="(event.datosPaciente == '') || (event.datosPaciente == null)" >
+      	  <md-content class="md-padding" ng-show="(event.datosPaciente == '') || (event.datosPaciente == null)" >
     		<form ng-submit="$event.preventDefault()">
       		<md-autocomplete
 	          ng-disabled="vm.isDisabled"
@@ -160,8 +155,13 @@
 	        	</md-not-found>
       		</md-autocomplete>
       <br/>
-    </form>
+    </form>      	
   </md-content>
+    <label ng-show="!(event.datosPaciente == '') || !(event.datosPaciente == null)">
+      	 {{event.datosPaciente.split(',')[0]}}
+		 <br>
+		 {{event.datosPaciente.split(',')[1]}}      	 
+      	 </label>
 
       	</td>
         <td class="col-md-3 col-sm-3">
