@@ -77,7 +77,7 @@ appc.controller('KitchenSinkCtrl',
     vm.guardarEditados = function(index, n , turno) {
     	console.log(vm.pacienteSeleccionado);
     
-    turno.paciente = vm.pacienteSeleccionado;
+//    turno.paciente = vm.pacienteSeleccionado;
     
     var mensajesDeError = turno.validar();	
     
@@ -232,13 +232,12 @@ appc.controller('KitchenSinkCtrl',
     vm.searchText = "";
     vm.selectedItem = null;
     
-    vm.selectedItemChange =  function(item) {
-       
-   	   console.log('------ertwertwertw-------------- ' + JSON.stringify(vm.selectedItem));
-   	   console.log('Item changed to ' + JSON.stringify(item));
-       vm.pacienteSeleccionado = item.value;
+    vm.selectedItemChange =  function(item , turno) {
+    
+    	console.log('Item changed to ' + JSON.stringify(item));
        vm.searchText = item.display;
-       vm.verSeleccionado = true;
+       turno.paciente = item.value;
+       console.log(turno.paciente);
      }
 
     vm.loadAll = function() {

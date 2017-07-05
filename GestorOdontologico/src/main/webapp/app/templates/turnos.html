@@ -143,11 +143,11 @@
     		<form ng-submit="$event.preventDefault()">
       		<md-autocomplete
 	          ng-disabled="vm.isDisabled"
-	          md-selected-item="vm.selectedItem"
+	          md-selected-item="event.selectedItem"
 	          md-search-text-change="vm.searchTextChange(vm.searchText)"
-	          md-search-text="vm.searchText"
-	          md-selected-item-change="vm.selectedItemChange(item)"
-	          md-items="item in vm.querySearch(vm.searchText)"
+	          md-search-text="event.searchText"
+	          md-selected-item-change="vm.selectedItemChange(item, event)"
+	          md-items="item in vm.querySearch(event.searchText)"
 	          md-item-text="item.display"
 	          md-min-length="1"
 	          placeholder="nombre, apellido de paciente">

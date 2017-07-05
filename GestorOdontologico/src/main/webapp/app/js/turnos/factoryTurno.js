@@ -11,7 +11,8 @@ app.factory('Turno', function() {
 	  this.color = color
 	  this.idTurno = idTurno
 	  this.paciente = null
-
+	  this.searchText = ""
+	  this.selectedItem = null
   }
   
   Turno.prototype.setTitle=function(titulo){
