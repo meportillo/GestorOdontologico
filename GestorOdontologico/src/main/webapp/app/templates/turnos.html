@@ -133,8 +133,9 @@
     <tbody>
     
       <tr ng-repeat="event in (vm.eventsTable) track by $index"> 
-      	<td class="col-md-3 col-sm-3">      	
-      	  <md-content class="md-padding" ng-show="(event.datosPaciente == '') || (event.datosPaciente == null)" >
+      
+	  <td class="col-md-3 col-sm-3">
+      	 <md-content ng-show="(event.datosPaciente == '') || (event.datosPaciente == null)" >
     		<form ng-submit="$event.preventDefault()">
       		<md-autocomplete
 	          ng-disabled="vm.isDisabled"
@@ -154,11 +155,18 @@
 			          No se encontro ningun paciente con el valor: "{{vm.searchText}}".
 	        	</md-not-found>
       		</md-autocomplete>
+<<<<<<< HEAD
     </form>      	
   </md-content>
     <label ng-show="!(event.datosPaciente == '') || !(event.datosPaciente == null)">
+=======
+      
+    		</form>
+  		</md-content>
+  		 <label ng-show="!(event.datosPaciente == '') || !(event.datosPaciente == null)">
+>>>>>>> e3a7e3697eed20037fb1fbfebdb3cdc75ae0b946
       	 {{event.datosPaciente.split(',')[0]}}
-		 <br>
+		 
 		 {{event.datosPaciente.split(',')[1]}}      	 
       	 </label>
 
