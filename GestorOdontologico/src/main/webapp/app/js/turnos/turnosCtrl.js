@@ -213,14 +213,10 @@ appc.controller('KitchenSinkCtrl',
  		}
 	}
     vm.querySearch = function(query) {
-   //    var temp =	vm.todosLosPacientes.filter
-    console.log("---------------------------------------------------------")
-    console.log(vm.todosLosPacientes);
-    console.log("---------------------------------------------------------")
 
     	return	vm.todosLosPacientes.filter(function(item){
-    		console.log(item);
-    		    return item.value.nombre.indexOf(query) !== -1 || item.value.apellido.indexOf(query) !== -1
+    		console.log(item.value.dni.toString());
+    		    return item.value.nombre.indexOf(query) !== -1 || item.value.apellido.indexOf(query) !== -1 || item.value.dni.toString().indexOf(query) !== -1
     		});
     
     }
